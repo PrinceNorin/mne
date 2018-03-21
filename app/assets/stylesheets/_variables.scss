@@ -1,0 +1,172 @@
+@import "colors";
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: font-url("SourceSansPro-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: font-url("FiraSans-Regular.ttf") format("truetype");
+}
+
+@function remCalc($pixels) {
+  $remSize: $pixels / 16px;
+  @return $remSize * 1rem;
+}
+
+$base-size: remCalc(14px);
+
+// colors
+$colors: (
+  "lightGray": $lightGray,
+  "woodyBrown": $woodyBrown,
+  "eggplant": $eggplant,
+);
+
+// theme colors
+$theme-colors: (
+  "lightGray": $lightGray,
+  "woodyBrown": $woodyBrown,
+  "eggplant": $eggplant,
+);
+
+// global
+$enable-shadows: true;
+$font-family-base: "Source Sans Pro";
+$headings-font-family: "Fira Sans";
+
+// body element
+$body-bg: #f2f2f2;
+$body-color: #333;
+
+// text & font
+$line-height-lg: 1.3;
+$line-height-sm: 1.3;
+$line-height-base: 1.3;
+$font-size-base: $base-size;
+
+// spacing
+$spacer: $base-size;
+
+// p element
+$paragraph-margin-bottom: $base-size;
+
+// grid
+$grid-gutter-width: 10px;
+
+// border
+$border-radius: $base-size * 0.25;
+$border-radius-lg: $base-size * 0.3;
+$border-radius-sm: $base-size * 0.2;
+
+// table
+$table-cell-padding: $base-size * 0.75;
+$table-cell-padding-sm: $base-size * 0.3;
+
+// button
+$input-btn-padding-y: $base-size * 0.375;
+$input-btn-padding-x: $base-size * 0.75;
+$input-btn-focus-width: $base-size * 0.2;
+
+$input-btn-padding-y: $base-size * 0.25;
+$input-btn-padding-x: $base-size * 0.5;
+
+$btn-block-spacing-y: $base-size * 0.5;
+
+// form
+$form-text-margin-top: $base-size * 0.25;
+$form-check-margin-bottom: $base-size * 0.5;
+
+$form-check-input-gutter: $base-size * 1.25;
+$form-check-input-margin-y: $base-size * 0.25;
+$form-check-input-margin-x: $base-size * 0.25;
+
+$form-check-inline-margin-x: $base-size * 0.75;
+$form-group-margin-bottom: $base-size;
+
+$custom-control-gutter: $base-size * 1.5;
+$custom-control-spacer-y: $base-size * 0.25;
+$custom-control-spacer-x: $base-size;
+
+$custom-control-indicator-size: $base-size;
+
+$custom-select-padding-y: $base-size * 0.375;
+$custom-select-padding-x: $base-size * 0.75;
+$custom-select-indicator-padding: $base-size;
+$custom-file-width: $base-size * 14;
+
+// dropdown
+$dropdown-min-width: $base-size * 10;
+$dropdown-padding-y: $base-size * 0.5;
+$dropdown-spacer: $base-size * 0.125;
+$dropdown-box-shadow: 0 ($base-size * 0.5) $base-size rgba(#000, 0.175);
+$dropdown-item-padding-y: $base-size * 0.25;
+$dropdown-item-padding-x: $base-size * 1.5;
+
+// nav
+$nav-link-padding-x: $base-size;
+$nav-link-padding-y: $base-size * 0.75;
+
+$navbar-toggler-padding-y: $base-size * 0.25;
+$navbar-toggler-padding-x: $base-size * 0.75;
+
+// pagination
+$pagination-padding-y: $base-size * 0.5;
+$pagination-padding-x: $base-size * 0.75;
+$pagination-padding-y-sm: $base-size * 0.25;
+$pagination-padding-x-sm: $base-size * 0.5;
+$pagination-padding-y-lg: $base-size * 0.75;
+$pagination-padding-x-lg: $base-size * 1.5;
+$pagination-line-height: $base-size * 1.25;
+
+// jumbotron
+$jumbotron-padding: $base-size * 2;
+
+// card
+$card-spacer-y: $base-size * 0.75;
+$card-spacer-x: $base-size * 1.25;
+$card-img-overlay-padding: $base-size * 1.25;
+$card-columns-gap: $base-size * 1.25;
+
+// popovers
+$popover-box-shadow: 0 ($base-size * 0.25) ($base-size * 0.5) rgba(#000, 0.2);
+$popover-header-padding-y: $base-size * 0.5;
+$popover-header-padding-x: $base-size * 0.75;
+
+$popover-arrow-width: $base-size * 0.8;
+$popover-arrow-height: $base-size * 0.4;
+
+// badges
+$badge-padding-y: $base-size * 0.25;
+$badge-padding-x: $base-size * 0.4;
+$badge-pill-padding-x: $base-size * 0.6;
+$badge-pill-border-radius: $base-size * 10;
+
+// alerts
+$alert-padding-y: $base-size * 0.75;
+$alert-padding-x: $base-size * 1.25;
+$alert-margin-bottom: $base-size;
+
+// progress bars
+$progress-height: $base-size;
+
+// list group
+$list-group-item-padding-y: $base-size * 0.75;
+$list-group-item-padding-x: $base-size * 1.25;
+
+// image thumbnails
+$thumbnail-padding: $base-size * 0.25;
+
+// breadcrumbs
+$breadcrumb-padding-y: $base-size * 0.75;
+$breadcrumb-padding-x: $base-size;
+$breadcrumb-item-padding: $base-size * 0.5;
+
+$breadcrumb-margin-bottom: $base-size;
+$breadcrumb-divider: "\00BB";
+$breadcrumb-bg: #fff;
+
+// code
+$code-padding-y: $base-size * 0.2;
+$code-padding-x: $base-size * 0.4;

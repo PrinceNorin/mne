@@ -1,0 +1,11 @@
+<td><%= @number %></td>
+<td><%= I18n.t("license_types.#{@license_type}") %></td>
+<td><%= @company_name %></td>
+<td><%= I18n.t("provinces.#{@province}") %></td>
+<td><%= @issued_date %></td>
+<td><%= @expires_date %></td>
+<td><span class="badge badge-<%= @statusClass %>"><%= I18n.t("statuses.#{@status}") %></span></td>
+<td>
+  <a href="#" id="btnEdit" class="text-info mr-1"><i class="fa fa-pencil"></i></a>
+  <a href="#" id="btnDelete" class="text-danger"><i class="fa fa-trash"></i></a>
+</td>

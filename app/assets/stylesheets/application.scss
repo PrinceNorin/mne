@@ -1,0 +1,71 @@
+/*
+  = require jquery-ui
+*/
+
+@import "variables";
+@import "bootstrap";
+@import "font-awesome";
+@import "noty";
+@import "noty_mint";
+
+body {
+  background-color: #f2f2f2;
+}
+
+.table td {
+  color: $lightGray;
+  font-size: 0.9em;
+}
+
+.table tr.bg-danger td {
+  color: #f2f2f2;
+}
+
+input, textarea, button, .form-control, .btn {
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.search {
+  position: relative;
+  input {
+    padding-right: 30px;
+  }
+  button {
+    top: 0;
+    right: 0;
+    position: absolute;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  &:hover {
+    background-color: #ccc;
+  }
+}
+
+.btn-no-hover {
+  &:hover {
+    background-color: inherit !important;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.license-details {
+  table tr td:first-child {
+    width: 80px;
+    font-weight: bold;
+  }
+  table, table td {
+    border: none;
+  }
+}

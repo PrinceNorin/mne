@@ -1,33 +1,75 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      license:
+        number: "Number"
+        status: "Status"
+        area: "Area"
+        area_unit: "Unit"
+        province: "Province"
+        issued_date: "Issue"
+        expires_date: "Expires"
+        address: "Address"
+        note: "Note"
+        company_name: "Company Name"
+        owner_name: "Owner Name"
+        license_type: "License Type"
+
+  provinces:
+    phnom_penh: "Phnom Penh"
+    banteay_meanchey: "Banteay Meanchey"
+    battambang: "Battambang"
+    kampong_cham: "Kampong Cham"
+    kampong_chhnang: "Kampong Chhnang"
+    kampong_speu: "Kampong Speu"
+    kampong_thom: "Kampong Thom"
+    kampot: "Kampot"
+    kandal: "Kandal"
+    koh_kong: "Koh Kong"
+    kep: "Kep"
+    kratie: "Kratie"
+    mondulkiri: "Mondulkiri"
+    oddar_meanchey: "Oddar Meanchey"
+    pailin: "Pailin"
+    preah_sihanouk: "Preah Sihanouk"
+    preah_vihear: "Preah Vihear"
+    pursat: "Pursat"
+    prey_veng: "Prey Veng"
+    ratanakiri: "Ratanakiri"
+    siem_reap: "Siem Reap"
+    stung_treng: "Stung Treng"
+    svay_rieng: "Svay Rieng"
+    takeo: "Takeo"
+    tboung_khmum: "Tboung Khmum"
+
+  area_units:
+    m2: "Squre Meter"
+    ha: "Hectare"
+
+  license_types:
+    stone: "Stone"
+    shallow: "Shallow"
+    stale_stone: "Stale Stone"
+    const_sand: "Construction Stone"
+
+  statuses:
+    active: "Active"
+    resolving: "Resolving"
+    inactive: "Inactive"
+
+  flash:
+    create_success: "Successfully create a new record"
+    update_success: "Successfully update a record"
+    destroy_success: "Successfully delete a record"
+
+  new_license: "New License"
+  edit_license: "Edit License"
+
+  create: "Create"
+  update: "Update"
+  delete: "Delete"
+
+  license_details: "License Details"
+  are_you_sure: "Are you sure?"
+  do_you_want_to_delete: "Do you really want to delete this?"
+  something_went_wrong: "Something went wrong!"

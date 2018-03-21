@@ -1,0 +1,59 @@
+<div class="modal fade" id="detailsLicense" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><%= I18n.t('license_details') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body license-details">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Number</td>
+              <td><%= @number %></td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td><%= I18n.t("license_types.#{@license_type}") %></td>
+            </tr>
+            <tr>
+              <td>Owner</td>
+              <td><%= @owner_name %></td>
+            </tr>
+            <tr>
+              <td>Area</td>
+              <td><%= @area + I18n.t("area_units.#{@area_unit}") %></td>
+            </tr>
+            <tr>
+              <td>Company</td>
+              <td><%= @company_name %></td>
+            </tr>
+            <tr>
+              <td>Province</td>
+              <td><%= I18n.t("provinces.#{@province}") %></td>
+            </tr>
+            <tr>
+              <td>Issued At</td>
+              <td><%= @issued_date %></td>
+            </tr>
+            <tr>
+              <td>Expires At</td>
+              <td><%= @expires_date %></td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td><%= @address %></td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td><%= @note %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

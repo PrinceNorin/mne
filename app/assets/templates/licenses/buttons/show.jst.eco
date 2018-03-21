@@ -1,0 +1,10 @@
+<button type="button" id="showItemBtn" class="btn btn-sm btn-default btn-no-hover" data-toggle="dropdown"><%= "#{@perPage} items" %></button>
+<button type="button" class="btn btn-sm btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+  <span class="sr-only">Toggle Dropdown</span>
+</button>
+<div id="showItem" class="dropdown-menu dropdown-menu-right">
+  <a class="dropdown-item" href="#" data-show="30">30</a>
+  <a class="dropdown-item" href="#" data-show="50">50</a>
+  <a class="dropdown-item" href="#" data-show="100">100</a>
+  <a class="dropdown-item" href="#" data-show="150">150</a>
+</div>

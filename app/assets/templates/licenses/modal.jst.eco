@@ -1,0 +1,99 @@
+<div class="modal fade" id="showLicense" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <form id="licenseForm" class="form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= I18n.t('new_license') %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label><%= I18n.t('activerecord.attributes.license.license_type') %></label>
+              <select name="license_type" class="form-control">
+                <% for value, name of I18n.t('license_types'): %>
+                  <option value="<%= value %>"><%= name %></option>
+                <% end %>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label><%= I18n.t('activerecord.attributes.license.number') %></label>
+              <div class="input-group">
+                <input type="text" name="number" class="form-control" autocomplete="off" autofocus />
+                <div class="input-group-append">
+                  <span class="input-group-text">រថ.អធរ.អប</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label><%= I18n.t('activerecord.attributes.license.company_name') %></label>
+              <input type="text" name="company_name" class="form-control" autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-3">
+              <label><%= I18n.t('activerecord.attributes.license.owner_name') %></label>
+              <input type="text" name="owner_name" class="form-control" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label><%= I18n.t('activerecord.attributes.license.area') %></label>
+              <input type="text" name="area" class="form-control" autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-2">
+              <label><%= I18n.t('activerecord.attributes.license.area_unit') %></label>
+              <select name="area_unit" class="form-control">
+                <% for value, name of I18n.t('area_units'): %>
+                  <option value="<%= value %>"><%= name %></option>
+                <% end %>
+              </select>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label><%= I18n.t('activerecord.attributes.license.province') %></label>
+              <select name="province" class="form-control">
+                <% for value, name of I18n.t('provinces'): %>
+                  <option value="<%= value %>"><%= name %></option>
+                <% end %>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label><%= I18n.t('activerecord.attributes.license.issued_date') %></label>
+              <input type="text" name="issued_date" class="form-control date" placeholder="YYYY-MM-DD" />
+            </div>
+
+            <div class="form-group col-md-3">
+              <label><%= I18n.t('activerecord.attributes.license.expires_date') %></label>
+              <input type="text" name="expires_date" class="form-control date" placeholder="YYYY-MM-DD" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label><%= I18n.t('activerecord.attributes.license.address') %></label>
+              <textarea name="address" class="form-control" rows="7"></textarea>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label><%= I18n.t('activerecord.attributes.license.note') %></label>
+              <textarea name="note" class="form-control" rows="7"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="btnSubmit" type="submit" class="btn btn-primary" disabled>
+            <%= @btnLabel %>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

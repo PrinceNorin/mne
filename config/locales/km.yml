@@ -1,0 +1,42 @@
+km:
+  provinces:
+    phnom_penh: "ភ្នំពេញ"
+    banteay_meanchey: "បន្ទាយមានជ័យ"
+    battambang: "បាត់ដំបង"
+    kampong_cham: "កំពង់ចាម"
+    kampong_chhnang: "កំពង់ឆ្នាំង"
+    kampong_speu: "កំពង់ស្ពឺ"
+    kampong_thom: "កំពង់ធំ"
+    kampot: "កំពត"
+    kandal: "កណ្តាល"
+    koh_kong: "កោះកុង"
+    kep: "កែប"
+    kratie: "ក្រចេះ"
+    mondulkiri: "មណ្ឌលគីរី  "
+    oddar_meanchey: "ឧត្តរមានជ័យ"
+    pailin: "បៃលិន"
+    preah_sihanouk: "ព្រះសីហនុ"
+    preah_vihear: "ព្រះវិហារ"
+    pursat: "ពោធិ៍សាត់"
+    prey_veng: "ព្រៃវែង"
+    ratanakiri: "រតនគីរី"
+    siem_reap: "សៀមរាប"
+    stung_treng: "ស្ទឹងត្រែង"
+    svay_rieng: "ស្វាយរៀង"
+    takeo: "តាកែវ"
+    tboung_khmum: "ត្បូងឃ្មុំ"
+
+  area_units:
+    m2: "Squre Meter"
+    ha: "Hectare"
+
+  flash:
+    create_success: "Successfully create a new record"
+    update_success: "Successfully update a record"
+    destroy_success: "Successfully delete a record"
+
+  new_license: "New License"
+  edit_license: "Edit License"
+
+  create: "Create"
+  update: "Update"

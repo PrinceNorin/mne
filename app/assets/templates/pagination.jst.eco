@@ -1,0 +1,7 @@
+<% if @total > 1: %>
+  <ul class="pagination pagination-sm">
+    <% for i in [1..@total]: %>
+      <li class="page-item <%= 'active' if i == @page %>"><a href="#" class="page-link" data-page="<%= i %>"><%= i %></a></li>
+    <% end %>
+  </ul>
+<% end %>
