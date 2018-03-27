@@ -57,6 +57,11 @@ en:
     resolving: "Resolving"
     inactive: "Inactive"
 
+  statement_types:
+    dispute: "Dispute"
+    suspense: "Suspense"
+    resolved: "Resolved"
+
   flash:
     create_success: "Successfully create a new record"
     update_success: "Successfully update a record"
@@ -69,6 +74,7 @@ en:
   update: "Update"
   delete: "Delete"
 
+  not_found: "404 not found"
   license_details: "License Details"
   are_you_sure: "Are you sure?"
   do_you_want_to_delete: "Do you really want to delete this?"

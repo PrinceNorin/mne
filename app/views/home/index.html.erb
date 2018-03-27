@@ -1,1 +1,5 @@
-<div class="view"></div>
+<div class="root"></div>
+<script type="text/javascript">
+  window.csrfToken = $('meta[name="csrf-token"]').attr('content')
+  window.user = <%= current_user.to_json.html_safe %>
+</script>

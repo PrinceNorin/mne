@@ -1,5 +1,6 @@
 class App.Routers.Licenses extends Backbone.Router
   routes:
+    '': 'indexLicenses'
     'licenses': 'indexLicenses'
     'licenses/new': 'newLicense'
     'licenses/:id': 'showLicense'
@@ -16,6 +17,12 @@ class App.Routers.Licenses extends Backbone.Router
             collection: @collection
           ).render().el
         )
+    else
+      $('.view').empty().append(
+        new App.Views.IndexLicenses(
+          collection: @collection
+        ).render().el
+      )
 
   newLicense: ->
     if @collection.isEmpty()
@@ -30,14 +37,26 @@ class App.Routers.Licenses extends Backbone.Router
     )
 
   showLicense: (id) ->
-    if @collection.isEmpty()
-      @collection.getFirstPage
-        success: (collection) =>
-          model = @collection.get(id)
-          @showDetails(model, @collection)
-
     model = @collection.get(id)
-    @showDetails(model, @collection)
+    if model
+      $('.view').empty().append(
+        new App.Views.ShowLicense(
+          model: model
+        ).render().el
+      )
+    else
+      model = new App.Models.License(id: id)
+      model.fetch
+        success: (model) ->
+          $('.view').empty().append(
+            new App.Views.ShowLicense(
+              model: model
+            ).render().el
+          )
+        error: ->
+          $('.view').empty().append(
+            new App.Views.NotFound().render().el
+          )
 
   editLicense: (id) ->
     if @collection.isEmpty()

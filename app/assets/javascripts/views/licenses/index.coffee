@@ -17,6 +17,7 @@ class App.Views.IndexLicenses extends Backbone.Marionette.View
 
   events:
     'click #btnNew': 'showNew'
+    'submit .search': 'search'
 
   childViewEvents:
     'license:show': 'showLicense'
@@ -39,6 +40,19 @@ class App.Views.IndexLicenses extends Backbone.Marionette.View
     @renderShowButton()
     @renderPagination()
     @renderFilterButton('all', 'All')
+
+  search: (event) ->
+    event.preventDefault()
+
+    value = @$el.find('input[name=q]').val()
+    if _.isEmpty(value)
+      @collection.getFirstPage()
+    else
+      @collection.getFirstPage(
+        data:
+          t: 'number'
+          q: value
+      )
 
   updateFilter: (type, text) ->
     @renderFilterButton(type, text)

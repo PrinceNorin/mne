@@ -1,5 +1,5 @@
 class App.Models.License extends Backbone.Model
-  urlRoot: '/licenses'
+  urlRoot: '/api/licenses'
 
   validation:
     number:

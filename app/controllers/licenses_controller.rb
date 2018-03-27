@@ -13,7 +13,7 @@ class LicensesController < ApplicationController
     @licenses = scope.page(params[:page])
       .per(per_page)
     render json: {
-      data: @licenses,
+      data: @licenses.map { |license| license.as_json(include: [:statements]) },
       per_page: per_page,
       total_pages: @licenses.total_pages,
       total_entries: @licenses.total_count,
@@ -22,13 +22,13 @@ class LicensesController < ApplicationController
   end
 
   def show
-    render json: @license
+    render json: @license.as_json(include: :statements)
   end
 
   def create
     @license = License.new(license_params)
     if @license.save
-      render json: @license
+      render json: @license.as_json(include: :statements)
     else
       render json: @license.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class LicensesController < ApplicationController
 
   def update
     if @license.update_attributes(license_params)
-      render json: @license
+      render json: @license.as_json(include: :statements)
     else
       render json: @license.errors, status: :unprocessable_entity
     end
@@ -55,8 +55,8 @@ class LicensesController < ApplicationController
 
   def license_params
     params.require(:license).permit(
-      :number, :status, :area, :area_unit, :province, :issued_date, :note,
-      :expires_date, :address, :company_name, :owner_name, :license_type
+      :number, :area, :area_unit, :province, :issued_date, :address,
+      :note, :expires_date, :company_name, :owner_name, :license_type
     )
   end
 

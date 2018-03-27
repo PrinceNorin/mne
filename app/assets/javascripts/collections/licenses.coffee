@@ -1,5 +1,5 @@
 class App.Collections.Licenses extends Backbone.PageableCollection
-  url: '/licenses'
+  url: '/api/licenses'
   model: App.Models.License
 
   state:

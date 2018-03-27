@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313132920) do
+ActiveRecord::Schema.define(version: 20180321153343) do
 
   create_table "licenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "number", null: false
@@ -30,6 +30,21 @@ ActiveRecord::Schema.define(version: 20180313132920) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_licenses_on_deleted_at"
     t.index ["number"], name: "index_licenses_on_number", unique: true
+  end
+
+  create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "number"
+    t.bigint "reference_id"
+    t.bigint "license_id"
+    t.date "issued_date"
+    t.integer "statement_type", default: 0
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_statements_on_deleted_at"
+    t.index ["license_id"], name: "index_statements_on_license_id"
+    t.index ["number"], name: "index_statements_on_number", unique: true
+    t.index ["reference_id"], name: "index_statements_on_reference_id", unique: true
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -70,4 +85,6 @@ ActiveRecord::Schema.define(version: 20180313132920) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "statements", "licenses"
+  add_foreign_key "statements", "statements", column: "reference_id"
 end

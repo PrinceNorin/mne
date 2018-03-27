@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center"><%= I18n.t('license_details') %></h5>
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <label>Number: </label> <span><%= @number %></span>
+            </div>
+            <div class="col-6">
+              <label>Business: </label> <span><%= I18n.t("license_types.#{@license_type}") %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label>Province: </label> <span><%= I18n.t("provinces.#{@province}") %></span>
+            </div>
+            <div class="col-6">
+              <label>Size: </label> <span><%= @area + " " + I18n.t("area_units.#{@area_unit}") %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label>Company: </label> <span><%= @company_name %></span>
+            </div>
+            <div class="col-6">
+              <label>Owner: </label> <span><%= @owner_name %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label>Issued Date: </label> <span><%= I18n.l('date.formats.long', @issued_date) %></span>
+            </div>
+            <div class="col-6">
+              <label>Expire Date: </label> <span><%= I18n.l('date.formats.long', @expires_date,) %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label>Address: </label> <span><%= @address %></span>
+            </div>
+            <div class="col-6">
+              <label>Note: </label> <span><%= @note %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body pl-0 pr-0">
+          <h5 class="card-title text-center mb-3 ml-3 mr-3">Statements</h5>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Number</th>
+                <th>Reference</th>
+                <th>Issued Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for statement in @statements: %>
+                <tr>
+                  <td>
+                    <span class="badge badge-<%= @colorCodes[statement.statement_type] %>">
+                      <%= I18n.t("statement_types.#{statement.statement_type}") %>
+                    </span>
+                  </td>
+                  <td><%= statement.number %></td>
+                  <td><%= statement.reference %></td>
+                  <td><%= I18n.l('date.formats.long', statement.issued_date) %></td>
+                  <td data-id="<%= statement.id %>">
+                    <a href="#" id="btnEdit" class="text-info mr-1"><i class="fa fa-pencil"></i></a>
+                    <a href="#" id="btnDelete" class="text-danger"><i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer bg-transparent">
+          <button id="btnStatus" class="btn btn-primary float-right">Add Statement</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="statementModal"></div>

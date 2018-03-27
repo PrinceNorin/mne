@@ -23,6 +23,7 @@ class App.Views.LicenseRow extends Backbone.Marionette.View
 class App.Views.LicenseTableBody extends Backbone.Marionette.CollectionView
   tagName: 'tbody'
   childView: App.Views.LicenseRow
+  emptyView: App.Views.EmptyLicense
 
   childViewTriggers:
     'license:show': 'license:show'

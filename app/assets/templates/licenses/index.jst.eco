@@ -8,12 +8,12 @@
             <div id="filterBtnGroup"></div>
           </div>
           <div class="float-right">
-            <div class="search float-left" style="width: 300px">
-              <input type="text" class="form-control" />
+            <form class="search float-left" style="width: 300px">
+              <input type="text" class="form-control" name="q" autocomplete="off" placeholder="License No" />
               <button class="btn btn-default">
                 <i class="fa fa-search"></i>
               </button>
-            </div>
+            </form>
             <button id="btnNew" class="btn btn-primary ml-sm-2 float-left">Create</button>
           </div>
         </div>

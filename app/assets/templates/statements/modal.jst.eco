@@ -1,0 +1,64 @@
+<div class="modal fade" id="newStatement" tabindex="-1">
+  <div class="modal-dialog">
+    <form id="statementForm" class="form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= @title %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Number</label>
+              <div class="input-group">
+                <input type="text" name="number" class="form-control" autocomplete="off" autofocus />
+                <div class="input-group-append">
+                  <span class="input-group-text">រថ.អធរ.អប</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Statement Type</label>
+              <select name="statement_type" class="form-control">
+                <% for value, name of I18n.t('statement_types'): %>
+                  <option value="<%= value %>"><%= name %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+
+          <% if @statements.length > 0: %>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Issued Date</label>
+                <input type="text" name="issued_date" class="form-control date" placeholder="YYYY/MM/DD" />
+              </div>
+
+              <div class="form-group col-md-6">
+                <label>Reference</label>
+                <select name="reference_id" class="form-control">
+                  <option>--Select Reference--</option>
+                  <% for statement in @statements: %>
+                    <option value="<%= statement.id %>"><%= statement.number %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          <% else: %>
+            <div class="form-group">
+              <label>Issued Date</label>
+              <input type="text" name="issued_date" class="form-control date" placeholder="YYYY/MM/DD" />
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="btnSubmit" type="submit" class="btn btn-primary" disabled>Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

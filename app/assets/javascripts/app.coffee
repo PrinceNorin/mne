@@ -1,20 +1,13 @@
-# window.App =
-#   Models: {}
-#   Collections: {}
-#   Views: {}
-#   Routers: {}
-#   initialize: ->
-#     for _, Router of @Routers
-#       new Router()
-#     @router = new Backbone.Router()
-#     Backbone.history.start()
-
 class Application extends Backbone.Marionette.Application
+  region: '.root'
+
   onStart: (app) ->
     for _, Router of app.Routers
       new Router()
+
+    @showView(new App.Views.Layout())
     app.router = new Backbone.Router()
-    Backbone.history.start()
+    Backbone.history.start(pushState: true)
 
 window.App = new Application()
 
@@ -24,4 +17,5 @@ App.Routers = {}
 App.Collections = {}
 
 $(document).ready ->
-  App.start()
+  if $('.root').length > 0
+    App.start()

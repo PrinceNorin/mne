@@ -13,4 +13,6 @@ class License < ApplicationRecord
 
   validates_uniqueness_of :number
   validates_numericality_of :area
+
+  has_many :statements, dependent: :destroy
 end
