@@ -73,7 +73,6 @@
                   <td><%= I18n.l('date.formats.long', statement.issued_date) %></td>
                   <td data-id="<%= statement.id %>">
                     <a href="#" id="btnEdit" class="text-info mr-1"><i class="fa fa-pencil"></i></a>
-                    <a href="#" id="btnDelete" class="text-danger"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <% end %>
