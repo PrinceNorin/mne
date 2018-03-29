@@ -1,4 +1,4 @@
-<button type="button" id="showItemBtn" class="btn btn-sm btn-default btn-no-hover" data-toggle="dropdown"><%= "#{@perPage} items" %></button>
+<button type="button" id="showItemBtn" class="btn btn-sm btn-default btn-no-hover" data-toggle="dropdown"><%= I18n.t('show_item', count: @perPage) %></button>
 <button type="button" class="btn btn-sm btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
   <span class="sr-only">Toggle Dropdown</span>
 </button>

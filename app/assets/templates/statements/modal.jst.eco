@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Number</label>
+              <label><%= I18n.t('activerecord.attributes.statement.number') %></label>
               <div class="input-group">
                 <input type="text" name="number" class="form-control" autocomplete="off" autofocus />
                 <div class="input-group-append">
@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group col-md-6">
-              <label>Statement Type</label>
+              <label><%= I18n.t('activerecord.attributes.statement.statement_type') %></label>
               <select name="statement_type" class="form-control">
                 <% for value, name of I18n.t('statement_types'): %>
                   <option value="<%= value %>"><%= name %></option>
@@ -33,14 +33,14 @@
           <% if @statements.length > 0: %>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Issued Date</label>
+                <label><%= I18n.t('activerecord.attributes.statement.issued_date') %></label>
                 <input type="text" name="issued_date" class="form-control date" placeholder="YYYY/MM/DD" />
               </div>
 
               <div class="form-group col-md-6">
-                <label>Reference</label>
+                <label><%= I18n.t('activerecord.attributes.statement.reference') %></label>
                 <select name="reference_id" class="form-control">
-                  <option>--Select Reference--</option>
+                  <option><%= I18n.t('select_statement') %></option>
                   <% for statement in @statements: %>
                     <option value="<%= statement.id %>"><%= statement.number %></option>
                   <% end %>
@@ -49,14 +49,14 @@
             </div>
           <% else: %>
             <div class="form-group">
-              <label>Issued Date</label>
+              <label><%= I18n.t('activerecord.attributes.statement.issued_date') %></label>
               <input type="text" name="issued_date" class="form-control date" placeholder="YYYY/MM/DD" />
             </div>
           <% end %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button id="btnSubmit" type="submit" class="btn btn-primary" disabled>Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= I18n.t('close') %></button>
+          <button id="btnSubmit" type="submit" class="btn btn-primary" disabled><%= I18n.t('update') %></button>
         </div>
       </div>
     </form>

@@ -19,12 +19,13 @@ class App.Views.ModalLicense extends Backbone.Marionette.View
     '[name=note]': 'note'
 
   templateContext: ->
-    label =
+    labels =
       if @model.isNew()
-        'create'
+        ['create', 'new_license']
       else
-        'update'
-    btnLabel: I18n.t(label)
+        ['update', 'edit_license']
+    title: I18n.t(labels[1])
+    btnLabel: I18n.t(labels[0])
 
   onBeforeRender: ->
     Backbone.Validation.bind @,
@@ -41,7 +42,7 @@ class App.Views.ModalLicense extends Backbone.Marionette.View
       @$modal = @$el.find('#showLicense').modal(show: true)
 
     @stickit()
-    @$el.find('.date').datepicker(dateFormat: 'yy-mm-dd')
+    @$el.find('.date').datepicker(dateFormat: 'yy/mm/dd')
 
   valid: (view, attr) ->
     input = view.$el.find("[name=#{attr}]")

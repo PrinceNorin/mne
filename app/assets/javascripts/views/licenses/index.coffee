@@ -39,7 +39,7 @@ class App.Views.IndexLicenses extends Backbone.Marionette.View
 
     @renderShowButton()
     @renderPagination()
-    @renderFilterButton('all', 'All')
+    @renderFilterButton('all', I18n.t('filters.all'))
 
   search: (event) ->
     event.preventDefault()
@@ -111,7 +111,7 @@ class App.Views.IndexLicenses extends Backbone.Marionette.View
     swal(
       icon: 'warning'
       dangerMode: true
-      buttons: [true, I18n.t('delete')]
+      buttons: [I18n.t('cancel'), I18n.t('delete')]
       title: I18n.t('are_you_sure')
       text: I18n.t('do_you_want_to_delete')
     ).then (value) => success() if value

@@ -1,13 +1,13 @@
 <thead>
   <tr>
-    <th>#</th>
-    <th>License Type</th>
-    <th>Company Name</th>
-    <th>Province</th>
-    <th>Issue</th>
-    <th>Expires</th>
-    <th>Status</th>
-    <th>Actions</th>
+    <th><%= I18n.t('activerecord.attributes.license.number') %></th>
+    <th><%= I18n.t('activerecord.attributes.license.license_type') %></th>
+    <th><%= I18n.t('activerecord.attributes.license.company_name') %></th>
+    <th><%= I18n.t('activerecord.attributes.license.province') %></th>
+    <th><%= I18n.t('activerecord.attributes.license.issued_date') %></th>
+    <th><%= I18n.t('activerecord.attributes.license.expires_date') %></th>
+    <th><%= I18n.t('activerecord.attributes.license.status') %></th>
+    <th><%= I18n.t('table.action') %></th>
   </tr>
 </thead>
 <tbody>

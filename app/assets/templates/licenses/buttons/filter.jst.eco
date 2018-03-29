@@ -1,19 +1,15 @@
 <% if @type == 'all': %>
   <button type="button" id="filterItemBtn" class="btn btn-sm btn-default btn-no-hover" data-toggle="dropdown"><%= @text %></button>
 <% else: %>
-  <button type="button" id="filterItemBtn" class="btn btn-sm btn-default btn-no-hover" data-toggle="dropdown"><%= "Filter by #{@text}" %></button>
+  <button type="button" id="filterItemBtn" class="btn btn-sm btn-default btn-no-hover" data-toggle="dropdown"><%= I18n.t('filter_by', text: @text) %></button>
 <% end %>
 <button type="button" class="btn btn-sm btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
   <span class="sr-only">Toggle Dropdown</span>
 </button>
 <div id="filterItem" class="dropdown-menu dropdown-menu-right">
-  <a class="dropdown-item" href="#" data-filter="all">All</a>
-  <a class="dropdown-item" href="#" data-filter="license_type">Type</a>
-  <a class="dropdown-item" href="#" data-filter="status">Status</a>
-  <a class="dropdown-item" href="#" data-filter="province">Province</a>
-  <a class="dropdown-item" href="#" data-filter="company_name">Company</a>
-  <a class="dropdown-item" href="#" data-filter="issued_date">Issued Date</a>
-  <a class="dropdown-item" href="#" data-filter="expires_date">Expires Date</a>
+  <% for key, value of I18n.t('filters'): %>
+    <a class="dropdown-item" href="#" data-filter="<%= key %>"><%= I18n.t("filters.#{key}") %></a>
+  <% end %>
 </div>
 <div class="form-inline">
   <div class="form-group">

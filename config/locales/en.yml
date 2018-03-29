@@ -1,5 +1,17 @@
 en:
+  km_lang: "Khmer"
+  en_lang: "English"
+  home: "Home"
+  sign_out: "Sign Out"
+
+  table:
+    action: "Actions"
+
   activerecord:
+    models:
+      statement:
+        one: "Statement"
+        other: "Statements"
     attributes:
       license:
         number: "Number"
@@ -14,6 +26,11 @@ en:
         company_name: "Company Name"
         owner_name: "Owner Name"
         license_type: "License Type"
+      statement:
+        number: "Number"
+        statement_type: "Type"
+        reference: "Reference"
+        issued_date: "Issue"
 
   provinces:
     phnom_penh: "Phnom Penh"
@@ -67,12 +84,30 @@ en:
     update_success: "Successfully update a record"
     destroy_success: "Successfully delete a record"
 
+  filters:
+    all: "All"
+    license_type: "Type"
+    status: "Status"
+    province: "Province"
+    company_name: "Company"
+    issued_date: "Issued Date"
+    expires_date: "Expires Date"
+
+  show_item: "%{count} Items"
+  filter_by: "Filter by: %{text}"
+
+  no_license: "No license to display."
   new_license: "New License"
   edit_license: "Edit License"
+  new_statement: "New Statement"
+  edit_statement: "Edit Statement"
+  select_statement: "--Select Reference--"
 
   create: "Create"
   update: "Update"
   delete: "Delete"
+  close: "Close"
+  cancel: "Cancel"
 
   not_found: "404 not found"
   license_details: "License Details"

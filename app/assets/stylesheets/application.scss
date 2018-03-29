@@ -8,6 +8,10 @@
 @import "noty";
 @import "noty_mint";
 
+html[lang=km] body {
+  font-family: "Battambang";
+}
+
 body {
   background-color: #f2f2f2;
 }

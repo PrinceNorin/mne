@@ -16,9 +16,9 @@ class App.Views.StatementModal extends Backbone.Marionette.View
   templateContext: ->
     title =
       if @model.isNew()
-        "New Statement"
+        I18n.t('new_statement')
       else
-        "Edit Statement"
+        I18n.t('edit_statement')
     statements = @getOption('license').get('statements')
     banIds = _.pluck(statements, 'reference_id')
     statements = statements.filter (s) =>

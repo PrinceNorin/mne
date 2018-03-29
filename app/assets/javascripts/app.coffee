@@ -17,5 +17,6 @@ App.Routers = {}
 App.Collections = {}
 
 $(document).ready ->
+  I18n.locale = $('html').attr('lang')
   if $('.root').length > 0
     App.start()

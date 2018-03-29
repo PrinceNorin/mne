@@ -7,57 +7,57 @@
           <hr />
           <div class="row">
             <div class="col-6">
-              <label>Number: </label> <span><%= @number %></span>
+              <label><%= I18n.t('activerecord.attributes.license.number') %>: </label> <span><%= @number %></span>
             </div>
             <div class="col-6">
-              <label>Business: </label> <span><%= I18n.t("license_types.#{@license_type}") %></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <label>Province: </label> <span><%= I18n.t("provinces.#{@province}") %></span>
-            </div>
-            <div class="col-6">
-              <label>Size: </label> <span><%= @area + " " + I18n.t("area_units.#{@area_unit}") %></span>
+              <label><%= I18n.t('activerecord.attributes.license.license_type') %>: </label> <span><%= I18n.t("license_types.#{@license_type}") %></span>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
-              <label>Company: </label> <span><%= @company_name %></span>
+              <label><%= I18n.t('activerecord.attributes.license.province') %>: </label> <span><%= I18n.t("provinces.#{@province}") %></span>
             </div>
             <div class="col-6">
-              <label>Owner: </label> <span><%= @owner_name %></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <label>Issued Date: </label> <span><%= I18n.l('date.formats.long', @issued_date) %></span>
-            </div>
-            <div class="col-6">
-              <label>Expire Date: </label> <span><%= I18n.l('date.formats.long', @expires_date,) %></span>
+              <label><%= I18n.t('activerecord.attributes.license.area') %>: </label> <span><%= @area + " " + I18n.t("area_units.#{@area_unit}") %></span>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
-              <label>Address: </label> <span><%= @address %></span>
+              <label><%= I18n.t('activerecord.attributes.license.company_name') %>: </label> <span><%= @company_name %></span>
             </div>
             <div class="col-6">
-              <label>Note: </label> <span><%= @note %></span>
+              <label><%= I18n.t('activerecord.attributes.license.owner_name') %>: </label> <span><%= @owner_name %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label><%= I18n.t('activerecord.attributes.license.issued_date') %>: </label> <span><%= I18n.l('date.formats.long', @issued_date) %></span>
+            </div>
+            <div class="col-6">
+              <label><%= I18n.t('activerecord.attributes.license.expires_date') %>: </label> <span><%= I18n.l('date.formats.long', @expires_date,) %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label><%= I18n.t('activerecord.attributes.license.address') %>: </label> <span><%= @address %></span>
+            </div>
+            <div class="col-6">
+              <label><%= I18n.t('activerecord.attributes.license.note') %>: </label> <span><%= @note %></span>
             </div>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-body pl-0 pr-0">
-          <h5 class="card-title text-center mb-3 ml-3 mr-3">Statements</h5>
+          <h5 class="card-title text-center mb-3 ml-3 mr-3"><%= I18n.t('activerecord.models.statement', count: 2) %></h5>
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Type</th>
-                <th>Number</th>
-                <th>Reference</th>
-                <th>Issued Date</th>
-                <th>Action</th>
+                <th><%= I18n.t('activerecord.attributes.statement.statement_type') %></th>
+                <th><%= I18n.t('activerecord.attributes.statement.number') %></th>
+                <th><%= I18n.t('activerecord.attributes.statement.reference') %></th>
+                <th><%= I18n.t('activerecord.attributes.statement.issued_date') %></th>
+                <th><%= I18n.t('table.action') %></th>
               </tr>
             </thead>
             <tbody>
@@ -80,7 +80,7 @@
           </table>
         </div>
         <div class="card-footer bg-transparent">
-          <button id="btnStatus" class="btn btn-primary float-right">Add Statement</button>
+          <button id="btnStatus" class="btn btn-primary float-right"><%= I18n.t('new_statement') %></button>
         </div>
       </div>
     </div>

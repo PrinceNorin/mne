@@ -7,13 +7,13 @@ class App.Models.Statement extends Backbone.Model
   validation:
     number:
       required: true
-      msg: I18n.t('errors.messages.blank')
+      msg: -> I18n.t('errors.messages.blank')
     license_id:
       required: true
-      msg: I18n.t('errors.messages.blank')
+      msg: -> I18n.t('errors.messages.blank')
     issued_date:
       required: true
-      msg: I18n.t('errors.messages.blank')
+      msg: -> I18n.t('errors.messages.blank')
 
   defaults:
     statement_type: 'dispute'

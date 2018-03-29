@@ -1,4 +1,100 @@
 km:
+  km_lang: "ខ្មែរ"
+  en_lang: "អង់គ្លេស"
+  home: "ដើមទំព័រ"
+  sign_out: "ចាកចេញ"
+
+  date:
+    abbr_day_names:
+    - អា
+    - ច
+    - អ
+    - ពុ
+    - ព្រហ
+    - សុ
+    - ស
+    abbr_month_names:
+    -
+    - មករា
+    - កុម្ភៈ
+    - មិនា
+    - មេសា
+    - ឧសភា
+    - មិថុនា
+    - កក្កដា
+    - សីហា
+    - កញ្ញា
+    - តុលា
+    - វិច្ឆិកា
+    - ធ្នូ
+    day_names:
+    - អាទិត្យ
+    - ចន្ទ
+    - អង្គារ
+    - ពុធ
+    - ព្រហស្បតិ៍
+    - សុក្រ
+    - សៅរ៍
+    formats:
+      long: "ថ្ងៃ%A ទី%e ខែ%B ឆ្នាំ%Y"
+      default: "%d %B %Y"
+      short: "%d %b"
+    month_names:
+    -
+    - មករា
+    - កុម្ភៈ
+    - មិនា
+    - មេសា
+    - ឧសភា
+    - មិថុនា
+    - កក្កដា
+    - សីហា
+    - កញ្ញា
+    - តុលា
+    - វិច្ឆិកា
+    - ធ្នូ
+    order:
+    - :day
+    - :month
+
+  table:
+    action: "សកម្មភាព"
+
+  activerecord:
+    models:
+      statement:
+        one: "ប្រកាស់"
+        other: "ប្រកាស់"
+    attributes:
+      license:
+        number: "លេខប្រកាស់"
+        status: "ស្ថានភាព"
+        area: "ទំហំ"
+        area_unit: "ឯកតា"
+        province: "ខេត្ត"
+        issued_date: "ថ្ងៃចេញប្រកាស់"
+        expires_date: "ថ្ងៃផុតកំណត់"
+        address: "អាសយដ្ឋាន"
+        note: "កំណត់សំគាល់ផ្សេងៗ"
+        company_name: "ឈ្មោះក្រុមហ៊ុន"
+        owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន"
+        license_type: "ប្រភេទជំនួញ"
+      statement:
+        number: "លេខប្រកាស់"
+        statement_type: "ប្រភេទ"
+        reference: "លេខប្រកាស់យោង"
+        issued_date: "ថ្ងៃចេញប្រកាស់"
+
+      user:
+        email: "អីម៉ែល"
+        password: "លេខសំងាត់"
+        remember_me: "ចងចាំ"
+
+  devise:
+    sessions:
+      new:
+        sign_in: "ចូលប្រើប្រាស់"
+
   provinces:
     phnom_penh: "ភ្នំពេញ"
     banteay_meanchey: "បន្ទាយមានជ័យ"
@@ -27,16 +123,57 @@ km:
     tboung_khmum: "ត្បូងឃ្មុំ"
 
   area_units:
-    m2: "Squre Meter"
-    ha: "Hectare"
+    m2: "ម៉ែត្រការ៉េ"
+    ha: "ហិចតា"
+
+  license_types:
+    stone: "ថ្ម"
+    shallow: "អាចម៍ដី"
+    stale_stone: "ថ្មអារ"
+    const_sand: "ខ្សាច់សំណង់"
+
+  statuses:
+    active: "កំពុងដំណើរការ"
+    resolving: "កំពុងដោះស្រាយ"
+    inactive: "អសកម្ម"
+
+  statement_types:
+    dispute: "ព្យួរ"
+    suspense: "ផ្អាក"
+    resolved: "ដាក់ឱ្យដំណើរការ"
 
   flash:
-    create_success: "Successfully create a new record"
-    update_success: "Successfully update a record"
-    destroy_success: "Successfully delete a record"
+    create_success: "បញ្ចូលទិន្នន័យបានជោគជ័យ"
+    update_success: "កែប្រែទិន្នន័យបានជោគជ័យ"
+    destroy_success: "លុបទិន្នន័យបានជោគជ័យ"
 
-  new_license: "New License"
-  edit_license: "Edit License"
+  filters:
+    all: "ទាំងអស់"
+    license_type: "ប្រភេទជំនួញ"
+    status: "ស្ថានភាព"
+    province: "ខេត្ត"
+    company_name: "ឈ្មោះក្រុមហ៊ុន"
+    issued_date: "ថ្ងៃចេញប្រកាស់"
+    expires_date: "ថ្ងៃផុតកំណត់"
 
-  create: "Create"
-  update: "Update"
+  show_item: "%{count} ឯកតា"
+  filter_by: "ស្វែងរកតាម: %{text}"
+
+  no_license: "ពុំមានអាជ្ញាប័ណ្ណសំរាប់បង្ហាញ"
+  new_license: "អាជ្ញាប័ណ្ណថ្មី"
+  edit_license: "កែប្រែអាជ្ញាប័ណ្ណ"
+  new_statement: "ប្រកាស់ថ្មី"
+  edit_statement: "កែប្រែប្រកាស់"
+  select_statement: "--ជ្រើសរើសលេខប្រកាស់យោង--"
+
+  create: "ដាក់បញ្ចូល"
+  update: "កែប្រែ"
+  delete: "លុបចោល"
+  close: "បិទ"
+  cancel: "បោះបង់"
+
+  not_found: "៤០៤ រក​មិន​ឃើញ"
+  license_details: "ពត័មានលំអិតរបស់អាជ្ញាប័ណ្ណ"
+  are_you_sure: "គិតបានច្បាស់លាស់ហើយរឺនៅ?"
+  do_you_want_to_delete: "តើអ្នកពិតជាចង់លុបវាចោលមែនទេ?"
+  something_went_wrong: "មានបញ្ហាបច្ចេកទេសកើតឡើង"

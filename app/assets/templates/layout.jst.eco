@@ -3,19 +3,22 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nva-item">
-          <a href="/" class="nav-link">Home</a>
+          <a href="/" class="nav-link"><%= I18n.t('home') %></a>
         </li>
       </ul>
       <ul class="navbar-nav float-right">
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= @user.name %></a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#" onclick="$('#logoutForm').submit(); return false;">Sign Out</a>
+            <a class="dropdown-item" href="#" onclick="$('#logoutForm').submit(); return false;"><%= I18n.t('sign_out') %></a>
             <form action="/users/sign_out" id="logoutForm" method="post" style="display: hidden;">
               <input type="hidden" name="_method" value="delete" />
               <input type="hidden" name="authenticity_token" value="<%= @token %>" />
             </form>
           </div>
+        </li>
+        <li class="nav-item">
+          <a href="<%= @langUrl %>" class="nav-link"><%= @lang %></a>
         </li>
       </ul>
     </div>

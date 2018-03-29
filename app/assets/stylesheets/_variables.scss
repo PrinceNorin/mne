@@ -10,6 +10,11 @@
   src: font-url("FiraSans-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Battambang";
+  src: font-url("Battambang-Regular.ttf") format("truetype");
+}
+
 @function remCalc($pixels) {
   $remSize: $pixels / 16px;
   @return $remSize * 1rem;
