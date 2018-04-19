@@ -1,0 +1,25 @@
+<%
+  statusColors = {
+    'active' => 'success',
+    'inactive' => 'danger',
+    'resolving' => 'warning'
+  }
+%>
+
+<tr>
+  <td width="5%"><%= license.number %></td>
+  <td width="20%">
+    <div><%= license.company_name %></div>
+    <% if license.owner_name.present? %>
+      <div><%= license.owner_name %></div>
+    <% end %>
+  </td>
+  <td width="10%"><%= t('area_with_unit', area: license.area, unit: t("area_units.#{license.area_unit}")).html_safe %></td>
+  <td width="20%"><%= license.address %></td>
+  <td width="10%"><%= t("provinces.#{license.province}") %></td>
+  <td width="5%"><%= t("license_types.#{license.license_type}") %></td>
+  <td width="10%"><%= l(license.issued_date, format: :short) %></td>
+  <td width="10%"><%= l(license.expires_date, format: :short) %></td>
+  <td><span class="d-block badge badge-<%= statusColors[license.status] %> p-2"><%= t("statuses.#{license.status}") %></span></td>
+  <td width="10%"><%= license.note %></td>
+</tr>

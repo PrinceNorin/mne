@@ -13,8 +13,13 @@ gem 'paper_trail', '~> 8.0'
 gem 'acts_as_paranoid', git: 'https://github.com/ActsAsParanoid/acts_as_paranoid.git', branch: :master
 
 # utilities
+gem 'ransack', '~> 1.8.8'
 gem 'kaminari', '~> 1.1'
+gem 'bootstrap4-kaminari-views', '~> 1.0.0'
 gem 'config', '~> 1.7'
+gem 'simple_form', '~> 3.5.1'
+gem 'client_side_validations', '~> 11.1.2'
+gem 'client_side_validations-simple_form', '~> 6.5.1'
 
 # assets, css and javascript
 gem 'i18n-js', '~> 3.0'

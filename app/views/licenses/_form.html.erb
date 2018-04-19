@@ -1,0 +1,47 @@
+<%= render 'shared/header' %>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title text-center"><%= title %></h1>
+        <hr />
+
+        <%= simple_form_for @license, defaults: { input_html: { class: 'form-control' } } do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-row">
+            <%= f.input :license_type, collection: License.license_type_select,
+              include_blank: false, wrapper_html: { class: 'col-md-3' } %>
+            <%= f.input :number, wrapper_html: { class: 'col-md-3' } %>
+            <%= f.input :company_name, wrapper_html: { class: 'col-md-3' } %>
+            <%= f.input :owner_name, wrapper_html: { class: 'col-md-3' } %>
+          </div>
+
+          <div class="form-row">
+            <%= f.input :area, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :area_unit, collection: License.area_unit_select,
+              include_blank: false, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :province, collection: License.province_select,
+              include_blank: false, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :issued_date, as: :string,
+              wrapper_html: { class: 'col-md-3' }, input_html: { class: 'form-control date' } %>
+            <%= f.input :expires_date, as: :string,
+              wrapper_html: { class: 'col-md-3' }, input_html: { class: 'form-control date' } %>
+          </div>
+
+          <div class="form-row">
+            <%= f.input :address, wrapper_html: { class: 'col-md-6' }, input_html: { rows: 10 } %>
+            <%= f.input :note, wrapper_html: { class: 'col-md-6' }, input_html: { rows: 10 } %>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12 clearfix">
+              <%= f.button :submit, @license.new_record? ? t('create') : t('update'), class: 'btn btn-lg btn-primary float-right' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

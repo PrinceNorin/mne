@@ -3,6 +3,7 @@ km:
   en_lang: "អង់គ្លេស"
   home: "ដើមទំព័រ"
   sign_out: "ចាកចេញ"
+  menu: "បញ្ជីមុខងារ"
 
   date:
     abbr_day_names:
@@ -62,6 +63,9 @@ km:
 
   activerecord:
     models:
+      license:
+        one: "អាជ្ញាប័ណ្ណ"
+        other: "អាជ្ញាប័ណ្ណ"
       statement:
         one: "ប្រកាស់"
         other: "ប្រកាស់"
@@ -79,6 +83,8 @@ km:
         company_name: "ឈ្មោះក្រុមហ៊ុន"
         owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន"
         license_type: "ប្រភេទជំនួញ"
+        issued_date_gteq: "ចេញប្រកាស់ពីថ្ងៃ"
+        issued_date_lteq: "ចេញប្រកាស់ដល់ថ្ងៃ"
       statement:
         number: "លេខប្រកាស់"
         statement_type: "ប្រភេទ"
@@ -90,10 +96,21 @@ km:
         password: "លេខសំងាត់"
         remember_me: "ចងចាំ"
 
+    errors:
+      models:
+        license:
+          attributes:
+            issued_date:
+              must_be_less_than: "មិនអាចធំជាងរឺស្មើ %{other}"
+            expires_date:
+              must_be_greater_than: "មិនអាចតូចជាងរឺស្មើ %{other}"
+
   devise:
     sessions:
       new:
         sign_in: "ចូលប្រើប្រាស់"
+
+  area_with_unit: "%{area} <br /> %{unit}"
 
   provinces:
     phnom_penh: "ភ្នំពេញ"
@@ -165,6 +182,9 @@ km:
   new_statement: "ប្រកាស់ថ្មី"
   edit_statement: "កែប្រែប្រកាស់"
   select_statement: "--ជ្រើសរើសលេខប្រកាស់យោង--"
+  create_license: "បញ្ចូលអាជ្ញាប័ណ្ណថ្មី"
+  search_license: "ស្វែងរកអាជ្ញាប័ណ្ណ"
+  select_option: "--ចូលជ្រើសរើស--"
 
   create: "ដាក់បញ្ចូល"
   update: "កែប្រែ"
@@ -177,3 +197,10 @@ km:
   are_you_sure: "គិតបានច្បាស់លាស់ហើយរឺនៅ?"
   do_you_want_to_delete: "តើអ្នកពិតជាចង់លុបវាចោលមែនទេ?"
   something_went_wrong: "មានបញ្ហាបច្ចេកទេសកើតឡើង"
+
+  views:
+    pagination:
+      first: "ដំបូង"
+      last: "ចុងក្រោយ"
+      previous: "មុន"
+      next: "បន្ទាប់"

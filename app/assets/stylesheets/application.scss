@@ -73,3 +73,18 @@ input, textarea, button, .form-control, .btn {
     border: none;
   }
 }
+
+.field_with_errors {
+  input, select, textarea {
+    @extend .is-invalid;
+  }
+}
+
+.required abbr {
+  @extend .text-danger;
+}
+
+table td, table th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}

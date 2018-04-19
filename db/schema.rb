@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321153343) do
+ActiveRecord::Schema.define(version: 20180418141552) do
 
   create_table "licenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "number", null: false
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20180321153343) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_licenses_on_deleted_at"
-    t.index ["number"], name: "index_licenses_on_number", unique: true
   end
 
   create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

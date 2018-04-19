@@ -2,12 +2,16 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'home#index'
+  get '/search' => 'search#index'
 
-  scope :api do
-    resources :licenses do
-      resources :statements
-    end
-  end
+  resources :licenses
+  resources :statements
 
-  match '*path', to: 'home#index', via: :all
+  # scope :api do
+  #   resources :licenses do
+  #     resources :statements
+  #   end
+  # end
+
+  # match '*path', to: 'home#index', via: :all
 end

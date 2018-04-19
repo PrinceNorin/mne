@@ -3,12 +3,16 @@ en:
   en_lang: "English"
   home: "Home"
   sign_out: "Sign Out"
+  menu: "Menu"
 
   table:
     action: "Actions"
 
   activerecord:
     models:
+      license:
+        one: "License"
+        other: "Licenses"
       statement:
         one: "Statement"
         other: "Statements"
@@ -26,11 +30,23 @@ en:
         company_name: "Company Name"
         owner_name: "Owner Name"
         license_type: "License Type"
+        issued_date_gteq: "Issue From"
+        issued_date_lteq: "Issue To"
       statement:
         number: "Number"
         statement_type: "Type"
         reference: "Reference"
         issued_date: "Issue"
+    errors:
+      models:
+        license:
+          attributes:
+            issued_date:
+              must_be_less_than: "can't be greater than or equal to %{other}"
+            expires_date:
+              must_be_greater_than: "can't be less than or equal to %{other}"
+
+  area_with_unit: "%{area} <br /> %{unit}"
 
   provinces:
     phnom_penh: "Phnom Penh"
@@ -102,6 +118,9 @@ en:
   new_statement: "New Statement"
   edit_statement: "Edit Statement"
   select_statement: "--Select Reference--"
+  create_license: "Create License"
+  search_license: "Search License"
+  select_option: "--Please Select--"
 
   create: "Create"
   update: "Update"
@@ -114,3 +133,6 @@ en:
   are_you_sure: "Are you sure?"
   do_you_want_to_delete: "Do you really want to delete this?"
   something_went_wrong: "Something went wrong!"
+
+  validations:
+    must_be_less_than: "can't be greater than %{other}"

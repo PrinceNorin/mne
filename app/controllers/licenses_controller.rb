@@ -4,47 +4,40 @@ class LicensesController < ApplicationController
   before_action :set_license, only: [:show, :edit, :update, :destroy]
 
   def index
-    scope = License.order(created_at: :desc)
-    if (query = query_params).present?
-      scope = scope.where(query)
-    end
-
-    per_page = params[:per_page] || Settings.pagination.per_page
-    @licenses = scope.page(params[:page])
-      .per(per_page)
-    render json: {
-      data: @licenses.map { |license| license.as_json(include: [:statements]) },
-      per_page: per_page,
-      total_pages: @licenses.total_pages,
-      total_entries: @licenses.total_count,
-      current_page: @licenses.current_page
-    }
+    @licenses = License.order(created_at: :desc).page(params[:page]).per(params[:per_page])
   end
 
   def show
     render json: @license.as_json(include: :statements)
   end
 
+  def new
+    @license = License.new
+  end
+
   def create
     @license = License.new(license_params)
     if @license.save
-      render json: @license.as_json(include: :statements)
+      redirect_to licenses_path, success: t('flash.create_success')
     else
-      render json: @license.errors, status: :unprocessable_entity
+      render :new
     end
+  end
+
+  def edit
   end
 
   def update
     if @license.update_attributes(license_params)
-      render json: @license.as_json(include: :statements)
+      redirect_to licenses_path, success: t('flash.update_success')
     else
-      render json: @license.errors, status: :unprocessable_entity
+      render :edit
     end
   end
 
   def destroy
     @license.destroy
-    render json: { message: 'success' }
+    redirect_to licenses_path, success: t('flash.delete_success')
   end
 
   private
@@ -58,20 +51,5 @@ class LicensesController < ApplicationController
       :number, :area, :area_unit, :province, :issued_date, :address,
       :note, :expires_date, :company_name, :owner_name, :license_type
     )
-  end
-
-  def query_params
-    if params[:q] && params[:t]
-      type = params[:t].to_sym
-      value =
-        case type
-        when :issued_date, :expires_date
-          f, t = params[:q].split(':')
-          Date.parse(f)..Date.parse(t)
-        else
-          params[:q]
-        end
-      { type => value }
-    end
   end
 end

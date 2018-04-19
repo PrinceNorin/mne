@@ -1,0 +1,74 @@
+<%= render 'shared/header' %>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title text-center mb-4"><%= t('search_license') %></h1><hr />
+
+        <div class="row mb-4">
+          <div class="col-12">
+            <%= search_form_for @q, url: search_path, class: 'form' do |f| %>
+              <div class="form-row">
+                <div class="col-3">
+                  <div class="form-group">
+                    <%= f.label :number %>
+                    <%= f.search_field :number_cont, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <%= f.label :company_name %>
+                    <%= f.search_field :company_name_cont, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <%= f.label :issued_date_gteq, t('activerecord.attributes.license.issued_date_gteq') %>
+                    <%= f.search_field :issued_date_gteq, class: 'form-control date', autocomplete: 'off' %>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <%= f.label :issued_date_lteq, t('activerecord.attributes.license.issued_date_lteq') %>
+                    <%= f.search_field :issued_date_lteq, class: 'form-control date', autocomplete: 'off' %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-4">
+                  <div class="form-group">
+                    <%= f.label :province %>
+                    <%= f.select :province_eq, License.province_search_select, { include_blank: t('select_option') }, { class: 'form-control' } %>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <%= f.label :license_type %>
+                    <%= f.select :license_type_eq, License.license_type_search_select, { include_blank: t('select_option') }, { class: 'form-control' } %>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <%= f.label :status %>
+                    <%= f.select :status_eq, License.status_search_select, { include_blank: t('select_option') }, { class: 'form-control' } %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12 text-right">
+                  <div class="form-group">
+                    <label></label>
+                    <%= f.submit t('search_license'), class: 'btn btn-primary' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <%= render 'licenses/table' %>
+      </div>
+    </div>
+  </div>
+</div>
