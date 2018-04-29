@@ -1,0 +1,62 @@
+<div class="col-6 license-details__content">
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.number') %></label>
+      <span><%= @license.number %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.company_or_owner_name') %></label>
+      <span><%= @license.company_or_owner_name %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.area') %></label>
+      <span><%= t('inline_area_with_unit', area: number_to_human(@license.area), unit: t("area_units.#{@license.area_unit}")) %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.address') %></label>
+      <span><%= @license.address %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.province') %></label>
+      <span><%= t("provinces.#{@license.province}") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.type') %></label>
+      <span><%= t("license_types.#{@license.license_type}") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.issued_date') %></label>
+      <span><%= l @license.issued_date %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.expires_date') %></label>
+      <span><%= l @license.expires_date %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.status') %></label>
+      <span><%= t("statuses.#{@license.status}") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label><%= t('license.details.note') %></label>
+      <span><%= @license.note %></span>
+    </div>
+  </div>
+</div>

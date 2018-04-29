@@ -88,3 +88,18 @@ table td, table th {
   text-align: center !important;
   vertical-align: middle !important;
 }
+
+.license-details__content {
+  label, span {
+    display: inline-block;
+  }
+  label {
+    width: 180px;
+    font-weight: bold;
+  }
+}
+
+.license-details__history-item {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}

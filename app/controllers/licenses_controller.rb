@@ -8,7 +8,6 @@ class LicensesController < ApplicationController
   end
 
   def show
-    render json: @license.as_json(include: :statements)
   end
 
   def new

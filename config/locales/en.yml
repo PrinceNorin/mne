@@ -47,6 +47,7 @@ en:
               must_be_greater_than: "can't be less than or equal to %{other}"
 
   area_with_unit: "%{area} <br /> %{unit}"
+  inline_area_with_unit: "%{area} %{unit}"
 
   provinces:
     phnom_penh: "Phnom Penh"
@@ -121,12 +122,18 @@ en:
   create_license: "Create License"
   search_license: "Search License"
   select_option: "--Please Select--"
+  sub_license: "Sub License"
+  based_on_license: "Based on license <b>%{number}</b> issued at <b>%{issued_date}</b>"
+  company_list: "Company List"
+  result_list: "Search Result"
 
   create: "Create"
   update: "Update"
   delete: "Delete"
   close: "Close"
   cancel: "Cancel"
+  edit: "Edit"
+  details: "Details"
 
   not_found: "404 not found"
   license_details: "License Details"
@@ -134,5 +141,15 @@ en:
   do_you_want_to_delete: "Do you really want to delete this?"
   something_went_wrong: "Something went wrong!"
 
-  validations:
-    must_be_less_than: "can't be greater than %{other}"
+  license:
+    details:
+      number: "License Number:"
+      company_or_owner_name: "Company/Owner's Name:"
+      area: "Area:"
+      address: "Business's Address:"
+      province: "Province:"
+      type: "License Type:"
+      issued_date: "Issued At:"
+      expires_date: "Expires At:"
+      status: "Status:"
+      note: "Other:"

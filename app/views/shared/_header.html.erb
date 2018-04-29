@@ -1,7 +1,7 @@
 <% lang = I18n.locale == :km ? :en : :km %>
 <% url = [request.url, "locale=#{lang}" ].join(request.url.include?('?') ? '&' : '?') %>
 
-<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
   <div class="container">
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
@@ -16,9 +16,11 @@
             <%= link_to t('sign_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           </div>
         </li>
+        <!--
         <li class="nav-item">
           <%= link_to t("#{lang}_lang"), url, class: 'nav-link' %>
         </li>
+        -->
       </ul>
     </div>
   </div>

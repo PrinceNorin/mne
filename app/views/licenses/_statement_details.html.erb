@@ -1,0 +1,15 @@
+<div class="col-6">
+  <ul>
+    <% @license.statements.each do |statement| %>
+      <li class="license-details__history-item">
+        <%=
+          link_to t('status_have_been_change_by_statement', {
+            status: t("statement_types.#{statement.statement_type}"),
+            number: statement.number,
+            issued_date: l(statement.issued_date)
+          }).html_safe, license_statement_path(@license, statement), class: 'text-secondary'
+        %>
+      </li>
+    <% end %>
+  </ul>
+</div>

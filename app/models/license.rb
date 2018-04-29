@@ -12,10 +12,7 @@ class License < ApplicationRecord
   validates_presence_of :number, :area, :address,
     :company_name, :issued_date, :expires_date
 
-  validates_uniqueness_of :number, conditions: -> do
-    now = Date.current
-    where(issued_date: now.beginning_of_year..now.end_of_year)
-  end
+  validate :number_uniqueness
 
   validates_numericality_of :area
 
@@ -27,6 +24,18 @@ class License < ApplicationRecord
   end
 
   has_many :statements, dependent: :destroy
+
+  def company_or_owner_name
+    if owner_name.present?
+      "#{company_name}/#{owner_name}"
+    else
+      company_name
+    end
+  end
+
+  def better_area
+    "%g" % ("%f" % area)
+  end
 
   class << self
     %w(license_type status province area_unit).each do |name|
@@ -43,6 +52,17 @@ class License < ApplicationRecord
           [I18n.t("#{plural_name}.#{key}"), value]
         end
       end
+    end
+  end
+
+  private
+
+  def number_uniqueness
+    now = self.issued_date || Date.current
+    from = now.beginning_of_year
+    to = now.end_of_year
+    if number_changed? && self.class.exists?(number: self.number, issued_date: from..to)
+      errors.add(:number, :taken)
     end
   end
 end

@@ -14,12 +14,18 @@
       <div><%= license.owner_name %></div>
     <% end %>
   </td>
-  <td width="10%"><%= t('area_with_unit', area: license.area, unit: t("area_units.#{license.area_unit}")).html_safe %></td>
+  <td width="10%"><%= t('area_with_unit', area: number_to_human(license.area), unit: t("area_units.#{license.area_unit}")).html_safe %></td>
   <td width="20%"><%= license.address %></td>
   <td width="10%"><%= t("provinces.#{license.province}") %></td>
   <td width="5%"><%= t("license_types.#{license.license_type}") %></td>
-  <td width="10%"><%= l(license.issued_date, format: :short) %></td>
-  <td width="10%"><%= l(license.expires_date, format: :short) %></td>
+  <td width="10%"><%= license.issued_date.strftime('%Y/%m/%d') %></td>
+  <td width="10%"><%= license.expires_date.strftime('%Y/%m/%d') %></td>
   <td><span class="d-block badge badge-<%= statusColors[license.status] %> p-2"><%= t("statuses.#{license.status}") %></span></td>
   <td width="10%"><%= license.note %></td>
+  <td>
+    <%= link_to t('edit'), edit_license_path(license), class: 'btn btn-primary btn-sm mb-1' %><br />
+    <%= link_to t('sub_license'), new_license_statement_path(license), class: 'btn btn-info btn-sm mb-1' %><br />
+    <%= link_to t('delete'), license_path(license), class: 'btn btn-danger btn-sm mb-1', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %><br />
+    <%= link_to t('details'), license_path(license), class: 'btn btn-secondary btn-sm' %>
+  </td>
 </tr>

@@ -71,22 +71,22 @@ km:
         other: "ប្រកាស់"
     attributes:
       license:
-        number: "លេខប្រកាស់"
+        number: "ប្រកាស់លេខ"
         status: "ស្ថានភាព"
         area: "ទំហំ"
         area_unit: "ឯកតា"
-        province: "ខេត្ត"
+        province: "ខេត្ត/ក្រុង"
         issued_date: "ថ្ងៃចេញប្រកាស់"
-        expires_date: "ថ្ងៃផុតកំណត់"
+        expires_date: "ថ្ងៃអស់សុពលភាព"
         address: "អាសយដ្ឋាន"
-        note: "កំណត់សំគាល់ផ្សេងៗ"
+        note: "ផ្សេងៗ"
         company_name: "ឈ្មោះក្រុមហ៊ុន"
         owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន"
-        license_type: "ប្រភេទជំនួញ"
+        license_type: "ប្រភេទអាជីវកម្ម"
         issued_date_gteq: "ចេញប្រកាស់ពីថ្ងៃ"
         issued_date_lteq: "ចេញប្រកាស់ដល់ថ្ងៃ"
       statement:
-        number: "លេខប្រកាស់"
+        number: "ប្រកាស់លេខ"
         statement_type: "ប្រភេទ"
         reference: "លេខប្រកាស់យោង"
         issued_date: "ថ្ងៃចេញប្រកាស់"
@@ -111,6 +111,11 @@ km:
         sign_in: "ចូលប្រើប្រាស់"
 
   area_with_unit: "%{area} <br /> %{unit}"
+  inline_area_with_unit: "%{area} %{unit}"
+
+  optional_owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន (អាចរំលងបាន)"
+  optional_statement_number: "លេខប្រកាស់យោង (អាចរំលងបាន)"
+  license_number_with_letter: "លេខប្រកាស់ (ជាមួយអក្សរ)"
 
   provinces:
     phnom_penh: "ភ្នំពេញ"
@@ -185,18 +190,38 @@ km:
   create_license: "បញ្ចូលអាជ្ញាប័ណ្ណថ្មី"
   search_license: "ស្វែងរកអាជ្ញាប័ណ្ណ"
   select_option: "--ចូលជ្រើសរើស--"
+  sub_license: "ប្រកាស់ថ្មី"
+  based_on_license: "យោងទៅលីអាជ្ញាប័ណ្ណលេខ <b>%{number}</b> ចេញថ្ងៃទី <b>%{issued_date}</b>"
+  company_list: "តារាងបញ្ជីអាជ្ញាបណ្ណក្នុងក្រសួង"
+  result_list: "តារាងបញ្ជីលទ្ធផល"
+  status_have_been_change_by_statement: "ត្រូវបាន <b>%{status}</b> ដោយយោងទៅលើប្រកាស់លេខ <b>%{number}</b> ចេញថ្ងៃទី <b>%{issued_date}</b>"
 
   create: "ដាក់បញ្ចូល"
   update: "កែប្រែ"
   delete: "លុបចោល"
   close: "បិទ"
   cancel: "បោះបង់"
+  edit: "កែប្រែ"
+  details: "ព័តមានលំអិត"
 
   not_found: "៤០៤ រក​មិន​ឃើញ"
-  license_details: "ពត័មានលំអិតរបស់អាជ្ញាប័ណ្ណ"
+  license_details: "ពត័មានលំអិតស្ដីពីអាជ្ញាប័ណ្ណ"
   are_you_sure: "គិតបានច្បាស់លាស់ហើយរឺនៅ?"
   do_you_want_to_delete: "តើអ្នកពិតជាចង់លុបវាចោលមែនទេ?"
   something_went_wrong: "មានបញ្ហាបច្ចេកទេសកើតឡើង"
+
+  license:
+    details:
+      number: "ប្រកាស់លេខ:"
+      company_or_owner_name: "ឈ្មោះក្រុមហ៊ុន/ម្ចាស់ក្រុមហ៊ុន:"
+      area: "ទំហំផ្ទៃដីសរុប:"
+      address: "តំបន់ធ្វើអាជីវកម្ម:"
+      province: "ខេត្ត/ក្រុង:"
+      type: "ប្រភេទអាជីវកម្ម:"
+      issued_date: "ចេញថ្ងៃទី:"
+      expires_date: "អស់សុពលភាពថ្ងៃទី:"
+      status: "ស្ថានភាព:"
+      note: "ផ្សេងៗ:"
 
   views:
     pagination:

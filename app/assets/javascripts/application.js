@@ -1,3 +1,4 @@
+//= require ./alert
 //= require rails-ujs
 //= require jquery3
 //= require jquery-ui
@@ -5,8 +6,8 @@
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
-// require i18n.js
-// require i18n/translations
+//= require i18n.js
+//= require i18n/translations
 // require underscore
 // require_tree ./vendors
 // require backbone

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418141552) do
+ActiveRecord::Schema.define(version: 20180422062329) do
 
   create_table "licenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "number", null: false
     t.integer "status", default: 0
-    t.decimal "area", precision: 10, null: false
+    t.decimal "area", precision: 16, scale: 6, null: false
     t.integer "area_unit", default: 0
     t.integer "province", default: 0
     t.date "issued_date", null: false
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20180418141552) do
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_statements_on_deleted_at"
     t.index ["license_id"], name: "index_statements_on_license_id"
-    t.index ["number"], name: "index_statements_on_number", unique: true
     t.index ["reference_id"], name: "index_statements_on_reference_id", unique: true
   end
 

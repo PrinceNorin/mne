@@ -1,10 +1,8 @@
-<%= render 'shared/header' %>
-
 <div class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title text-center mb-4"><%= License.model_name.human(count: 2) %></h1>
+        <h1 class="card-title text-center mb-4"><%= t('company_list') %></h1><hr />
         <%= render 'table' %>
       </div>
     </div>

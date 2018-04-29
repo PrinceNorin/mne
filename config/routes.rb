@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/search' => 'search#index'
 
-  resources :licenses
-  resources :statements
+  resources :licenses do
+    resources :statements, except: [:index, :show]
+  end
 
   # scope :api do
   #   resources :licenses do
