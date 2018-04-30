@@ -1,3 +1,5 @@
+require 'csv'
+
 class License < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
@@ -52,6 +54,42 @@ class License < ApplicationRecord
           [I18n.t("#{plural_name}.#{key}"), value]
         end
       end
+    end
+
+    def to_csv
+      columns = %w(
+        number company_name owner_name area
+        address province license_type issued_date
+        expires_date status note
+      ).map { |col| I18n.t("activerecord.attributes.license.#{col}") }
+
+      path = Rails.root.join('tmp', "licenses_#{Time.now.to_i}.csv").to_s
+      File.open(path, 'w+:UTF-16LE:UTF-8') do |file|
+        data = CSV.generate(col_sep: "\t") do |csv|
+          csv << columns
+          all.each { |license| csv << csv_data(license) }
+        end
+
+        file.write("\xEF\xBB\xBF")
+        file.write(data)
+      end
+
+      path
+    end
+
+    private
+
+    def csv_data(license)
+      data = [
+        license.number, license.company_name, license.owner_name,
+        "#{license.area} #{I18n.t('area_units.' + license.area_unit)}",
+        license.address, I18n.t("provinces.#{license.province}"),
+        I18n.t("license_types.#{license.license_type}"),
+        license.issued_date.strftime('%Y/%m/%d'),
+        license.expires_date.strftime('%Y/%m/%d'),
+        I18n.t("statuses.#{license.status}"),
+        license.note
+      ]
     end
   end
 

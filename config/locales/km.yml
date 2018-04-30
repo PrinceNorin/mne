@@ -113,6 +113,7 @@ km:
   area_with_unit: "%{area} <br /> %{unit}"
   inline_area_with_unit: "%{area} %{unit}"
 
+  download_csv: "ទាញយកតារាងឯកសារ Excel"
   optional_owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន (អាចរំលងបាន)"
   optional_statement_number: "លេខប្រកាស់យោង (អាចរំលងបាន)"
   license_number_with_letter: "លេខប្រកាស់ (ជាមួយអក្សរ)"
