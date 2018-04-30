@@ -2,7 +2,8 @@ class StatementsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :set_license
-  before_action :set_statement, only: [:update, :destroy]
+  before_action :set_statement, only: [:edit, :update, :destroy]
+  before_action :load_references
 
   def new
     @statement = @license.statements.build
@@ -22,9 +23,9 @@ class StatementsController < ApplicationController
 
   def update
     if @statement.update_attributes(statement_params)
-      render json: @statement.reload.as_json(include: {license: {include: :statements}})
+      redirect_to license_path(@license)
     else
-      render json: @statement.errors, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -37,13 +38,24 @@ class StatementsController < ApplicationController
 
   def set_license
     @license = License.find(params[:license_id])
-    ids = Statement.pluck(:id)
-    ref_ids = Statement.pluck(:reference_id)
-    @references = Statement.where(id: ids - ref_ids)
   end
 
   def set_statement
     @statement = @license.statements.find(params[:id])
+  end
+
+  def load_references
+    scope = Statement
+
+    if @statement.present?
+      ids = scope.where.not(id: @statement.id).pluck(:id)
+      ref_ids = Statement.pluck(:reference_id) - [@statement.reference.try(:id)].compact
+    else
+      ids = scope.pluck(:id)
+      ref_ids = Statement.pluck(:reference_id)
+    end
+
+    @references = Statement.where(id: ids - ref_ids)
   end
 
   def statement_params

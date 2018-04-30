@@ -13,7 +13,7 @@ class Statement < ApplicationRecord
   validate :number_uniqueness
   validates_uniqueness_of :reference_id, allow_nil: true
   validates_presence_of :issued_date, :number, :statement_type
-  validates_presence_of :reference, unless: :dispute?
+  # validates_presence_of :reference, unless: :dispute?
 
   after_save :change_license_status
 

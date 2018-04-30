@@ -83,8 +83,8 @@ km:
         company_name: "ឈ្មោះក្រុមហ៊ុន"
         owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន"
         license_type: "ប្រភេទអាជីវកម្ម"
-        issued_date_gteq: "ចេញប្រកាស់ពីថ្ងៃ"
-        issued_date_lteq: "ចេញប្រកាស់ដល់ថ្ងៃ"
+        issued_date_gteq: "ចេញប្រកាស់ថ្ងៃទី"
+        issued_date_lteq: "រហូតដល់ថ្ងៃទី"
       statement:
         number: "ប្រកាស់លេខ"
         statement_type: "ប្រភេទ"

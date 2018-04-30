@@ -7,7 +7,14 @@
             status: t("statement_types.#{statement.statement_type}"),
             number: statement.number,
             issued_date: l(statement.issued_date)
-          }).html_safe, license_statement_path(@license, statement), class: 'text-secondary'
+          }).html_safe, edit_license_statement_path(@license, statement), class: 'text-primary'
+        %>
+        <%#=
+          t('status_have_been_change_by_statement', {
+            status: t("statement_types.#{statement.statement_type}"),
+            number: statement.number,
+            issued_date: l(statement.issued_date)
+          }).html_safe
         %>
       </li>
     <% end %>

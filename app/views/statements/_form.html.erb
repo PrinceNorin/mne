@@ -33,6 +33,8 @@
           <div class="form-row">
             <div class="form-group col-md-12 clearfix">
               <%= f.button :submit, @statement.new_record? ? t('create') : t('update'), class: 'btn btn-lg btn-primary float-right' %>
+              <%#= link_to t('delete'), license_statement_path(@license, @statement), class: 'btn btn-danger btn-lg float-right mr-2',
+                method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %>
             </div>
           </div>
         <% end %>
