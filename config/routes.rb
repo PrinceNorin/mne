@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :licenses do
     resources :statements, except: [:index, :show]
+    resource :business_plan, only: [:show, :create, :update]
   end
 
   # scope :api do

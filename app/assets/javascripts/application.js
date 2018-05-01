@@ -22,6 +22,7 @@
 
 $(document).ready(function() {
   $('.date').datepicker({
+    changeYear: true,
     dateFormat: 'yy/mm/dd',
     onClose: function(dateText, inst) {
       $(inst.input).change().focusout();

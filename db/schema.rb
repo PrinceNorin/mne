@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422062329) do
+ActiveRecord::Schema.define(version: 20180430032857) do
+
+  create_table "business_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "license_id"
+    t.integer "currency", default: 0
+    t.text "content"
+    t.decimal "budget", precision: 16, scale: 6, default: "0.0"
+    t.integer "employees"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["license_id"], name: "index_business_plans_on_license_id"
+  end
 
   create_table "licenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "number", null: false
@@ -83,6 +95,7 @@ ActiveRecord::Schema.define(version: 20180422062329) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "business_plans", "licenses"
   add_foreign_key "statements", "licenses"
   add_foreign_key "statements", "statements", column: "reference_id"
 end

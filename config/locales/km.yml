@@ -61,6 +61,13 @@ km:
   table:
     action: "សកម្មភាព"
 
+  helpers:
+    label:
+      business_plan[contents_attributes][0]:
+        year: "ឆ្នាំ"
+      business_plan[business_plan_details_attributes]:
+          year: "ឆ្នាំ"
+
   activerecord:
     models:
       license:
@@ -69,6 +76,7 @@ km:
       statement:
         one: "ប្រកាស់"
         other: "ប្រកាស់"
+      business_plan: "ផែនការទុន"
     attributes:
       license:
         number: "ប្រកាស់លេខ"
@@ -90,6 +98,14 @@ km:
         statement_type: "ប្រភេទ"
         reference: "លេខប្រកាស់យោង"
         issued_date: "ថ្ងៃចេញប្រកាស់"
+      business_plan:
+        budget: "ថវិការសរុប"
+        currency: "ប្រភេទថវិការ"
+        employees: "ចំនួនកម្មករ"
+        note: "ផ្សេងៗ"
+        contents:
+          year: "ឆ្នាំ"
+          plan: "ផែនការជាលាយល័ក្ខអក្សរ"
 
       user:
         email: "អីម៉ែល"
@@ -165,6 +181,10 @@ km:
     suspense: "ផ្អាក"
     resolved: "ដាក់ឱ្យដំណើរការ"
 
+  currencies:
+    riel: "រៀល (៛)"
+    dollar: "ដុល្លារ ($)"
+
   flash:
     create_success: "បញ្ចូលទិន្នន័យបានជោគជ័យ"
     update_success: "កែប្រែទិន្នន័យបានជោគជ័យ"
@@ -187,6 +207,8 @@ km:
   edit_license: "កែប្រែអាជ្ញាប័ណ្ណ"
   new_statement: "ប្រកាស់ថ្មី"
   edit_statement: "កែប្រែប្រកាស់"
+  new_business_plan: "ផែនការទុនថ្មី"
+  edit_business_plan: "កែប្រែផែនការទុន"
   select_statement: "--ជ្រើសរើសលេខប្រកាស់យោង--"
   create_license: "បញ្ចូលអាជ្ញាប័ណ្ណថ្មី"
   search_license: "ស្វែងរកអាជ្ញាប័ណ្ណ"
@@ -196,6 +218,9 @@ km:
   company_list: "តារាងបញ្ជីអាជ្ញាបណ្ណក្នុងក្រសួង"
   result_list: "តារាងបញ្ជីលទ្ធផល"
   status_have_been_change_by_statement: "ត្រូវបាន <b>%{status}</b> ដោយយោងទៅលើប្រកាស់លេខ <b>%{number}</b> ចេញថ្ងៃទី <b>%{issued_date}</b>"
+  license_history: "កំណត់ត្រាប្រវត្តិ"
+  no_history: "ពំមានកំណត់ត្រាសំរាប់បង្ហាញ"
+  no_business_plan: "ពំមានផែនការទុនសំរាប់បង្ហាញ"
 
   create: "ដាក់បញ្ចូល"
   update: "កែប្រែ"
@@ -204,6 +229,8 @@ km:
   cancel: "បោះបង់"
   edit: "កែប្រែ"
   details: "ព័តមានលំអិត"
+  add_business_plan: "ដាក់ផែនការទុន"
+  person: "នាក់"
 
   not_found: "៤០៤ រក​មិន​ឃើញ"
   license_details: "ពត័មានលំអិតស្ដីពីអាជ្ញាប័ណ្ណ"

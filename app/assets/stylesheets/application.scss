@@ -103,3 +103,13 @@ table td, table th {
   padding-top: 7px;
   padding-bottom: 7px;
 }
+
+.business-plan__content {
+  label, span {
+    display: inline-block;
+  }
+  label {
+    width: 60px;
+    font-weight: bold;
+  }
+}

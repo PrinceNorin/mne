@@ -1,0 +1,42 @@
+<div class="business-plan__content">
+  <% business_plan = @license.business_plan %>
+  <% if business_plan.present? %>
+    <div class="row">
+      <div class="col-12">
+        <label><%= t('activerecord.attributes.business_plan.budget') %>:</label>
+        <span><%= number_to_currency(business_plan.budget, unit: t("currencies.#{business_plan.currency}")) %></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label><%= t('activerecord.attributes.business_plan.employees') %>:</label>
+        <span><%= "#{business_plan.employees} #{t('person')}" %></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label><%= t('activerecord.attributes.business_plan.note') %>:</label>
+        <span><%= business_plan.note %></span>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-striped mt-2">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.business_plan.contents.year') %></th>
+          <th><%= t('activerecord.attributes.business_plan.contents.plan') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% business_plan.contents.each do |content| %>
+          <tr>
+            <td><%= content.year %></td>
+            <td><%= content.plan %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center"><%= t('no_business_plan') %></p>
+  <% end %>
+</div>

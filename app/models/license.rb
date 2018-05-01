@@ -26,6 +26,7 @@ class License < ApplicationRecord
   end
 
   has_many :statements, dependent: :destroy
+  has_one :business_plan, dependent: :destroy
 
   def company_or_owner_name
     if owner_name.present?

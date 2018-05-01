@@ -21,11 +21,12 @@
   <td width="10%"><%= license.issued_date.strftime('%Y/%m/%d') %></td>
   <td width="10%"><%= license.expires_date.strftime('%Y/%m/%d') %></td>
   <td><span class="d-block badge badge-<%= statusColors[license.status] %> p-2"><%= t("statuses.#{license.status}") %></span></td>
-  <td width="10%"><%= license.note %></td>
+  <td width="10%"><%= truncate(license.note, length: 50) %></td>
   <td>
     <%= link_to t('edit'), edit_license_path(license), class: 'btn btn-primary btn-sm mb-1' %><br />
     <%= link_to t('sub_license'), new_license_statement_path(license), class: 'btn btn-info btn-sm mb-1' %><br />
     <%= link_to t('delete'), license_path(license), class: 'btn btn-danger btn-sm mb-1', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %><br />
-    <%= link_to t('details'), license_path(license), class: 'btn btn-secondary btn-sm' %>
+    <%= link_to t('details'), license_path(license), class: 'btn btn-secondary btn-sm mb-1' %>
+    <%= link_to t('add_business_plan'), license_business_plan_path(license), class: 'btn btn-success btn-sm mb-1' %>
   </td>
 </tr>

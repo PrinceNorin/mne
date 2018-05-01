@@ -1,4 +1,4 @@
-<div class="col-6">
+<% if @license.statements.any? %>
   <ul>
     <% @license.statements.each do |statement| %>
       <li class="license-details__history-item">
@@ -9,14 +9,9 @@
             issued_date: l(statement.issued_date)
           }).html_safe, edit_license_statement_path(@license, statement), class: 'text-primary'
         %>
-        <%#=
-          t('status_have_been_change_by_statement', {
-            status: t("statement_types.#{statement.statement_type}"),
-            number: statement.number,
-            issued_date: l(statement.issued_date)
-          }).html_safe
-        %>
       </li>
     <% end %>
   </ul>
-</div>
+<% else %>
+  <p class="text-center"><%= t('no_history') %></p>
+<% end %>

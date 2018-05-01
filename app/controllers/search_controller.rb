@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @q = License.ransack(params[:q])
     @licenses = @q.result(distinct: true).page(params[:page]).per(params[:per_page])

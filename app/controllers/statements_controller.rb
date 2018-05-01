@@ -1,5 +1,4 @@
 class StatementsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :set_license
   before_action :set_statement, only: [:edit, :update, :destroy]
