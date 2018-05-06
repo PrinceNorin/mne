@@ -173,13 +173,15 @@ km:
 
   statuses:
     active: "កំពុងដំណើរការ"
-    resolving: "កំពុងដោះស្រាយ"
-    inactive: "អសកម្ម"
+    dispute: "ព្យួរ"
+    suspense: "ផ្អាក"
+    deleted: "លុប"
 
   statement_types:
     dispute: "ព្យួរ"
     suspense: "ផ្អាក"
     resolved: "ដាក់ឱ្យដំណើរការ"
+    deleted: "លុប"
 
   currencies:
     riel: "រៀល (៛)"

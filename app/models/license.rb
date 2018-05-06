@@ -7,7 +7,7 @@ class License < ApplicationRecord
   paginates_per 100
 
   enum area_unit: %i[m2 ha]
-  enum status: %i[active resolving inactive]
+  enum status: %i[active dispute suspense deleted]
   enum province: I18n.t('provinces').keys
   enum license_type: %i[const_sand stone stale_stone shallow]
 

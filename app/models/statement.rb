@@ -2,7 +2,7 @@ class Statement < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  enum statement_type: %i[dispute suspense resolved]
+  enum statement_type: %i[dispute suspense resolved deleted]
 
   belongs_to :license
   belongs_to :reference,
@@ -37,9 +37,10 @@ class Statement < ApplicationRecord
   def change_license_status
     license_status =
       case statement_type.to_sym
-      when :dispute then :resolving
-      when :suspense then :inactive
+      when :dispute then :dispute
+      when :suspense then :suspense
       when :resolved then :active
+      when :deleted then :deleted
       end
     license.update_attributes(status: license_status) if license_status
   end
