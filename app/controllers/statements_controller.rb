@@ -44,17 +44,17 @@ class StatementsController < ApplicationController
   end
 
   def load_references
-    scope = Statement
+    scope = @license.statements
 
     if @statement.present?
       ids = scope.where.not(id: @statement.id).pluck(:id)
-      ref_ids = Statement.pluck(:reference_id) - [@statement.reference.try(:id)].compact
+      ref_ids = scope.pluck(:reference_id) - [@statement.reference.try(:id)].compact
     else
       ids = scope.pluck(:id)
-      ref_ids = Statement.pluck(:reference_id)
+      ref_ids = scope.pluck(:reference_id)
     end
 
-    @references = Statement.where(id: ids - ref_ids)
+    @references = scope.where(id: ids - ref_ids)
   end
 
   def statement_params

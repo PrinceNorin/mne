@@ -2,7 +2,7 @@ class Statement < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  enum statement_type: %i[dispute suspense resolved deleted]
+  enum statement_type: %i[dispute suspense resolved archived]
 
   belongs_to :license
   belongs_to :reference,
@@ -40,7 +40,7 @@ class Statement < ApplicationRecord
       when :dispute then :dispute
       when :suspense then :suspense
       when :resolved then :active
-      when :deleted then :deleted
+      when :archived then :archived
       end
     license.update_attributes(status: license_status) if license_status
   end

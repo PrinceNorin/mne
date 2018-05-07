@@ -8,28 +8,16 @@
           <div class="col-12">
             <%= search_form_for @q, url: search_path, class: 'form' do |f| %>
               <div class="form-row">
-                <div class="col-3">
+                <div class="col-6">
                   <div class="form-group">
                     <%= f.label :number %>
                     <%= f.search_field :number_cont, class: 'form-control' %>
                   </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6">
                   <div class="form-group">
-                    <%= f.label :company_name %>
-                    <%= f.search_field :company_name_cont, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="form-group">
-                    <%= f.label :issued_date_gteq, t('activerecord.attributes.license.issued_date_gteq') %>
-                    <%= f.search_field :issued_date_gteq, class: 'form-control date', autocomplete: 'off' %>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="form-group">
-                    <%= f.label :issued_date_lteq, t('activerecord.attributes.license.issued_date_lteq') %>
-                    <%= f.search_field :issued_date_lteq, class: 'form-control date', autocomplete: 'off' %>
+                    <%= f.label :year %>
+                    <%= f.select :year_eq, year_options, { include_blank: t('select_option') }, class: 'form-control' %>
                   </div>
                 </div>
               </div>

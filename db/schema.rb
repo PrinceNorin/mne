@@ -97,5 +97,4 @@ ActiveRecord::Schema.define(version: 20180430032857) do
 
   add_foreign_key "business_plans", "licenses"
   add_foreign_key "statements", "licenses"
-  add_foreign_key "statements", "statements", column: "reference_id"
 end

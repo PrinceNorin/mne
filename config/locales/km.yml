@@ -79,29 +79,31 @@ km:
       business_plan: "ផែនការទុន"
     attributes:
       license:
+        no1: "លេខរៀង"
         number: "ប្រកាស់លេខ"
         status: "ស្ថានភាព"
-        area: "ទំហំ"
+        area: "ទំហំសរុប"
         area_unit: "ឯកតា"
         province: "ខេត្ត/ក្រុង"
-        issued_date: "ថ្ងៃចេញប្រកាស់"
+        issued_date: "ថ្ងៃចេញអាជ្ញាបណ្ណ"
         expires_date: "ថ្ងៃអស់សុពលភាព"
-        address: "អាសយដ្ឋាន"
+        address: "តំបន់ធ្វើអាជីវកម្ម"
         note: "ផ្សេងៗ"
         company_name: "ឈ្មោះក្រុមហ៊ុន"
         owner_name: "ឈ្មោះម្ចាស់ក្រុមហ៊ុន"
         license_type: "ប្រភេទអាជីវកម្ម"
         issued_date_gteq: "ចេញប្រកាស់ថ្ងៃទី"
         issued_date_lteq: "រហូតដល់ថ្ងៃទី"
+        year: "ចេញប្រកាស់ឆ្នាំ"
       statement:
         number: "ប្រកាស់លេខ"
         statement_type: "ប្រភេទ"
         reference: "លេខប្រកាស់យោង"
         issued_date: "ថ្ងៃចេញប្រកាស់"
       business_plan:
-        budget: "ថវិការសរុប"
+        budget: "ទុនវិនិយោគ"
         currency: "ប្រភេទថវិការ"
-        employees: "ចំនួនកម្មករ"
+        employees: "ចំនួនកម្មករ(នាក់)"
         note: "ផ្សេងៗ"
         contents:
           year: "ឆ្នាំ"
@@ -163,7 +165,7 @@ km:
 
   area_units:
     m2: "ម៉ែត្រការ៉េ"
-    ha: "ហិចតា"
+    ha: "ហិតា"
 
   license_types:
     stone: "ថ្ម"
@@ -175,13 +177,13 @@ km:
     active: "កំពុងដំណើរការ"
     dispute: "ព្យួរ"
     suspense: "ផ្អាក"
-    deleted: "លុប"
+    archived: "លុប"
 
   statement_types:
     dispute: "ព្យួរ"
     suspense: "ផ្អាក"
     resolved: "ដាក់ឱ្យដំណើរការ"
-    deleted: "លុប"
+    archived: "លុប"
 
   currencies:
     riel: "រៀល (៛)"

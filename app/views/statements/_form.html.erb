@@ -13,15 +13,10 @@
           <%= f.error_notification %>
 
           <div class="form-row">
-            <% if @references.any? %>
-              <%= f.input :statement_type, collection: Statement.statement_type_select,
-                include_blank: false, wrapper_html: { class: 'col-md-6' } %>
-              <%= f.association :reference, collection: @references.map { |r| [r.number, r.id] },
-                include_blank: t('select_option'), label: t('optional_statement_number'), wrapper_html: { class: 'col-md-6' } %>
-            <% else %>
-              <%= f.input :statement_type, collection: Statement.statement_type_select,
-                include_blank: false, wrapper_html: { class: 'col-md-12' } %>
-            <% end %>
+            <%= f.input :statement_type, collection: Statement.statement_type_select,
+              include_blank: false, wrapper_html: { class: 'col-md-6' } %>
+            <%= f.association :reference, collection: @references.map { |r| [r.number, r.id] },
+              include_blank: t('select_option'), label: t('optional_statement_number'), wrapper_html: { class: 'col-md-6' } %>
           </div>
 
           <div class="form-row">

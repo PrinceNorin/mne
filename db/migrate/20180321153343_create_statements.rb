@@ -13,6 +13,5 @@ class CreateStatements < ActiveRecord::Migration[5.1]
     add_index :statements, :number, unique: true
     add_index :statements, :reference_id, unique: true
     add_index :statements, :deleted_at
-    add_foreign_key :statements, :statements, column: :reference_id
   end
 end

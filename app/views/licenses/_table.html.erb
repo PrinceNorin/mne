@@ -2,11 +2,10 @@
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
+        <th><%= t('activerecord.attributes.license.no1') %></th>
         <th><%= License.human_attribute_name(:number) %></th>
-        <th>
-          <%= License.human_attribute_name(:company_name) %><br />
-          <%= License.human_attribute_name(:owner_name) %>
-        </th>
+        <th><%= License.human_attribute_name(:company_name) %></th>
+        <th><%= License.human_attribute_name(:owner_name) %></th>
         <th><%= License.human_attribute_name(:area) %></th>
         <th><%= License.human_attribute_name(:address) %></th>
         <th><%= License.human_attribute_name(:province) %></th>

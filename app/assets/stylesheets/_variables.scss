@@ -15,6 +15,16 @@
   src: font-url("Battambang-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: font-url("Khmer-OS-battambang.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Khmer OS Muollight";
+  src: font-url("Khmer-OS-muollight.ttf") format("truetype");
+}
+
 @function remCalc($pixels) {
   $remSize: $pixels / 16px;
   @return $remSize * 1rem;

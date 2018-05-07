@@ -4,10 +4,10 @@ class License < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  paginates_per 100
+  paginates_per 500
 
-  enum area_unit: %i[m2 ha]
-  enum status: %i[active dispute suspense deleted]
+  enum area_unit: %i[ha m2]
+  enum status: %i[active dispute suspense archived]
   enum province: I18n.t('provinces').keys
   enum license_type: %i[const_sand stone stale_stone shallow]
 
@@ -27,6 +27,12 @@ class License < ApplicationRecord
 
   has_many :statements, dependent: :destroy
   has_one :business_plan, dependent: :destroy
+
+  scope :year_eq, ->(year) do
+    start_date = Date.parse("#{year}-01-01")
+    end_date = start_date.end_of_year
+    where(issued_date: start_date..end_date)
+  end
 
   def company_or_owner_name
     if owner_name.present?
@@ -76,6 +82,10 @@ class License < ApplicationRecord
       end
 
       path
+    end
+
+    def ransackable_scopes(auth = nil)
+      [:year_eq]
     end
 
     private

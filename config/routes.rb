@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/search' => 'search#index'
 
-  resources :licenses, except: :destroy do
+  resources :licenses do
     resources :statements, except: [:index, :show]
     resource :business_plan, only: [:show, :create, :update]
   end

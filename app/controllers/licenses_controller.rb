@@ -1,6 +1,6 @@
 class LicensesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_license, only: [:show, :edit, :update]
+  before_action :set_license, only: [:show, :edit, :update, :destroy]
 
   def index
     respond_to do |format|
@@ -41,6 +41,11 @@ class LicensesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @license.destroy
+    redirect_to licenses_path, success: t('flash.delete_success')
   end
 
   private
