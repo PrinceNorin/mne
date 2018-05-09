@@ -3,17 +3,7 @@ class LicensesController < ApplicationController
   before_action :set_license, only: [:show, :edit, :update, :destroy]
 
   def index
-    respond_to do |format|
-      scope = License.order(created_at: :desc)
-
-      format.html do
-        @licenses = scope.page(params[:page]).per(params[:per_page])
-      end
-
-      format.csv do
-        send_file scope.to_csv, filename: 'តារាងបញ្ជីអាជ្ញាបណ្ណក្នុងក្រសួង.csv'
-      end
-    end
+    @licenses = License.includes(:business_plan).order(created_at: :desc).page(params[:page]).per(params[:per_page])
   end
 
   def show
