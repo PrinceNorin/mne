@@ -37,6 +37,7 @@ $colors: (
   "lightGray": $lightGray,
   "woodyBrown": $woodyBrown,
   "eggplant": $eggplant,
+  "yellow": #c3a700
 );
 
 // theme colors
@@ -44,7 +45,8 @@ $theme-colors: (
   "lightGray": $lightGray,
   "woodyBrown": $woodyBrown,
   "eggplant": $eggplant,
-  "white": #e2e2e2
+  "white": #e2e2e2,
+  "yellow": #c3a700
 );
 
 // global
@@ -180,8 +182,8 @@ $breadcrumb-padding-x: $base-size;
 $breadcrumb-item-padding: $base-size * 0.5;
 
 $breadcrumb-margin-bottom: $base-size;
-$breadcrumb-divider: "\00BB";
-$breadcrumb-bg: #fff;
+// $breadcrumb-divider: "\00BB";
+// $breadcrumb-bg: #fff;
 
 // code
 $code-padding-y: $base-size * 0.2;

@@ -27,6 +27,7 @@ class License < ApplicationRecord
 
   has_many :statements, dependent: :destroy
   has_one :business_plan, dependent: :destroy
+  has_many :taxes, dependent: :destroy
 
   scope :year_eq, ->(year) do
     start_date = Date.parse("#{year}-01-01")

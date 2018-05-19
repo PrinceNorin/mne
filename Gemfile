@@ -15,6 +15,7 @@ gem 'acts_as_paranoid', git: 'https://github.com/ActsAsParanoid/acts_as_paranoid
 # utilities
 gem 'ransack', '~> 1.8.8'
 gem 'kaminari', '~> 1.1'
+gem 'write_xlsx', '~> 0.85'
 gem 'bootstrap4-kaminari-views', '~> 1.0.0'
 gem 'config', '~> 1.7'
 gem 'simple_form', '~> 3.5.1'

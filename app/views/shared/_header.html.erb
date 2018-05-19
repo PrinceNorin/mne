@@ -1,7 +1,7 @@
 <% lang = I18n.locale == :km ? :en : :km %>
 <% url = [request.url, "locale=#{lang}" ].join(request.url.include?('?') ? '&' : '?') %>
 
-<div class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+<div class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark mb-2">
   <div class="container">
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">

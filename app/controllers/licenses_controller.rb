@@ -7,6 +7,18 @@ class LicensesController < ApplicationController
   end
 
   def show
+    @taxes = @license.taxes.order(:year, :month)
+    @tax_years = @taxes.map(&:year).sort.uniq
+    @taxes_map = @taxes.inject({}) do |h, tax|
+      h[tax.year] ||= []
+      h[tax.year] << tax
+      h
+    end
+
+    if @taxes.any?
+      @current_year = Date.current.year
+      @current_year = @tax_years[0] unless @taxes_map[@current_year]
+    end
   end
 
   def new

@@ -19,6 +19,7 @@ html[lang=km] body {
 body {
   font-size: 13px;
   background-color: #f2f2f2;
+  margin-top: 60px;
 }
 
 .table td {
@@ -117,7 +118,13 @@ table td, table th {
     display: inline-block;
   }
   label {
-    width: 60px;
+    width: 100px;
     font-weight: bold;
   }
+}
+
+.breadcrumb-item.active a {
+  color: #6c757d;
+  cursor: default;
+  text-decoration: none;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430032857) do
+ActiveRecord::Schema.define(version: 20180516025715) do
 
   create_table "business_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "license_id"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 20180430032857) do
     t.index ["reference_id"], name: "index_statements_on_reference_id", unique: true
   end
 
+  create_table "taxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "license_id"
+    t.decimal "unit", precision: 16, scale: 6, null: false
+    t.decimal "total", precision: 16, scale: 6, null: false
+    t.integer "year", null: false
+    t.integer "month", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["license_id"], name: "index_taxes_on_license_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -97,4 +108,5 @@ ActiveRecord::Schema.define(version: 20180430032857) do
 
   add_foreign_key "business_plans", "licenses"
   add_foreign_key "statements", "licenses"
+  add_foreign_key "taxes", "licenses"
 end

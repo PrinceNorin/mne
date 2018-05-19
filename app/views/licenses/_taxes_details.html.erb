@@ -1,0 +1,59 @@
+<div class="business-plan__content">
+  <% if @taxes.any? %>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <% @tax_years.each do |year| %>
+          <% if year == @current_year %>
+            <li class="breadcrumb-item active"><a href="#" data-year="<%= year %>"><%= year %></a></li>
+          <% else %>
+            <li class="breadcrumb-item">
+              <a href="#" data-year="<%= year %>"><%= year %></a>
+            </li>
+          <% end %>
+        <% end %>
+      </ol>
+    </nav>
+
+    <table class="table table-bordered table-striped mt-2" id="tax-table">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.tax.month') %></th>
+          <th><%= t('activerecord.attributes.tax.unit') %></th>
+          <th><%= t('activerecord.attributes.tax.total') %></th>
+        </tr>
+      </thead>
+      <% @taxes_map.each do |year, taxes| %>
+        <tbody id="tax-<%= year %>" class="<%= year == @current_year ? 'active' : '' %>">
+          <% taxes.each do |tax| %>
+            <tr>
+              <td><%= t("months.#{tax.month}") %></td>
+              <td><%= tax.unit %></td>
+              <td><%= tax.total %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td><%= t('total_amount') %></td>
+            <td><%= taxes.sum(&:unit) %></td>
+            <td><%= taxes.sum(&:total) %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="text-center"><%= t('no_history') %></p>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $('#tax-table tbody').not('.active').hide();
+
+  $('.breadcrumb a').on('click', function(e) {
+    e.preventDefault();
+
+    $('.breadcrumb-item.active').removeClass('active');
+    $(this).parent().addClass('active');
+
+    $('#tax-table tbody.active').removeClass('active').hide();
+    $('#tax-table tbody#tax-' + $(this).data('year')).addClass('active').show();
+  })
+</script>

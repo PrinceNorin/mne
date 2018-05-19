@@ -24,6 +24,7 @@
     <%= link_to t('sub_license'), new_license_statement_path(license), class: 'btn btn-info btn-sm mb-1' %>
     <%= link_to t('details'), license_path(license), class: 'btn btn-secondary btn-sm mb-1' %>
     <%= link_to license.business_plan.present? ? t('edit_business_plan') : t('add_business_plan'), license_business_plan_path(license), class: 'btn btn-success btn-sm mb-1' %>
+    <%= link_to t('add_tax'), new_license_tax_path(license), class: 'btn btn-yellow btn-sm mb-1', style: 'color: #fff;' %>
     <%= link_to t('delete'), license_path(license), class: 'btn btn-danger btn-sm', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %><br />
   </td>
 </tr>

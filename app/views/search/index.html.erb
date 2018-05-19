@@ -17,7 +17,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <%= f.label :year %>
-                    <%= f.select :year_eq, year_options, { include_blank: t('select_option') }, class: 'form-control' %>
+                    <%= f.select :year_eq, year_options, { include_blank: t('select_option'), selected: Date.current.year }, class: 'form-control' %>
                   </div>
                 </div>
               </div>
