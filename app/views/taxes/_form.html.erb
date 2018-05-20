@@ -9,8 +9,10 @@
           <%= f.error_notification %>
 
           <div class="form-row">
-            <%= f.input :year, collection: year_options, include_blank: false, selected: Date.current.year, wrapper_html: { class: 'col-md-3' } %>
-            <%= f.input :month, collection: Tax.month_select, include_blank: false, selected: Tax.months.keys[Date.current.month - 1], wrapper_html: { class: 'col-md-3' } %>
+            <% year = @tax.year || Date.current.year %>
+            <% month = @tax.month || Tax.months.keys[Date.current.month - 1] %>
+            <%= f.input :year, collection: year_options, include_blank: false, selected: year, wrapper_html: { class: 'col-md-3' } %>
+            <%= f.input :month, collection: Tax.month_select, include_blank: false, selected: month, wrapper_html: { class: 'col-md-3' } %>
             <%= f.input :unit, wrapper_html: { class: 'col-md-3' } %>
             <%= f.input :total, wrapper_html: { class: 'col-md-3' } %>
           </div>

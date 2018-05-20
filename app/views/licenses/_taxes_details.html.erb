@@ -20,6 +20,7 @@
           <th><%= t('activerecord.attributes.tax.month') %></th>
           <th><%= t('activerecord.attributes.tax.unit') %></th>
           <th><%= t('activerecord.attributes.tax.total') %></th>
+          <th style="width: 110px"></th>
         </tr>
       </thead>
       <% @taxes_map.each do |year, taxes| %>
@@ -27,14 +28,18 @@
           <% taxes.each do |tax| %>
             <tr>
               <td><%= t("months.#{tax.month}") %></td>
-              <td><%= tax.unit %></td>
-              <td><%= tax.total %></td>
+              <td class="text-right"><%= tax.unit %></td>
+              <td class="text-right"><%= tax.total %></td>
+              <td class="text-right">
+                <%= link_to t('edit'), edit_license_tax_path(tax.license, tax) %>
+                <%= link_to t('delete'), license_tax_path(tax.license, tax), class: 'text-danger', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %>
+              </td>
             </tr>
           <% end %>
           <tr>
             <td><%= t('total_amount') %></td>
-            <td><%= taxes.sum(&:unit) %></td>
-            <td><%= taxes.sum(&:total) %></td>
+            <td class="text-right"><%= taxes.sum(&:unit) %></td>
+            <td class="text-right" colspan="2"><%= taxes.sum(&:total) %></td>
           </tr>
         </tbody>
       <% end %>
