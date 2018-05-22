@@ -11,10 +11,10 @@
   <td width="5%"><%= license.number %></td>
   <td width="10%"><%= license.company_name %></td>
   <td width="10%"><%= license.owner_name %></td>
-  <td width="10%"><%= t('area_with_unit', area: number_to_human(license.area), unit: t("area_units.#{license.area_unit}")).html_safe %></td>
+  <td width="10%" class="text-center"><%= t('area_with_unit', area: number_to_human(license.area), unit: t("area_units.#{license.area_unit}")).html_safe %></td>
   <td width="20%"><%= license.address %></td>
   <td width="10%"><%= t("provinces.#{license.province}") %></td>
-  <td width="5%"><%= t("license_types.#{license.license_type}") %></td>
+  <td width="5%" class="text-center"><%= t("license_types.#{license.license_type}") %></td>
   <td width="10%"><%= license.issued_date.strftime('%Y/%m/%d') %></td>
   <td width="10%"><%= license.expires_date.strftime('%Y/%m/%d') %></td>
   <td><span class="d-block badge badge-<%= statusColors[license.status] %> p-2"><%= t("statuses.#{license.status}") %></span></td>

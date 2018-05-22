@@ -39,7 +39,8 @@
           <tr>
             <td><%= t('total_amount') %></td>
             <td class="text-right"><%= taxes.sum(&:unit) %></td>
-            <td class="text-right" colspan="2"><%= taxes.sum(&:total) %></td>
+            <td class="text-right"><%= taxes.sum(&:total) %></td>
+            <td class="text-right"><%= taxes.sum(&:unit) %></td>
           </tr>
         </tbody>
       <% end %>

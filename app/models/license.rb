@@ -98,6 +98,12 @@ class License < ApplicationRecord
         plan.contents.map(&:year) if plan.present?
       end.compact.flatten
 
+      if years.empty?
+        path = Rails.root.join('tmp', "licenses_#{Time.now.to_i}.csv").to_s
+        File.new(path, 'w+:UTF-16LE:UTF-8').close
+        return path
+      end
+
       year_cols = (years.min..years.max).to_a
       columns += year_cols
       columns += [
@@ -171,7 +177,7 @@ class License < ApplicationRecord
     now = self.issued_date || Date.current
     from = now.beginning_of_year
     to = now.end_of_year
-    if number_changed? && self.class.exists?(number: self.number, issued_date: from..to)
+    if (number_changed? || issued_date_changed?) && self.class.exists?(number: self.number, issued_date: from..to)
       errors.add(:number, :taken)
     end
   end
