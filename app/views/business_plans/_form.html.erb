@@ -17,7 +17,7 @@
 
           <%= f.simple_fields_for :contents do |field| %>
             <div class="form-row">
-              <%= field.input :year, wrapper_html: { class: 'col-md-3' },
+              <%= field.input :year, wrapper_html: { class: 'col-md-3' }, disabled: true,
                 label: t('activerecord.attributes.business_plan.contents.year') %>
               <%= field.input :plan, wrapper_html: { class: 'col-md-9' },
                 label: t('activerecord.attributes.business_plan.contents.plan') %>
