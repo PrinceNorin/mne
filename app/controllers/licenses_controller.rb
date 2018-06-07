@@ -3,7 +3,13 @@ class LicensesController < ApplicationController
   before_action :set_license, only: [:show, :edit, :update, :destroy]
 
   def index
-    @licenses = License.includes(:business_plan).order(created_at: :desc).page(params[:page]).per(params[:per_page])
+    scope = License.includes(:business_plan)
+
+    @nearly_expires_licenses = scope.nearly_expires.page(params[:page]).order(:expires_date)
+    @licenses = scope.where.not(id: @nearly_expires_licenses.pluck(:id))
+      .page(params[:page])
+      .per(params[:per_page])
+      .order(created_at: :desc)
   end
 
   def show
@@ -58,7 +64,7 @@ class LicensesController < ApplicationController
 
   def license_params
     params.require(:license).permit(
-      :number, :area, :area_unit, :province, :issued_date, :address,
+      :number, :area, :area_unit, :province, :valid_date, :issued_date, :address,
       :note, :expires_date, :company_name, :owner_name, :license_type
     )
   end

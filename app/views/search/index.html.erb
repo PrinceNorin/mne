@@ -53,12 +53,11 @@
           </div>
         </div>
 
-        <hr /><h1 class="text-center mb-4"><%= t('result_list') %></h1>
         <div class="clearfix mb-4">
           <%= link_to t('download_csv'), request.url.sub('search', 'download.xls'), class: 'float-right btn btn-white' %>
           <%= link_to t('download_plan_csv'), request.url.sub('search', 'plan_download.xls'), class: 'float-right btn btn-white mr-2' %>
         </div>
-        <%= render 'licenses/table' %>
+        <%= render 'licenses/table', licenses: @licenses %>
       </div>
     </div>
   </div>

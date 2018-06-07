@@ -7,6 +7,7 @@
 @import "font-awesome";
 @import "noty";
 @import "noty_mint";
+@import "typeahead";
 
 html[lang=km] body {
   font-family: "Khmer OS Battambang";
@@ -33,6 +34,11 @@ body {
 
 .table tr.bg-danger td {
   color: #f2f2f2;
+}
+
+.table-borderless th,
+.table-borderless td {
+  border: 0;
 }
 
 input, textarea, button, .form-control, .btn {
@@ -95,12 +101,17 @@ input, textarea, button, .form-control, .btn {
 }
 
 table th {
+  font-size: 12px !important;
   font-weight: normal !important;
   text-align: center !important;
 }
 
 table td, table th {
   vertical-align: middle !important;
+}
+
+.table-borderless th {
+  text-align: left !important;
 }
 
 .license-details__content {
@@ -132,4 +143,33 @@ table td, table th {
   color: #6c757d;
   cursor: default;
   text-decoration: none;
+}
+
+.overflow-list-group {
+  height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+
+  .list-group-item {
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+
+    &.select {
+      @extend .active;
+    }
+  }
+}
+
+.overflow-list-group::-webkit-scrollbar {
+  width: 5px;
+}
+
+.overflow-list-group::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.overflow-list-group::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  outline: 1px solid slategrey;
 }

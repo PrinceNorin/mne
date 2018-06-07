@@ -1,16 +1,16 @@
-<% if @licenses.any? %>
+<% if licenses.any? %>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
         <th><%= t('activerecord.attributes.license.no1') %></th>
-        <th><%= License.human_attribute_name(:number) %></th>
         <th><%= License.human_attribute_name(:company_name) %></th>
         <th><%= License.human_attribute_name(:owner_name) %></th>
+        <th><%= License.human_attribute_name(:number) %></th>
+        <th><%= License.human_attribute_name(:issued_date) %></th>
+        <th><%= License.human_attribute_name(:license_type) %></th>
         <th><%= License.human_attribute_name(:area) %></th>
         <th><%= License.human_attribute_name(:address) %></th>
-        <th><%= License.human_attribute_name(:province) %></th>
-        <th><%= License.human_attribute_name(:license_type) %></th>
-        <th><%= License.human_attribute_name(:issued_date) %></th>
+        <th><%= License.human_attribute_name(:valid_date) %></th>
         <th><%= License.human_attribute_name(:expires_date) %></th>
         <th><%= License.human_attribute_name(:status) %></th>
         <th><%= License.human_attribute_name(:note) %></th>
@@ -18,10 +18,10 @@
       </tr>
     </thead>
     <tbody>
-      <%= render @licenses %>
+      <%= render licenses %>
     </tbody>
   </table>
-  <%= paginate @licenses, theme: 'twitter-bootstrap-4' %>
+  <%= paginate licenses, theme: 'twitter-bootstrap-4' %>
 <% else %>
   <p class="text-center"><%= t('no_license') %></p>
 <% end %>

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resource :business_plan, only: [:show, :create, :update]
   end
 
+  resources :companies, only: [:index, :show]
+
   # scope :api do
   #   resources :licenses do
   #     resources :statements

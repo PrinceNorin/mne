@@ -12,7 +12,7 @@ class License < ApplicationRecord
   enum license_type: %i[const_sand stone stale_stone shallow]
 
   validates_presence_of :number, :area, :address,
-    :company_name, :issued_date, :expires_date
+    :company_name, :issued_date, :expires_date, :valid_date
 
   validate :number_uniqueness
 
@@ -29,10 +29,18 @@ class License < ApplicationRecord
   has_one :business_plan, dependent: :destroy
   has_many :taxes, dependent: :destroy
 
+  before_save :clean_data
+
   scope :year_eq, ->(year) do
     start_date = Date.parse("#{year}-01-01")
     end_date = start_date.end_of_year
     where(issued_date: start_date..end_date)
+  end
+
+  scope :nearly_expires, -> do
+    from = 1.week.ago
+    to = 3.months.from_now
+    where(expires_date: from..to)
   end
 
   def company_or_owner_name
@@ -66,9 +74,9 @@ class License < ApplicationRecord
 
     def to_csv
       columns = %w(
-        number company_name owner_name area
-        address province license_type issued_date
-        expires_date status note
+        company_name owner_name number issued_date
+        license_type area address
+        valid_date expires_date status note
       ).map { |col| I18n.t("activerecord.attributes.license.#{col}") }
 
       path = Rails.root.join('tmp', "licenses_#{Time.now.to_i}.csv").to_s
@@ -87,9 +95,9 @@ class License < ApplicationRecord
 
     def to_plan_csv
       columns = %w(
-        number company_name owner_name area
-        address province license_type issued_date
-        expires_date
+        company_name owner_name number issued_date
+        license_type area address
+        valid_date expires_date
       ).map { |col| I18n.t("activerecord.attributes.license.#{col}") }
 
       licenses = all.includes(:business_plan)
@@ -135,11 +143,12 @@ class License < ApplicationRecord
 
     def csv_data(license)
       data = [
-        license.number, license.company_name, license.owner_name,
-        "#{license.area} #{I18n.t('area_units.' + license.area_unit)}",
-        license.address, I18n.t("provinces.#{license.province}"),
-        I18n.t("license_types.#{license.license_type}"),
+        license.company_name, license.owner_name, license.number,
         I18n.l(license.issued_date, format: '%d, %b %Y'),
+        I18n.t("license_types.#{license.license_type}"),
+        "#{license.area} #{I18n.t('area_units.' + license.area_unit)}",
+        "#{license.address} ខេត្ត#{I18n.t("provinces.#{license.province}")}",
+        I18n.l(license.valid_date, format: '%d, %b %Y'),
         I18n.l(license.expires_date, format: '%d, %b %Y'),
         I18n.t("statuses.#{license.status}"),
         license.note
@@ -180,5 +189,11 @@ class License < ApplicationRecord
     if (number_changed? || issued_date_changed?) && self.class.exists?(number: self.number, issued_date: from..to)
       errors.add(:number, :taken)
     end
+  end
+
+  def clean_data
+    self.number = number.strip
+    self.company_name = company_name.strip
+    self.owner_name = owner_name.strip
   end
 end

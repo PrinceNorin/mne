@@ -10,9 +10,11 @@
 
           <div class="form-row">
             <%= f.input :license_type, collection: License.license_type_select,
-              include_blank: false, wrapper_html: { class: 'col-md-3' } %>
-            <%= f.input :number, label: t('license_number_with_letter'), wrapper_html: { class: 'col-md-3' } %>
-            <%= f.input :company_name, wrapper_html: { class: 'col-md-3' } %>
+              include_blank: false, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :number, label: t('license_number_with_letter'), wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :issued_date, as: :string,
+              wrapper_html: { class: 'col-md-2' }, input_html: { class: 'form-control date' } %>
+            <%= f.input :company_name, class: 'typeahead', wrapper_html: { class: 'col-md-3' } %>
             <%= f.input :owner_name, label: t('optional_owner_name'), wrapper_html: { class: 'col-md-3' } %>
           </div>
 
@@ -22,7 +24,7 @@
               include_blank: false, wrapper_html: { class: 'col-md-2' } %>
             <%= f.input :province, collection: License.province_select,
               include_blank: false, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :issued_date, as: :string,
+            <%= f.input :valid_date, as: :string,
               wrapper_html: { class: 'col-md-3' }, input_html: { class: 'form-control date' } %>
             <%= f.input :expires_date, as: :string,
               wrapper_html: { class: 'col-md-3' }, input_html: { class: 'form-control date' } %>
@@ -43,3 +45,23 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var engine = new Bloodhound({
+    local: <%= License.pluck(:company_name).uniq.to_json.html_safe %>,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    datumTokenizer: Bloodhound.tokenizers.whitespace
+  });
+
+  $('#license_company_name').typeahead({
+    hint: false,
+    minLength: 2,
+    highlight: true,
+    classNames: {
+      input: 'form-control'
+    }
+  }, {
+    name: 'companies',
+    source: engine
+  });
+</script>

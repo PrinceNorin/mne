@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center"><%= t('companies_index') %></h1><hr />
+          <div class="form">
+            <div class="form-group">
+              <input id="txtSearch" type="text" placeholder="<%= t('search_company') %>" class="form-control" autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <ul class="list-group overflow-list-group">
+                <% @companies.each do |c| %>
+                  <li class="list-group-item" href="#"><%= c[:name] %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center"><%= t('company_history') %></h1><hr />
+          <div id="company-history-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function handleClick(event) {
+    var name = $(event.target).text();
+    var c = engine.get(name);
+
+    $.ajax({
+      url: '/companies/show.js?ids=' + c[0].ids.join(','),
+      method: 'GET'
+    });
+
+    $('.overflow-list-group .list-group-item').removeClass('select');
+    $(event.target).addClass('select');
+  }
+
+  function addActiveClass(event) {
+    $(event.target).addClass('active');
+  }
+
+  function removeActiveClass(event) {
+    $(event.target).removeClass('active');
+  }
+
+  function createItems(companies) {
+    return $.map(companies, function(company) {
+      var item = $('<li />');
+      item.text(company.name);
+      item.addClass('list-group-item');
+      item.on('click', handleClick);
+      item.hover(addActiveClass, removeActiveClass);
+
+      return item;
+    });
+  }
+
+  var companies = <%= @companies.to_json.html_safe %>;
+  var engine = new Bloodhound({
+    local: companies,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    datumTokenizer: function(c) {
+      return Bloodhound.tokenizers.whitespace(c.name);
+    },
+    identify: function(c) {
+      return c.name;
+    }
+  });
+
+  $('#txtSearch').on('keyup', function(event) {
+    var text = event.target.value;
+    if (text == '') {
+      $('.overflow-list-group').empty();
+      $('.overflow-list-group').append(createItems(companies));
+    } else {
+      engine.search(text, function(results) {
+        var $items = createItems(results);
+        $('.overflow-list-group').empty();
+        $('.overflow-list-group').append($items);
+      });
+    }
+  });
+
+  $('.overflow-list-group .list-group-item').on('click', handleClick);
+  $('.overflow-list-group .list-group-item').hover(addActiveClass, removeActiveClass);
+</script>

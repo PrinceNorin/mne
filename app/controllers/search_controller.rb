@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     @q = License.ransack(params[:q])
     @licenses = @q.result(distinct: true)
       .includes(:business_plan)
-      .order(:license_type, created_at: :desc)
+      .order(:license_type, :created_at)
       .page(params[:page]).per(params[:per_page])
   end
 
@@ -15,7 +15,9 @@ class SearchController < ApplicationController
         @licenses = License.ransack(params[:q])
           .result(distinct: true)
           .includes(:business_plan)
-          .order(:license_type, created_at: :desc)
+
+        @licenses = License.where(id: @licenses.select('MAX(id)').group(:company_name))
+          .order(:license_type, :created_at)
 
         path = @licenses.to_csv
         data = File.read(path)
@@ -31,7 +33,9 @@ class SearchController < ApplicationController
         @licenses = License.ransack(params[:q])
           .result(distinct: true)
           .includes(:business_plan)
-          .order(:license_type, created_at: :desc)
+
+        @licenses = License.where(id: @licenses.select('MAX(id)').group(:company_name))
+          .order(:license_type, :created_at)
 
         path = @licenses.to_plan_csv
         data = File.read(path)

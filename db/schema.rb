@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516025715) do
+ActiveRecord::Schema.define(version: 20180528150543) do
 
   create_table "business_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "license_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180516025715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.date "valid_date", null: false
     t.index ["deleted_at"], name: "index_licenses_on_deleted_at"
   end
 
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180516025715) do
     t.integer "month", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tax_type", null: false
     t.index ["license_id"], name: "index_taxes_on_license_id"
   end
 
