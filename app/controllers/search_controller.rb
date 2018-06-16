@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     @q = License.ransack(params[:q])
     @licenses = @q.result(distinct: true)
       .includes(:business_plan)
-      .order(:license_type, :created_at)
+      .order(:category_id, :created_at)
       .page(params[:page]).per(params[:per_page])
   end
 
@@ -15,11 +15,10 @@ class SearchController < ApplicationController
         @licenses = License.ransack(params[:q])
           .result(distinct: true)
           .includes(:business_plan)
+          .unique_by_latest_expires_date
+          .order(:category_id, :created_at)
 
-        @licenses = License.where(id: @licenses.select('MAX(id)').group(:company_name))
-          .order(:license_type, :created_at)
-
-        path = @licenses.to_csv
+        path = Licenses::CSVService.new(@licenses).to_csv
         data = File.read(path)
         send_data data, filename: 'តារាងបញ្ជីអាជ្ញាបណ្ណក្នុងក្រសួង.xls'
         FileUtils.rm path
@@ -33,11 +32,10 @@ class SearchController < ApplicationController
         @licenses = License.ransack(params[:q])
           .result(distinct: true)
           .includes(:business_plan)
+          .unique_by_latest_expires_date
+          .order(:category_id, :created_at)
 
-        @licenses = License.where(id: @licenses.select('MAX(id)').group(:company_name))
-          .order(:license_type, :created_at)
-
-        path = @licenses.to_plan_csv
+        path = Plans::CSVService.new(@licenses).to_csv
         data = File.read(path)
         send_data data, filename: 'ស្ថិតិផែនការផលិតកម្ម.xls'
         FileUtils.rm path
@@ -51,7 +49,7 @@ class SearchController < ApplicationController
       format.xlsx do
         @taxes = Tax.ransack(params[:q]).result.order(:year, :month)
 
-        path = @taxes.to_tax_csv
+        path = Taxes::CSVService.new(@taxes).to_csv
         data = File.read(path)
         send_data data, filename: 'តារាងតាមដានបរិមាណនិងការបង់សួយសារ.xls'
         FileUtils.rm path

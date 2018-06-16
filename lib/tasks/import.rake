@@ -12,21 +12,31 @@ namespace :import do
       area_unit = 'ha'
       address = row[3]
       province = I18n.t("provinces").key(row[4])
-      type = type_from_string(row[5])
       issued_date = Date.parse(row[6])
       expires_date = Date.parse(row[7])
 
+      category = Category.find_or_create_by(name: row[5])
+      company = Company.find_by(name: row[1])
+      if company.nil?
+        company = Company.create(
+          name: row[1],
+          business_address: address
+        )
+      end
+
       License.create!(
         number: no,
-        company_name: company,
         area: area,
-        area_unit: area_unit,
         address: address,
+        company: company,
+        category: category,
         province: province,
-        license_type: type,
+        area_unit: area_unit,
+        valid_date: issued_date,
         issued_date: issued_date,
         expires_date: expires_date,
-        owner_name: ''
+        company_name: company.name,
+        category_name: category.name
       )
     end
   end

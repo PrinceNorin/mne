@@ -2,13 +2,15 @@
   <% if @taxes.any? %>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <% @tax_years.each do |year| %>
-          <% if year == @current_year %>
-            <li class="breadcrumb-item active"><a href="#" data-year="<%= year %>"><%= year %></a></li>
-          <% else %>
-            <li class="breadcrumb-item">
-              <a href="#" data-year="<%= year %>"><%= year %></a>
-            </li>
+        <% @type_taxes.each do |type, t_taxes| %>
+          <% t_taxes.each do |year, _| %>
+            <% if type == @current_type && year == @current_year %>
+              <li class="breadcrumb-item active"><a href="#" data-tax='<%= "tax-#{type}-#{year}" %>'><%= t("tax_types.#{type}") + " (#{year})" %></a></li>
+            <% else %>
+              <li class="breadcrumb-item">
+                <a href="#" data-tax='<%= "tax-#{type}-#{year}" %>'><%= t("tax_types.#{type}") + " (#{year})" %></a>
+              </li>
+            <% end %>
           <% end %>
         <% end %>
       </ol>
@@ -23,26 +25,28 @@
           <th style="width: 110px"></th>
         </tr>
       </thead>
-      <% @taxes_map.each do |year, taxes| %>
-        <tbody id="tax-<%= year %>" class="<%= year == @current_year ? 'active' : '' %>">
-          <% taxes.each do |tax| %>
+      <% @type_taxes.each do |type, year_taxes| %>
+        <% year_taxes.each do |year, taxes| %>
+          <tbody id="tax-<%= type + '-' + year.to_s %>" class="<%= type == @current_type && year == @current_year ? 'active' : '' %>">
+            <% taxes.each do |tax| %>
+              <tr>
+                <td><%= t("months.#{tax.month}") %></td>
+                <td class="text-right"><%= tax.unit %></td>
+                <td class="text-right"><%= tax.total %></td>
+                <td class="text-right">
+                  <%= link_to t('edit'), edit_license_tax_path(tax.license, tax) %>
+                  <%= link_to t('delete'), license_tax_path(tax.license, tax), class: 'text-danger', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %>
+                </td>
+              </tr>
+            <% end %>
             <tr>
-              <td><%= t("months.#{tax.month}") %></td>
-              <td class="text-right"><%= tax.unit %></td>
-              <td class="text-right"><%= tax.total %></td>
-              <td class="text-right">
-                <%= link_to t('edit'), edit_license_tax_path(tax.license, tax) %>
-                <%= link_to t('delete'), license_tax_path(tax.license, tax), class: 'text-danger', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %>
-              </td>
+              <td><%= t('total_amount') %></td>
+              <td class="text-right"><%= taxes.sum(&:unit) %></td>
+              <td class="text-right"><%= taxes.sum(&:total) %></td>
+              <td class="text-right"><%= taxes.sum(&:unit) %></td>
             </tr>
-          <% end %>
-          <tr>
-            <td><%= t('total_amount') %></td>
-            <td class="text-right"><%= taxes.sum(&:unit) %></td>
-            <td class="text-right"><%= taxes.sum(&:total) %></td>
-            <td class="text-right"><%= taxes.sum(&:unit) %></td>
-          </tr>
-        </tbody>
+          </tbody>
+        <% end %>
       <% end %>
     </table>
   <% else %>
@@ -60,6 +64,6 @@
     $(this).parent().addClass('active');
 
     $('#tax-table tbody.active').removeClass('active').hide();
-    $('#tax-table tbody#tax-' + $(this).data('year')).addClass('active').show();
+    $('#tax-table tbody#' + $(this).data('tax')).addClass('active').show();
   })
 </script>

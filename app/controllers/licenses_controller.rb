@@ -14,16 +14,21 @@ class LicensesController < ApplicationController
 
   def show
     @taxes = @license.taxes.order(:year, :month)
-    @tax_years = @taxes.map(&:year).sort.uniq
-    @taxes_map = @taxes.inject({}) do |h, tax|
-      h[tax.year] ||= []
-      h[tax.year] << tax
-      h
+    type_taxes = @taxes.group_by(&:tax_type)
+
+    @type_taxes = {}
+    type_taxes.each do |t, taxes|
+      @type_taxes[t] = taxes.group_by(&:year)
     end
 
+
     if @taxes.any?
+      @current_type = @type_taxes.keys.first
       @current_year = Date.current.year
-      @current_year = @tax_years[0] unless @taxes_map[@current_year]
+
+      unless @type_taxes[@current_type][@current_year]
+        @current_year = @type_taxes[@current_type].keys.first
+      end
     end
   end
 
@@ -32,11 +37,11 @@ class LicensesController < ApplicationController
   end
 
   def create
-    @license = License.new(license_params)
-    if @license.save
-      redirect_to licenses_path, success: t('flash.create_success')
-    else
+    @license = Licenses::CreateService.new(license_params).create
+    if @license.errors.any?
       render :new
+    else
+      redirect_to licenses_path, success: t('flash.create_success')
     end
   end
 
@@ -44,10 +49,11 @@ class LicensesController < ApplicationController
   end
 
   def update
-    if @license.update_attributes(license_params)
-      redirect_to licenses_path, success: t('flash.update_success')
-    else
+    @license = Licenses::UpdateService.new(@license, license_params).update
+    if @license.errors.any?
       render :edit
+    else
+      redirect_to licenses_path, success: t('flash.update_success')
     end
   end
 
@@ -64,8 +70,9 @@ class LicensesController < ApplicationController
 
   def license_params
     params.require(:license).permit(
-      :number, :area, :area_unit, :province, :valid_date, :issued_date, :address,
-      :note, :expires_date, :company_name, :owner_name, :license_type
+      :category_id, :number, :area, :area_unit,
+      :province, :valid_date, :issued_date, :address,
+      :note, :expires_date, :company_name, :owner_name
     )
   end
 end

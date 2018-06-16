@@ -78,6 +78,8 @@ km:
         other: "ប្រកាស់"
       business_plan: "ផែនការទុន"
       tax: "សួយសារ"
+      category: "ប្រភេទអាជីវកម្ម"
+      company: "ក្រុមហ៊ុន"
     attributes:
       license:
         no1: "ល.រ"
@@ -86,17 +88,17 @@ km:
         area: "ផ្ទៃក្រឡាដី"
         area_unit: "ឯកតា"
         province: "ខេត្ត/ក្រុង"
-        issued_date: "ថ្ងៃចេញ"
+        issued_date: "ចេញនៅថ្ងៃទី"
         valid_date: "មានសុពលភាពពីថ្ងៃទី"
         expires_date: "អស់សុពលភាពនៅថ្ងៃទី"
         address: "ទីតាំងអាជីវកម្ម"
         note: "ផ្សេងៗ"
         company_name: "ឈ្មោះក្រុមហ៊ុន"
         owner_name: "ឈ្មោះម្ចាស់"
-        license_type: "ប្រភេទអាជីវកម្ម"
+        category: "ប្រភេទអាជីវកម្ម"
         issued_date_gteq: "ចេញប្រកាស់ថ្ងៃទី"
         issued_date_lteq: "រហូតដល់ថ្ងៃទី"
-        year: "ចេញប្រកាស់ឆ្នាំ"
+        year: "ឆ្នាំចេញប្រកាស់"
       statement:
         number: "ប្រកាស់លេខ"
         statement_type: "ប្រភេទ"
@@ -115,7 +117,12 @@ km:
         total: "ចំនួនទឹកប្រាក់"
         year: "ឆ្នាំ"
         month: "ខែ"
-
+      category:
+        name: "ឈ្មោះ"
+      company:
+        name: "ឈ្មោះ"
+        owner: "ឈ្មោះម្ចាស់"
+        business_address: "ទីតាំងអាជីវកម្ម"
       user:
         email: "អីម៉ែល"
         password: "លេខសំងាត់"
@@ -125,10 +132,10 @@ km:
       models:
         license:
           attributes:
-            issued_date:
-              must_be_less_than: "មិនអាចធំជាងរឺស្មើ %{other}"
+            valid_date:
+              must_be_less_than: "ត្រូវអោយបានមុនថ្ងៃអស់សុពលភាព"
             expires_date:
-              must_be_greater_than: "មិនអាចតូចជាងរឺស្មើ %{other}"
+              must_be_greater_than: "ត្រូវអោយបានមុនថ្ងៃមានសុពលភាព"
 
   devise:
     sessions:

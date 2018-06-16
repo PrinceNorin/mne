@@ -12,7 +12,7 @@ class BusinessPlan < ApplicationRecord
     if: -> { employees.present? }
 
   def contents
-    @contents ||= content.map { |attrs| BusinessPlanDetails.new(attrs) }
+    content.map { |attrs| BusinessPlanDetails.new(attrs) }
   end
 
   def contents_attributes=(contents)

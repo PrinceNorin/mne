@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20180528150543) do
     t.index ["license_id"], name: "index_business_plans_on_license_id"
   end
 
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "owner"
+    t.text "business_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "licenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "number", null: false
     t.integer "status", default: 0
@@ -35,12 +49,16 @@ ActiveRecord::Schema.define(version: 20180528150543) do
     t.text "address"
     t.text "note"
     t.string "company_name", null: false
-    t.string "owner_name", null: false
-    t.integer "license_type", default: 0
+    t.string "owner_name"
+    t.string "category_name", null: false
+    t.bigint "company_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.date "valid_date", null: false
+    t.index ["category_id"], name: "index_licenses_on_category_id"
+    t.index ["company_id"], name: "index_licenses_on_company_id"
     t.index ["deleted_at"], name: "index_licenses_on_deleted_at"
   end
 
@@ -109,6 +127,8 @@ ActiveRecord::Schema.define(version: 20180528150543) do
   end
 
   add_foreign_key "business_plans", "licenses"
+  add_foreign_key "licenses", "categories"
+  add_foreign_key "licenses", "companies"
   add_foreign_key "statements", "licenses"
   add_foreign_key "taxes", "licenses"
 end

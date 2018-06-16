@@ -94,6 +94,9 @@ input, textarea, button, .form-control, .btn {
   input, select, textarea {
     @extend .is-invalid;
   }
+  .invalid-feedback {
+    display: block;
+  }
 }
 
 .required abbr {

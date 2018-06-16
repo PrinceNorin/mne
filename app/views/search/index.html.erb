@@ -30,8 +30,8 @@
                 </div>
                 <div class="col-4">
                   <div class="form-group">
-                    <%= f.label :license_type %>
-                    <%= f.select :license_type_eq, License.license_type_search_select, { include_blank: t('select_option') }, { class: 'form-control' } %>
+                    <%= f.label :category, t('activerecord.attributes.license.category') %>
+                    <%= f.select :category_id_eq, Category.all.map { |c| [c.name, c.id] }, { include_blank: t('select_option') }, { class: 'form-control' } %>
                   </div>
                 </div>
                 <div class="col-4">

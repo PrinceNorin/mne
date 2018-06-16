@@ -11,7 +11,7 @@
             <div class="form-group">
               <ul class="list-group overflow-list-group">
                 <% @companies.each do |c| %>
-                  <li class="list-group-item" href="#"><%= c[:name] %></li>
+                  <li class="list-group-item" href="#" data-id="<%= c.id %>"><%= c.name %></li>
                 <% end %>
               </ul>
             </div>
@@ -34,7 +34,7 @@
     var c = engine.get(name);
 
     $.ajax({
-      url: '/companies/show.js?ids=' + c[0].ids.join(','),
+      url: '/companies/' + c[0].id,
       method: 'GET'
     });
 
@@ -54,6 +54,7 @@
     return $.map(companies, function(company) {
       var item = $('<li />');
       item.text(company.name);
+      item.data('id', company.id);
       item.addClass('list-group-item');
       item.on('click', handleClick);
       item.hover(addActiveClass, removeActiveClass);

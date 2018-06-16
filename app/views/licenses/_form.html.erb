@@ -9,7 +9,7 @@
           <%= f.error_notification %>
 
           <div class="form-row">
-            <%= f.input :license_type, collection: License.license_type_select,
+            <%= f.association :category,
               include_blank: false, wrapper_html: { class: 'col-md-2' } %>
             <%= f.input :number, label: t('license_number_with_letter'), wrapper_html: { class: 'col-md-2' } %>
             <%= f.input :issued_date, as: :string,
@@ -47,13 +47,16 @@
 </div>
 
 <script type="text/javascript">
+  var companies = <%= Company.all.to_json.html_safe %>;
   var engine = new Bloodhound({
-    local: <%= License.pluck(:company_name).uniq.to_json.html_safe %>,
+    local: $.map(companies, function(company) {
+      return company.name;
+    }),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     datumTokenizer: Bloodhound.tokenizers.whitespace
   });
 
-  $('#license_company_name').typeahead({
+  var $input = $('#license_company_name').typeahead({
     hint: false,
     minLength: 2,
     highlight: true,
@@ -64,4 +67,29 @@
     name: 'companies',
     source: engine
   });
+
+  $input.on('typeahead:select', function(event, name) {
+    var company = getCompany(name);
+    if (company) {
+      var ownerInput = $('#license_owner_name');
+      var addressInput = $('#license_address');
+
+      if (ownerInput.val() == '') {
+        ownerInput.val(company.owner);
+      }
+
+      if (addressInput.val() == '') {
+        addressInput.val(company.business_address);
+      }
+    }
+  });
+
+  function getCompany(name) {
+    for (var i = 0; i < companies.length; i ++) {
+      var company = companies[i];
+      if (company.name == name) {
+        return company;
+      }
+    }
+  }
 </script>

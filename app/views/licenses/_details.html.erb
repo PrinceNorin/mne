@@ -26,8 +26,8 @@
       <td><%= l @license.issued_date %></td>
     </tr>
     <tr>
-      <td><%= t('activerecord.attributes.license.license_type') %></td>
-      <td><%= t("license_types.#{@license.license_type}") %></td>
+      <td><%= t('activerecord.attributes.license.category') %></td>
+      <td><%= @license.category_name %></td>
     </tr>
     <tr>
       <td><%= t('activerecord.attributes.license.area') %></td>
