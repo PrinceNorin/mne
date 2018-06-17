@@ -1,24 +1,24 @@
-<div class="row mb-2">
-  <div class="col-12">
+<div class="row">
+  <div class="col-md-8 offset-md-2">
     <div class="card">
       <div class="card-body">
-        <h1 class="card-title text-center"><%= title %></h1>
-        <hr />
+        <h1 class="card-title text-center"><%= t('add_tax') %></h1>
+        <hr /><br />
 
-        <%= simple_form_for [@license, tax], defaults: { input_html: { class: 'form-control' } } do |f| %>
+        <%= simple_form_for [@license, @tax], defaults: { input_html: { class: 'form-control' } } do |f| %>
           <%= f.error_notification %>
 
           <div class="form-row">
-            <% year = tax.year || Date.current.year %>
-            <% month = tax.month || Tax.months.keys[Date.current.month - 1] %>
-            <%= f.input :year, collection: year_options, include_blank: false, selected: year, wrapper_html: { class: 'col-md-3' } %>
+            <% year = @tax.year || Date.current.year %>
+            <% month = @tax.month || Tax.months.keys[Date.current.month - 1] %>
+            <%= f.input :tax_type, collection: Tax.tax_type_select, include_blank: false, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :year, collection: year_options, include_blank: false, selected: year, wrapper_html: { class: 'col-md-2' } %>
             <%= f.input :month, collection: Tax.month_select, include_blank: false, selected: month, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :unit, wrapper_html: { class: 'col-md-3' } %>
-            <%= f.input :total, wrapper_html: { class: 'col-md-3' } %>
-            <%= f.hidden_field :tax_type %>
-            <div class="form-group col-md-1">
+            <%= f.input :unit, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :total, wrapper_html: { class: 'col-md-2' } %>
+            <div class="form-group col-md-2">
               <label style="visibility: hidden">*</label>
-              <%= f.button :submit, tax.new_record? ? t('create') : t('update'), class: 'form-control btn btn-primary' %>
+              <%= f.button :submit, @tax.new_record? ? t('create') : t('update'), class: 'form-control btn btn-primary' %>
             </div>
           </div>
         <% end %>

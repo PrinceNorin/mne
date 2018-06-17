@@ -117,6 +117,7 @@ km:
         total: "ចំនួនទឹកប្រាក់"
         year: "ឆ្នាំ"
         month: "ខែ"
+        tax_type: "ប្រភេទ"
       category:
         name: "ឈ្មោះ"
       company:

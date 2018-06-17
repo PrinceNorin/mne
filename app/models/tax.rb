@@ -12,5 +12,11 @@ class Tax < ApplicationRecord
     def month_select
       months.map { |key, _| [I18n.t("months.#{key}"), key] }
     end
+
+    def tax_type_select
+      tax_types.map do |key, value|
+        [I18n.t("tax_types.#{key}"), key]
+      end
+    end
   end
 end
