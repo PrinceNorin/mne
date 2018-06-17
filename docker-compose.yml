@@ -1,18 +1,26 @@
 version: '3'
+
 services:
-  web:
-    image: norin/mne:1.0
-    restart: always
-    depends_on:
-      - db
-    environment:
-      RAILS_ENV: production
-    ports:
-      - '3000:3000'
   db:
     image: mysql:5.7
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_ROOT_PASSWORD: secret
     volumes:
-      - './data:/var/lib/mysql'
+      - mnedata:/var/lib/mysql
+
+  web:
+    image: norin/mne
+    restart: always
+    command: bundle exec rails server -b 0.0.0.0 -p 3000
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.docker
+    volumes:
+      - ./backup:/backup
+
+volumes:
+  mnedata:

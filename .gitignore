@@ -19,6 +19,8 @@
 .byebug_history
 
 .env
+.env.*
+!.env.sample
 
 config/settings.local.yml
 config/settings/*.local.yml

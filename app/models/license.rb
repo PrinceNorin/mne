@@ -58,6 +58,11 @@ class License < ApplicationRecord
     joins(join_sql).where('`l2`.id IS NULL')
   end
 
+  scope :expires, -> do
+    where('expires_date < ? AND status != ?',
+      Date.current, statuses[:archived])
+  end
+
   def company_or_owner_name
     if owner_name.present?
       "#{company_name}/#{owner_name}"

@@ -1,13 +1,15 @@
-<div class="row mb-2">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h1 class="card-title text-center mb-4"><%= t('expire_license_list') %></h1>
-        <%= render 'table', licenses: @nearly_expires_licenses %>
+<% if @nearly_expires_licenses.any? %>
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center mb-4"><%= t('expire_license_list') %></h1>
+          <%= render 'table', licenses: @nearly_expires_licenses %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <div class="row">
   <div class="col-12">

@@ -20,5 +20,4 @@ ApplicationRecord.transaction do
   pass = STDIN.noecho(&:gets).chomp
 
   User.create!(name: name, email: email, password: pass)
-  STDIN.print "\nA new user has been created!\n"
 end

@@ -193,13 +193,13 @@ km:
     active: "កំពុងដំណើរការ"
     dispute: "ព្យួរ"
     suspense: "ផ្អាក"
-    archived: "លុប"
+    archived: "បញ្ចប់"
 
   statement_types:
     dispute: "ព្យួរ"
     suspense: "ផ្អាក"
     resolved: "ដាក់ឱ្យដំណើរការ"
-    archived: "លុប"
+    archived: "បញ្ចប់"
 
   currencies:
     riel: "រៀល (៛)"
