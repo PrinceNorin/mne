@@ -40,9 +40,9 @@ class BusinessPlansController < ApplicationController
     @business_plan = @license.business_plan
     if @business_plan.nil?
       @business_plan=  @license.build_business_plan
-      @business_plan.initialize_content!(@license.valid_date.year, @license.expires_date.year)
+      @business_plan.initialize_content!(@license.valid_at.year, @license.expire_at.year)
     else
-      (@license.valid_date.year..@license.expires_date.year).each do |year|
+      (@license.valid_at.year..@license.expire_at.year).each do |year|
         next if @business_plan.contents.map(&:year).include?(year.to_s)
         @business_plan.content << { 'year' => year.to_s }
       end

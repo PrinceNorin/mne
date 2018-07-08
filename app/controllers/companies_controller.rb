@@ -1,6 +1,10 @@
 class CompaniesController < ApplicationController
   def index
     @companies = Company.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @companies }
+    end
   end
 
   def show

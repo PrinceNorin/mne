@@ -1,6 +1,7 @@
-require 'csv'
-
 class License < ApplicationRecord
+  include Selectable
+  include Searchable
+
   has_paper_trail
   acts_as_paranoid
 
@@ -9,49 +10,60 @@ class License < ApplicationRecord
   enum area_unit: %i[ha m2]
   enum status: %i[active dispute suspense archived]
   enum province: I18n.t('provinces').keys
-  enum license_type: %i[const_sand stone stale_stone shallow]
 
-  belongs_to :company
-  belongs_to :category
-
-  validates_presence_of :number, :area,
-    :address, :category_name, :company_name,
-    :issued_date, :expires_date, :valid_date
-
-  validate :number_uniqueness
-
-  validates_numericality_of :area
-
-  validate :valid_date, if: -> { valid_date && expires_date } do
-    if valid_date >= expires_date
-      errors.add(:valid_date, :must_be_less_than)
-      errors.add(:expires_date, :must_be_greater_than)
-    end
-  end
-
-  has_many :statements, dependent: :destroy
-  has_one :business_plan, dependent: :destroy
-  has_many :taxes, dependent: :destroy
+  selectable_fields :status, :province, :area_unit
 
   before_save :clean_data
 
-  scope :year_eq, ->(year) do
-    start_date = Date.parse("#{year}-01-01")
-    end_date = start_date.end_of_year
-    where(issued_date: start_date..end_date)
+  belongs_to :company
+  belongs_to :category
+  has_many :taxes, dependent: :destroy
+  has_many :statements, dependent: :destroy
+  has_one :business_plan, dependent: :destroy
+
+  validate :number_uniqueness
+  validates :number, presence: true
+
+  validates :total_area,
+    presence: true,
+    numericality: true
+
+  validates :business_address,
+    presence: true
+
+  validates :company_name,
+    presence: true
+
+  validates :category_name,
+    presence: true
+
+  validates :issue_at,
+    presence: true
+
+  validates :expire_at,
+    presence: true
+
+  validates :valid_at,
+    presence: true
+
+  validate :valid_at, if: -> { valid_at && expire_at } do
+    if valid_at >= expire_at
+      errors.add(:valid_at, :must_be_less_than)
+      errors.add(:expires_at, :must_be_greater_than)
+    end
   end
 
   scope :nearly_expires, -> do
-    from = 1.week.ago
+    from = 1.month.ago
     to = 3.months.from_now
-    where(expires_date: from..to)
+    where(expire_at: from..to)
   end
 
   scope :unique_by_latest_expires_date, -> do
     join_sql = <<-SQL
       LEFT JOIN `licenses` l2 ON (
         `licenses`.`company_id` = `l2`.`company_id` AND
-        `licenses`.`expires_date` < `l2`.`expires_date`
+        `licenses`.`expire_at` < `l2`.`expire_at`
       )
     SQL
 
@@ -59,58 +71,56 @@ class License < ApplicationRecord
   end
 
   scope :expires, -> do
-    where('expires_date < ? AND status != ?',
+    where('expire_at < ? AND status != ?',
       Date.current, statuses[:archived])
   end
 
-  def company_or_owner_name
-    if owner_name.present?
-      "#{company_name}/#{owner_name}"
+  searchable_scope :year_eq, ->(year) do
+    start_date = Date.parse("#{year}-01-01")
+    end_date = start_date.end_of_year
+    where(issue_at: start_date..end_date)
+  end
+
+  searchable_scope :valid_year_from, ->(year) do
+    where('valid_at >= ?', Date.parse("#{year}-01-01"))
+  end
+
+  searchable_scope :valid_year_to, ->(year) do
+    date = Date.parse("#{year}-01-01")
+    where('valid_at <= ?', date.end_of_year)
+  end
+
+  def d_business_address
+    t_province = I18n.t("provinces.#{province}")
+    if province == 'phnom_penh'
+      t_province = "ក្រុង#{t_province}"
     else
-      company_name
+      t_province = "ខេត្ត#{t_province}"
+    end
+
+    if business_address.include?(t_province)
+      business_address
+    else
+      "#{business_address} #{t_province}"
     end
   end
 
   def better_area
-    "%g" % ("%f" % area)
-  end
-
-  class << self
-    %w(license_type status province area_unit).each do |name|
-      define_method "#{name}_select" do
-        plural_name = name.pluralize.to_sym
-        self.public_send(plural_name).map do |key, _|
-          [I18n.t("#{plural_name}.#{key}"), key]
-        end
-      end
-
-      define_method "#{name}_search_select" do
-        plural_name = name.pluralize.to_sym
-        self.public_send(plural_name).map do |key, value|
-          [I18n.t("#{plural_name}.#{key}"), value]
-        end
-      end
-    end
-
-    def ransackable_scopes(auth = nil)
-      [:year_eq]
-    end
+    "%g" % ("%f" % total_area)
   end
 
   private
 
   def number_uniqueness
-    now = self.issued_date || Date.current
+    now = self.issue_at || Date.current
     from = now.beginning_of_year
     to = now.end_of_year
-    if (number_changed? || issued_date_changed?) && self.class.exists?(number: self.number, issued_date: from..to)
+    if (number_changed? || issue_at_changed?) && self.class.exists?(number: self.number, issue_at: from..to)
       errors.add(:number, :taken)
     end
   end
 
   def clean_data
     self.number = number.strip
-    self.company_name = company_name.strip
-    self.owner_name = owner_name.strip if owner_name
   end
 end

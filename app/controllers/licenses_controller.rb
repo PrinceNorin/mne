@@ -5,7 +5,10 @@ class LicensesController < ApplicationController
   def index
     scope = License.includes(:business_plan)
 
-    @nearly_expires_licenses = scope.nearly_expires.page(params[:page]).order(:expires_date)
+    @nearly_expires_licenses = scope.nearly_expires
+      .page(params[:page])
+      .order(created_at: :desc)
+
     @licenses = scope.where.not(id: @nearly_expires_licenses.pluck(:id))
       .page(params[:page])
       .per(params[:per_page])
@@ -13,23 +16,22 @@ class LicensesController < ApplicationController
   end
 
   def show
-    @taxes = @license.taxes.order(:year, :month)
-    type_taxes = @taxes.group_by(&:tax_type)
+    # @taxes = @license.taxes.duties.order(:from)
+    # type_taxes = @taxes.group_by(&:tax_type)
 
-    @type_taxes = {}
-    type_taxes.each do |t, taxes|
-      @type_taxes[t] = taxes.group_by(&:year)
-    end
+    # @type_taxes = {}
+    # type_taxes.each do |t, taxes|
+    #   @type_taxes[t] = taxes.group_by(&:year)
+    # end
 
+    # if @taxes.any?
+    #   @current_type = @type_taxes.keys.first
+    #   @current_year = Date.current.year
 
-    if @taxes.any?
-      @current_type = @type_taxes.keys.first
-      @current_year = Date.current.year
-
-      unless @type_taxes[@current_type][@current_year]
-        @current_year = @type_taxes[@current_type].keys.first
-      end
-    end
+    #   unless @type_taxes[@current_type][@current_year]
+    #     @current_year = @type_taxes[@current_type].keys.first
+    #   end
+    # end
   end
 
   def new
@@ -38,7 +40,7 @@ class LicensesController < ApplicationController
 
   def create
     @license = Licenses::CreateService.new(license_params).create
-    if @license.errors.any?
+    if @license.errors.any? || @license.company.errors.any?
       render :new
     else
       redirect_to licenses_path, success: t('flash.create_success')
@@ -50,7 +52,7 @@ class LicensesController < ApplicationController
 
   def update
     @license = Licenses::UpdateService.new(@license, license_params).update
-    if @license.errors.any?
+    if @license.errors.any? || @license.company.errors.any?
       render :edit
     else
       redirect_to licenses_path, success: t('flash.update_success')
@@ -70,9 +72,9 @@ class LicensesController < ApplicationController
 
   def license_params
     params.require(:license).permit(
-      :category_id, :number, :area, :area_unit,
-      :province, :valid_date, :issued_date, :address,
-      :note, :expires_date, :company_name, :owner_name
+      :category_id, :number, :total_area, :area_unit,
+      :province, :valid_at, :issue_at, :business_address,
+      :note, :expire_at, :company_name, :owner_name
     )
   end
 end

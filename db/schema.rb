@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180528150543) do
+ActiveRecord::Schema.define(version: 20180516025715) do
 
   create_table "business_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "license_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20180528150543) do
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "owner"
-    t.text "business_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,22 +40,22 @@ ActiveRecord::Schema.define(version: 20180528150543) do
   create_table "licenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "number", null: false
     t.integer "status", default: 0
-    t.decimal "area", precision: 16, scale: 6, null: false
+    t.decimal "total_area", precision: 16, scale: 6, null: false
     t.integer "area_unit", default: 0
     t.integer "province", default: 0
-    t.date "issued_date", null: false
-    t.date "expires_date", null: false
-    t.text "address"
+    t.date "issue_at", null: false
+    t.date "expire_at", null: false
+    t.date "valid_at", null: false
+    t.text "business_address"
     t.text "note"
     t.string "company_name", null: false
-    t.string "owner_name"
+    t.string "owner_name", null: false
     t.string "category_name", null: false
     t.bigint "company_id"
     t.bigint "category_id"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.date "valid_date", null: false
     t.index ["category_id"], name: "index_licenses_on_category_id"
     t.index ["company_id"], name: "index_licenses_on_company_id"
     t.index ["deleted_at"], name: "index_licenses_on_deleted_at"
@@ -78,13 +77,14 @@ ActiveRecord::Schema.define(version: 20180528150543) do
 
   create_table "taxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "license_id"
-    t.decimal "unit", precision: 16, scale: 6, null: false
-    t.decimal "total", precision: 16, scale: 6, null: false
-    t.integer "year", null: false
-    t.integer "month", null: false
+    t.float "rate", limit: 24
+    t.decimal "unit", precision: 16, scale: 6
+    t.decimal "total", precision: 16, scale: 6
+    t.date "from"
+    t.date "to"
+    t.integer "tax_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tax_type", null: false
     t.index ["license_id"], name: "index_taxes_on_license_id"
   end
 

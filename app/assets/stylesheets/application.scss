@@ -22,6 +22,20 @@ html[lang=km] body {
   }
 }
 
+#ui-datepicker-div.no-day {
+  .ui-datepicker-calendar {
+    display: none;
+  }
+  .ui-datepicker-year {
+    float: right;
+    width: 49%;
+  }
+  .ui-datepicker-month {
+    float: left;
+    width: 49%;
+  }
+}
+
 body {
   font-size: 13px;
   background-color: #f2f2f2;
@@ -162,6 +176,10 @@ table td, table th {
       @extend .active;
     }
   }
+}
+
+.borderless td, .borderless thead th {
+  border: none;
 }
 
 .overflow-list-group::-webkit-scrollbar {

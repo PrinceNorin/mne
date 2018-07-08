@@ -1,0 +1,135 @@
+<div id="taxForm" class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <select class="form-control" v-model="filter.tax_type" @change="clearData()">
+            <% (Tax::TAX_TYPES - [:env_recovery_fee_1]).each do |tax_type| %>
+              <option value="<%= tax_type %>"><%= t("tax_types.#{tax_type}") %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="form-group" v-if="shouldShowYear">
+          <select class="form-control" v-model="filter.year">
+            <option value=""><%= t('activerecord.attributes.tax.year') %></option>
+            <% year_options.each do |a, b| %>
+              <option value="<%= a %>"><%= b %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" @keyup="setCompany($event)"
+            placeholder="<%= t('activerecord.attributes.license.company_name') %>">
+        </div>
+
+        <div class="form-group">
+          <button class="form-control btn btn-primary" @click="fetchTax()"><%= t('search') %></button>
+        </div>
+
+        <div class="form-group">
+          <button class="form-control btn btn-white" @click="downloadTax()"><%= t('download') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 offset-md-3 mt-2" v-if="!hasCompanyTaxes()">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title text-center">
+          <%= t('no_result') %>
+        </h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 offset-md-3 mt-2" v-if="hasCompanyTaxes() && isMonthlyTaxType()">
+    <div class="card" v-for="(yearTaxes, company) in companyTaxes">
+      <div class="card-body">
+        <div class="card-title">
+          <a href="#" class="d-block text-center" @click="toggleTable($event, company)">{{ company }}</a>
+        </div>
+        <table class="table table-bordered table-striped" v-for="(taxes, year) in yearTaxes" v-if="showTable(company)">
+          <thead>
+            <tr>
+              <th><%= t('activerecord.attributes.tax.year') %></th>
+              <th><%= t('activerecord.attributes.tax.month') %></th>
+              <th><%= t('activerecord.attributes.tax.unit') %></th>
+              <th><%= t('activerecord.attributes.tax.total') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="tax in taxes">
+              <td>{{ year }}</td>
+              <td>{{ I18n.t('months')[tax.month - 1] }}</td>
+              <td class="text-right">{{ tax.unit }}</td>
+              <td class="text-right">{{ tax.total }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">{{ I18n.t('total_amount') }}</td>
+              <td class="text-right">{{ calculateTotal(taxes, 'unit') }}</td>
+              <td class="text-right">{{ calculateTotal(taxes, 'total') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 offset-md-3 mt-2" v-if="hasCompanyTaxes() && !isMonthlyTaxType()">
+    <div class="card" v-for="(taxes, company) in companyTaxes">
+      <div class="card-body">
+        <div class="card-title">
+          <a href="#" class="d-block text-center" @click="toggleTable($event, company)">{{ company }}</a>
+        </div>
+        <table class="table table-bordered table-striped" v-if="showTable(company)">
+          <thead>
+            <tr>
+              <th><%= t('activerecord.attributes.tax.year') %></th>
+              <th v-if="filter.tax_type !== 'license_fee' && filter.tax_type !== 'env_recovery_fee'">
+                <%= t('activerecord.attributes.tax.unit') %>
+              </th>
+              <th v-if="filter.tax_type !== 'license_fee' && filter.tax_type === 'env_recovery_fee'">
+                <%= t('activerecord.attributes.tax.unit_1') %>
+              </th>
+              <th v-if="filter.tax_type !== 'license_fee' && filter.tax_type === 'env_recovery_fee'">
+                <%= t('activerecord.attributes.tax.unit_2') %>
+              </th>
+              <th><%= t('activerecord.attributes.tax.total') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="tax in taxes">
+              <td>{{ yearRange(tax) }}</td>
+              <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type !== 'env_recovery_fee'">
+                {{ tax.unit }}
+              </td>
+              <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type === 'env_recovery_fee'">
+                {{ tax.unit_1 }}
+              </td>
+              <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type === 'env_recovery_fee'">
+                {{ tax.unit_2 }}
+              </td>
+              <td class="text-right">{{ tax.total }}</td>
+            </tr>
+            <tr>
+              <td>{{ I18n.t('total_amount') }}</td>
+              <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type !== 'env_recovery_fee'">
+                {{ calculateTotal(taxes, 'unit') }}
+              </td>
+              <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type == 'env_recovery_fee'">
+                {{ calculateTotal(taxes, 'unit_1') }}
+              </td>
+              <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type == 'env_recovery_fee'">
+                {{ calculateTotal(taxes, 'unit_2') }}
+              </td>
+              <td class="text-right">{{ calculateTotal(taxes, 'total') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

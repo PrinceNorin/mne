@@ -10,7 +10,6 @@ class CreateStatements < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :statements, :number, unique: true
     add_index :statements, :reference_id, unique: true
     add_index :statements, :deleted_at
   end

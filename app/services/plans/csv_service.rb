@@ -1,3 +1,5 @@
+require 'csv'
+
 module Plans
   class CSVService
     attr_reader :licenses

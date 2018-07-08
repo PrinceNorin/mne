@@ -12,26 +12,26 @@
             <%= f.association :category,
               include_blank: false, wrapper_html: { class: 'col-md-2' } %>
             <%= f.input :number, label: t('license_number_with_letter'), wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :issued_date, as: :string,
+            <%= f.input :issue_at, as: :string,
               wrapper_html: { class: 'col-md-2' }, input_html: { class: 'form-control date' } %>
             <%= f.input :company_name, class: 'typeahead', wrapper_html: { class: 'col-md-3' } %>
             <%= f.input :owner_name, label: t('optional_owner_name'), wrapper_html: { class: 'col-md-3' } %>
           </div>
 
           <div class="form-row">
-            <%= f.input :area, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :area_unit, collection: License.area_unit_select,
+            <%= f.input :total_area, wrapper_html: { class: 'col-md-2' } %>
+            <%= f.input :area_unit, collection: License.selectable_area_unit,
               include_blank: false, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :province, collection: License.province_select,
+            <%= f.input :province, collection: License.selectable_province,
               include_blank: false, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :valid_date, as: :string,
+            <%= f.input :valid_at, as: :string,
               wrapper_html: { class: 'col-md-3' }, input_html: { class: 'form-control date' } %>
-            <%= f.input :expires_date, as: :string,
+            <%= f.input :expire_at, as: :string,
               wrapper_html: { class: 'col-md-3' }, input_html: { class: 'form-control date' } %>
           </div>
 
           <div class="form-row">
-            <%= f.input :address, wrapper_html: { class: 'col-md-6' }, input_html: { rows: 10 } %>
+            <%= f.input :business_address, wrapper_html: { class: 'col-md-6' }, input_html: { rows: 10 } %>
             <%= f.input :note, wrapper_html: { class: 'col-md-6' }, input_html: { rows: 10 } %>
           </div>
 

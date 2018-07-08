@@ -1,8 +1,11 @@
 ApplicationRecord.transaction do
   categories = %w(
     ថ្ម
-    អាចម៍ដី
     ថ្មអារ
+    អាចម៍ដី
+    ដីក្រហម
+    ខ្សាច់​
+    ខ្សាច់បក
     ខ្សាច់សំណង់
   )
 

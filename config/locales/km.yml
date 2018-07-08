@@ -85,13 +85,13 @@ km:
         no1: "ល.រ"
         number: "លេខអាជ្ញាបណ្ណ"
         status: "ស្ថានភាព"
-        area: "ផ្ទៃក្រឡាដី"
+        total_area: "ផ្ទៃក្រឡាដី"
         area_unit: "ឯកតា"
         province: "ខេត្ត/ក្រុង"
-        issued_date: "ចេញនៅថ្ងៃទី"
-        valid_date: "មានសុពលភាពពីថ្ងៃទី"
-        expires_date: "អស់សុពលភាពនៅថ្ងៃទី"
-        address: "ទីតាំងអាជីវកម្ម"
+        issue_at: "ចេញនៅថ្ងៃទី"
+        valid_at: "មានសុពលភាពពីថ្ងៃទី"
+        expire_at: "អស់សុពលភាពនៅថ្ងៃទី"
+        business_address: "ទីតាំងអាជីវកម្ម"
         note: "ផ្សេងៗ"
         company_name: "ឈ្មោះក្រុមហ៊ុន"
         owner_name: "ឈ្មោះម្ចាស់"
@@ -99,6 +99,8 @@ km:
         issued_date_gteq: "ចេញប្រកាស់ថ្ងៃទី"
         issued_date_lteq: "រហូតដល់ថ្ងៃទី"
         year: "ឆ្នាំចេញប្រកាស់"
+        valid_from: "មានសុពលភាពពីឆ្នាំ"
+        valid_to: "មានសុពលភាពដល់ឆ្នាំ"
       statement:
         number: "ប្រកាស់លេខ"
         statement_type: "ប្រភេទ"
@@ -113,8 +115,10 @@ km:
           year: "ឆ្នាំ"
           plan: "ផែនការជាលាយល័ក្ខអក្សរ"
       tax:
-        unit: "បរិមាណ"
-        total: "ចំនួនទឹកប្រាក់"
+        unit: "ផ្ទៃដី"
+        unit_1: "ផ្ទៃដីគ្រោងធ្វើអាជីវកម្ម"
+        unit_2: "ផ្ទៃដីដែលបានបញ្ចប់ការធ្វើអាជីវកម្ម"
+        total: "ទឹកប្រាក់"
         year: "ឆ្នាំ"
         month: "ខែ"
         tax_type: "ប្រភេទ"
@@ -146,6 +150,7 @@ km:
   area_with_unit: "%{area} <br /> %{unit}"
   inline_area_with_unit: "%{area} %{unit}"
 
+  download: "ទាញយក"
   download_csv: "ទាញយកអាជ្ញាប័ណ្ណ"
   download_plan_csv: "ទាញយកផែនការផលិតកម្ម"
   download_tax_csv: "ទាញយកកាតព្វកិច្ចហិរញ្ញវត្ថុ"
@@ -182,13 +187,7 @@ km:
 
   area_units:
     m2: "ម៉ែត្រការ៉េ"
-    ha: "ហិតា"
-
-  license_types:
-    stone: "ថ្ម"
-    shallow: "អាចម៍ដី"
-    stale_stone: "ថ្មអារ"
-    const_sand: "ខ្សាច់សំណង់"
+    ha: "ហិកតា"
 
   statuses:
     active: "កំពុងដំណើរការ"
@@ -207,25 +206,27 @@ km:
     dollar: "ដុល្លារ ($)"
 
   months:
-    jan: មករា
-    feb: កុម្ភៈ
-    mar: មិនា
-    apr: មេសា
-    may: ឧសភា
-    jun: មិថុនា
-    jul: កក្កដា
-    aug: សីហា
-    sep: កញ្ញា
-    oct: តុលា
-    nov: វិច្ឆិកា
-    dec: ធ្នូ
+    - មករា
+    - កុម្ភៈ
+    - មិនា
+    - មេសា
+    - ឧសភា
+    - មិថុនា
+    - កក្កដា
+    - សីហា
+    - កញ្ញា
+    - តុលា
+    - វិច្ឆិកា
+    - ធ្នូ
 
   tax_types:
-    cat_1: "សួយសារ"
-    cat_2: "កាតព្វកិច្ចសង្គម"
-    cat_3: "កាតព្វកិច្ចបណ្ដុះបណ្ដាល"
-    cat_4: "ឈ្នួលផ្ទៃក្រឡា"
-    cat_5: "មូលនិធិស្ដារបរិស្ថាន"
+    loyalty: "សួយសារ"
+    aditional_duty: "កាតព្វកិច្ចបន្ថែម"
+    training_duty: "កាតព្វកិច្ចបណ្ដុះបណ្ដាល"
+    social_duty: "កាតព្វកិច្ចសង្គម"
+    license_fee: "កម្រៃអាជ្ញាបណ្ណ"
+    total_area_fee: "ឈ្នួលផ្ទៃក្រឡា"
+    env_recovery_fee: "មូលនិធិស្ដារបរិស្ថាន"
 
   flash:
     create_success: "បញ្ចូលទិន្នន័យបានជោគជ័យ"
@@ -243,7 +244,9 @@ km:
 
   show_item: "%{count} ឯកតា"
   filter_by: "ស្វែងរកតាម: %{text}"
+  search: "ស្វែងរក"
 
+  no_result: "ពុំមានលទ្ធផល"
   no_license: "ពុំមានអាជ្ញាប័ណ្ណសំរាប់បង្ហាញ"
   new_license: "អាជ្ញាប័ណ្ណថ្មី"
   edit_license: "កែប្រែអាជ្ញាប័ណ្ណ"
@@ -271,6 +274,8 @@ km:
   business_plan_title: "ទុនវិនិយោគនិងផែនការផលិតកម្មប្រចាំឆ្នាំ"
   licenses_index: "ស្ថិតិអាជ្ញាបណ្ណ"
   expire_license_list: "ស្ថិតិអាជ្ញាបណ្ណរ៉ែសំណង់ដែលជិតផុតកំណត់"
+  total_unit: "ផ្ទៃដីសរុប"
+  total_amount_1: "ទឹកប្រាក់សរុប"
 
   create: "ដាក់បញ្ចូល"
   update: "កែប្រែ"

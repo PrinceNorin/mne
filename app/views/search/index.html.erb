@@ -8,16 +8,22 @@
           <div class="col-12">
             <%= search_form_for @q, url: search_path, class: 'form' do |f| %>
               <div class="form-row">
-                <div class="col-6">
+                <div class="col-4">
                   <div class="form-group">
                     <%= f.label :number %>
                     <%= f.search_field :number_cont, class: 'form-control' %>
                   </div>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                   <div class="form-group">
-                    <%= f.label :year %>
-                    <%= f.select :year_eq, year_options, { include_blank: t('select_option') }, class: 'form-control' %>
+                    <%= f.label :valid_from %>
+                    <%= f.select :valid_year_from, year_options, { include_blank: t('select_option') }, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <%= f.label :valid_to %>
+                    <%= f.select :valid_year_to, year_options, { include_blank: t('select_option') }, class: 'form-control' %>
                   </div>
                 </div>
               </div>
@@ -25,7 +31,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <%= f.label :province %>
-                    <%= f.select :province_eq, License.province_search_select, { include_blank: t('select_option') }, { class: 'form-control' } %>
+                    <%= f.select :province_eq, License.selectable_search_province, { include_blank: t('select_option') }, { class: 'form-control' } %>
                   </div>
                 </div>
                 <div class="col-4">
@@ -37,7 +43,7 @@
                 <div class="col-4">
                   <div class="form-group">
                     <%= f.label :status %>
-                    <%= f.select :status_eq, License.status_search_select, { include_blank: t('select_option') }, { class: 'form-control' } %>
+                    <%= f.select :status_eq, License.selectable_search_status, { include_blank: t('select_option') }, { class: 'form-control' } %>
                   </div>
                 </div>
               </div>

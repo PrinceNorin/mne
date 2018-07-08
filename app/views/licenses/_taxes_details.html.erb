@@ -30,11 +30,11 @@
           <tbody id="tax-<%= type + '-' + year.to_s %>" class="<%= type == @current_type && year == @current_year ? 'active' : '' %>">
             <% taxes.each do |tax| %>
               <tr>
-                <td><%= t("months.#{tax.month}") %></td>
+                <td><%= t('months')[tax.month - 1] %></td>
                 <td class="text-right"><%= tax.unit %></td>
                 <td class="text-right"><%= tax.total %></td>
                 <td class="text-right">
-                  <%= link_to t('edit'), edit_license_tax_path(tax.license, tax) %>
+                  <%#= link_to t('edit'), edit_license_tax_path(tax.license, tax) %>
                   <%= link_to t('delete'), license_tax_path(tax.license, tax), class: 'text-danger', method: :delete, data: { 'confirm-swal' => t('are_you_sure') } %>
                 </td>
               </tr>

@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   get '/search' => 'search#index'
   get '/download' => 'search#download'
   get '/plan_download' => 'search#plan_download'
-  get '/tax_download' => 'search#tax_download'
 
   resources :licenses do
-    resources :taxes, except: [:index, :show]
+    resources :taxes, only: [:new, :create, :destroy]
     resources :statements, except: [:index, :show]
     resource :business_plan, only: [:show, :create, :update]
   end
 
+  resources :taxes, only: [:index]
   resources :companies, only: [:index, :show]
 
   # scope :api do

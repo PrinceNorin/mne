@@ -1,0 +1,35 @@
+<div class="row mb-2">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title text-center"><%= t("tax_types.#{tax.tax_type}") %></h3>
+        <hr />
+
+        <%= simple_form_for [@license, tax], url: license_taxes_path(@license, tax), defaults: { input_html: { class: 'form-control tax-input' } } do |f| %>
+          <%= f.error_notification %>
+
+          <%= f.hidden_field :tax_rate, class: 'tax-input' %>
+          <%= f.hidden_field :tax_type, value: tax.tax_type %>
+
+          <div class="form-row">
+            <%= f.input :unit_1, label: t('activerecord.attributes.tax.unit_1'),
+              wrapper_html: { class: 'col-md-6' }, input_html: { type: 'number' } %>
+            <%= f.input :total_1, label: t('activerecord.attributes.tax.total'),
+              wrapper_html: { class: 'col-md-6' }, input_html: { type: 'number' } %>
+          </div>
+
+          <div class="form-row">
+            <%= f.input :unit_2, label: t('activerecord.attributes.tax.unit_2'),
+              wrapper_html: { class: 'col-md-6' }, input_html: { type: 'number' } %>
+            <%= f.input :total_2, label: t('activerecord.attributes.tax.total'),
+              wrapper_html: { class: 'col-md-6' }, input_html: { type: 'number' } %>
+          </div>
+
+          <div class="form-group clearfix">
+            <%= f.button :submit, t('create'), class: 'btn btn-primary float-right' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

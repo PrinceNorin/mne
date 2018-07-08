@@ -22,8 +22,8 @@
       <td><%= @license.number %></td>
     </tr>
     <tr>
-      <td><%= t('activerecord.attributes.license.issued_date') %></td>
-      <td><%= l @license.issued_date %></td>
+      <td><%= t('activerecord.attributes.license.issue_at') %></td>
+      <td><%= l @license.issue_at %></td>
     </tr>
     <tr>
       <td><%= t('activerecord.attributes.license.category') %></td>
@@ -31,23 +31,23 @@
     </tr>
     <tr>
       <td><%= t('activerecord.attributes.license.area') %></td>
-      <td><%= t('inline_area_with_unit', area: @license.area, unit: t("area_units.#{@license.area_unit}")) %></td>
+      <td><%= t('inline_area_with_unit', area: @license.total_area, unit: t("area_units.#{@license.area_unit}")) %></td>
     </tr>
     <tr>
       <td><%= t('activerecord.attributes.license.province') %></td>
       <td><%= t("provinces.#{@license.province}") %></td>
     </tr>
     <tr>
-      <td><%= t('activerecord.attributes.license.address') %></td>
-      <td><%= @license.address %></td>
+      <td><%= t('activerecord.attributes.license.business_address') %></td>
+      <td><%= @license.business_address %></td>
     </tr>
     <tr>
-      <td><%= t('activerecord.attributes.license.valid_date') %></td>
-      <td><%= l @license.valid_date %></td>
+      <td><%= t('activerecord.attributes.license.valid_at') %></td>
+      <td><%= l @license.valid_at %></td>
     </tr>
     <tr>
-      <td><%= t('activerecord.attributes.license.expires_date') %></td>
-      <td><%= l @license.expires_date %></td>
+      <td><%= t('activerecord.attributes.license.expire_at') %></td>
+      <td><%= l @license.expire_at %></td>
     </tr>
     <tr>
       <td><%= t('activerecord.attributes.license.status') %></td>

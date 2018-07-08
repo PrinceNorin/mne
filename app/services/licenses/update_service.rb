@@ -12,7 +12,9 @@ module Licenses
         license.company = find_or_create_company
         category = Category.find_by(id: params[:category_id])
         license.category_name = category.name if category.present?
-        raise ActiveRecord::Rollback unless license.save
+        if !license.save || license.company.errors.any?
+          raise ActiveRecord::Rollback
+        end
       end
       license
     end
@@ -24,8 +26,7 @@ module Licenses
       if company.nil?
         company = Company.create(
           name: params[:company_name],
-          owner: params[:owner_name],
-          business_address: params[:address]
+          owner: params[:owner_name]
         )
       end
       company

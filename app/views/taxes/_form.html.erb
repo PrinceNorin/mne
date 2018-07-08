@@ -1,28 +1,8 @@
-<div class="row">
-  <div class="col-md-8 offset-md-2">
-    <div class="card">
-      <div class="card-body">
-        <h1 class="card-title text-center"><%= t('add_tax') %></h1>
-        <hr /><br />
+<%= render 'duty_form', tax: @duty_tax %>
+<%= render 'env_recovery_fee_form', tax: @env_recovery_fee unless @env_recovery_fee.respond_to?(:new_record?) %>
+<%= render 'total_area_fee_form', tax: @total_area_fee if @total_area_fee.try(:new_record?) %>
+<%= render 'license_fee_form', tax: @license_fee if @license_fee.try(:new_record?) %>
 
-        <%= simple_form_for [@license, @tax], defaults: { input_html: { class: 'form-control' } } do |f| %>
-          <%= f.error_notification %>
-
-          <div class="form-row">
-            <% year = @tax.year || Date.current.year %>
-            <% month = @tax.month || Tax.months.keys[Date.current.month - 1] %>
-            <%= f.input :tax_type, collection: Tax.tax_type_select, include_blank: false, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :year, collection: year_options, include_blank: false, selected: year, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :month, collection: Tax.month_select, include_blank: false, selected: month, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :unit, wrapper_html: { class: 'col-md-2' } %>
-            <%= f.input :total, wrapper_html: { class: 'col-md-2' } %>
-            <div class="form-group col-md-2">
-              <label style="visibility: hidden">*</label>
-              <%= f.button :submit, @tax.new_record? ? t('create') : t('update'), class: 'form-control btn btn-primary' %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<script type="text/javascript">
+  window.TAX_RATES = <%= Tax::RATES.to_json.html_safe %>;
+</script>
