@@ -63,11 +63,13 @@ class License < ApplicationRecord
     join_sql = <<-SQL
       LEFT JOIN `licenses` l2 ON (
         `licenses`.`company_id` = `l2`.`company_id` AND
-        `licenses`.`expire_at` < `l2`.`expire_at`
+        `licenses`.`expire_at` < `l2`.`expire_at` AND
+        `licenses`.`category_id` = `l2`.`category_id` AND
+        `licenses`.`province` = `l2`.`province`
       )
     SQL
 
-    joins(join_sql).where('`l2`.id IS NULL')
+    joins(join_sql).where('`l2`.`id` IS NULL')
   end
 
   scope :expires, -> do

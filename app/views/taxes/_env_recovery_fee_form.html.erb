@@ -2,7 +2,7 @@
   <div class="col-md-6 offset-md-3">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title text-center"><%= t("tax_types.#{tax.tax_type}") %></h3>
+        <h3 class="card-title text-center"><%= t("env_recovery_title") %></h3>
         <hr />
 
         <%= simple_form_for [@license, tax], url: license_taxes_path(@license, tax), defaults: { input_html: { class: 'form-control tax-input' } } do |f| %>

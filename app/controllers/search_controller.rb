@@ -20,7 +20,7 @@ class SearchController < ApplicationController
 
         path = Licenses::CSVService.new(@licenses).to_csv
         data = File.read(path)
-        send_data data, filename: 'តារាងបញ្ជីអាជ្ញាបណ្ណក្នុងក្រសួង.xls'
+        send_data data, filename: 'អាជ្ញាបណ្ណ.xls'
         FileUtils.rm path
       end
     end
@@ -43,17 +43,17 @@ class SearchController < ApplicationController
     end
   end
 
-  def tax_download
-    respond_to do |format|
-      format.html { @q = Tax.ransack(params[:q]) }
-      format.xlsx do
-        @taxes = Tax.ransack(params[:q]).result.order(:year, :month)
+  # def tax_download
+  #   respond_to do |format|
+  #     format.html { @q = Tax.ransack(params[:q]) }
+  #     format.xlsx do
+  #       @taxes = Tax.ransack(params[:q]).result.order(:year, :month)
 
-        path = Taxes::CSVService.new(@taxes).to_csv
-        data = File.read(path)
-        send_data data, filename: 'តារាងតាមដានបរិមាណនិងការបង់សួយសារ.xls'
-        FileUtils.rm path
-      end
-    end
-  end
+  #       path = Taxes::CSVService.new(@taxes).to_csv
+  #       data = File.read(path)
+  #       send_data data, filename: 'តារាងតាមដានបរិមាណនិងការបង់សួយសារ.xls'
+  #       FileUtils.rm path
+  #     end
+  #   end
+  # end
 end
