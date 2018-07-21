@@ -1,5 +1,5 @@
 <div class="list-group">
-  <% @licenses.each do |license| %>
+  <% @licenses.sort_by { |l| l.valid_at}.each do |license| %>
     <%= link_to(
       "#{license.valid_at.year} - #{license.expire_at.year}",
       license_path(license),
