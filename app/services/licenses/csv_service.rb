@@ -37,7 +37,7 @@ module Licenses
         I18n.l(license.issue_at, format: '%d, %b %Y'),
         license.category_name,
         "#{license.total_area} #{I18n.t('area_units.' + license.area_unit)}",
-        "#{license.business_address} ខេត្ត#{I18n.t("provinces.#{license.province}")}",
+        "#{license.business_address} #{I18n.t("provinces.#{license.province}")}",
         I18n.l(license.valid_at, format: '%d, %b %Y'),
         I18n.l(license.expire_at, format: '%d, %b %Y'),
         I18n.t("statuses.#{license.status}"),
