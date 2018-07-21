@@ -10,9 +10,9 @@ module Licenses
 
     def to_csv
       columns = %w(
-        company_name owner_name number issued_date
-        category area address
-        valid_date expires_date status note
+        company_name owner_name number issue_at
+        category total_area business_address
+        valid_at expire_at status note
       ).map { |col| I18n.t("activerecord.attributes.license.#{col}") }
 
       path = Rails.root.join('tmp', "licenses_#{Time.now.to_i}.csv").to_s
@@ -34,12 +34,12 @@ module Licenses
     def csv_data(license)
       [
         license.company_name, license.owner_name, license.number,
-        I18n.l(license.issued_date, format: '%d, %b %Y'),
+        I18n.l(license.issue_at, format: '%d, %b %Y'),
         license.category_name,
-        "#{license.area} #{I18n.t('area_units.' + license.area_unit)}",
-        "#{license.address} ខេត្ត#{I18n.t("provinces.#{license.province}")}",
-        I18n.l(license.valid_date, format: '%d, %b %Y'),
-        I18n.l(license.expires_date, format: '%d, %b %Y'),
+        "#{license.total_area} #{I18n.t('area_units.' + license.area_unit)}",
+        "#{license.business_address} ខេត្ត#{I18n.t("provinces.#{license.province}")}",
+        I18n.l(license.valid_at, format: '%d, %b %Y'),
+        I18n.l(license.expire_at, format: '%d, %b %Y'),
         I18n.t("statuses.#{license.status}"),
         license.note
       ]
