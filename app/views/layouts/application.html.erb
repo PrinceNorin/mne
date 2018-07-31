@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
-    <title>MineEnergy</title>
+    <title><%= t('app_title') %></title>
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.png' %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>

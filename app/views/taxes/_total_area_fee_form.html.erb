@@ -13,7 +13,7 @@
 
           <div class="form-row">
             <%= f.input :unit, input_html: { value: tax.tax_unit, readonly: true }, wrapper_html: { class: 'col-md-5' } %>
-            <%= f.input :total, input_html: { value: tax.tax_unit * tax.tax_rate, readonly: true }, wrapper_html: { class: 'col-md-5' } %>
+            <%= f.input :total, input_html: { value: tax.tax_unit * tax.tax_rate }, wrapper_html: { class: 'col-md-5' } %>
             <div class="form-group col-md-2">
               <label style="visibility: hidden">*</label>
               <%= f.button :submit, tax.new_record? ? t('create') : t('update'), class: 'form-control btn btn-primary' %>

@@ -66,7 +66,7 @@
               <td>{{ year }}</td>
               <td>{{ I18n.t('months')[tax.month - 1] }}</td>
               <td class="text-right">{{ tax.unit }}</td>
-              <td class="text-right">{{ tax.total }}</td>
+              <td class="text-right">{{ totalCurrency(tax.total, tax.currency) }}</td>
             </tr>
             <tr>
               <td colspan="2">{{ I18n.t('total_amount') }}</td>
@@ -113,7 +113,7 @@
               <td class="text-right" v-if="filter.tax_type !== 'license_fee' && filter.tax_type === 'env_recovery_fee'">
                 {{ tax.unit_2 }}
               </td>
-              <td class="text-right">{{ tax.total }}</td>
+              <td class="text-right">{{ totalCurrency(tax.total, tax.currency) }}</td>
             </tr>
             <tr>
               <td>{{ I18n.t('total_amount') }}</td>

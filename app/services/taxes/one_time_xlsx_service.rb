@@ -46,7 +46,14 @@ module Taxes
             row += 1
             ws.merge_range(row, 0, row, 1, I18n.t('total_amount'), fs)
 
-            total_fee = values[1].sum(&:total)
+            currencies = values[1].group_by(&:currency)
+            riel_total_fee = (currencies['riel'] || []).sum(&:total)
+            dollar_total_fee = (currencies['dollar'] || []).sum(&:total)
+            fees = []
+            fees << "#{I18n.t('currency_symbols.riel')}#{riel_total_fee}" if riel_total_fee != 0
+            fees << "#{I18n.t('currency_symbols.dollar')}#{dollar_total_fee}" if dollar_total_fee != 0
+            total_fee = fees.join(' / ')
+
             if tax_type == 'license_fee'
               ws.write(row, 2, total_fee, fs2)
             elsif tax_type == 'total_area_fee'
@@ -107,11 +114,12 @@ module Taxes
       else
         taxes.each_with_index do |tax, i|
           col = (i + 1) * 2
+          total = I18n.t("currency_symbols.#{tax.currency}") + tax.total.to_s
           if tax_type == 'license_fee'
-            ws.write(row, col, tax.total, colfs1)
+            ws.write(row, col, total, colfs1)
           else
             ws.write(row, col, tax.unit, colfs1)
-            ws.write(row, col + 1, tax.total, colfs1)
+            ws.write(row, col + 1, total, colfs1)
           end
         end
       end

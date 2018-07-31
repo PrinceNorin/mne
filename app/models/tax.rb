@@ -28,16 +28,6 @@ class Tax < ApplicationRecord
     'env_recovery_fee_1' => 2500
   }.freeze
 
-  TOTAL_AREA_RATES = {
-    'ថ្ម' => 50,
-    'ថ្មអារ' => 50,
-    'អាចម៍ដី' => 30,
-    'ដីក្រហម' => 30,
-    'ខ្សាច់​' => 30,
-    'ខ្សាច់បក' => 30,
-    'ខ្សាច់សំណង់' => 30
-  }.freeze
-
   ONE_TIME_FEE_TYPES = %w(
     license_fee
     total_area_fee
@@ -53,6 +43,8 @@ class Tax < ApplicationRecord
   LICENSE_FEE_RATE = 10_000_000
 
   attr_accessor :year, :month
+
+  enum currency: %i[riel dollar]
 
   belongs_to :license
 
@@ -123,7 +115,7 @@ class Tax < ApplicationRecord
     when 'license_fee'
       LICENSE_FEE_RATE
     when 'total_area_fee'
-      TOTAL_AREA_RATES[license.category.name]
+      license.category.tax_rate
     else
       RATES[tax_type]
     end

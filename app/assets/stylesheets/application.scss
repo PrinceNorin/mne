@@ -10,7 +10,7 @@
 @import "typeahead";
 
 html[lang=km] body {
-  font-family: "Khmer OS Battambang";
+  font-family: "Suwannaphum";
 
   .table th {
     font-family: "Khmer OS Muollight";
@@ -18,7 +18,7 @@ html[lang=km] body {
 
   h1, h2, h3, h4, h5, h6,
   .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Khmer OS Battambang";
+    font-family: "Suwannaphum";
   }
 }
 
@@ -40,6 +40,10 @@ body {
   font-size: 13px;
   background-color: #f2f2f2;
   margin-top: 60px;
+}
+
+.logo {
+  margin-bottom: 30px;
 }
 
 .table td {

@@ -12,7 +12,7 @@ class CreateLicenses < ActiveRecord::Migration[5.1]
       t.text :business_address
       t.text :note
       t.string :company_name, null: false
-      t.string :owner_name, null: false
+      t.string :owner_name
       t.string :category_name, null: false
       t.references :company, foreign_key: true
       t.references :category, foreign_key: true

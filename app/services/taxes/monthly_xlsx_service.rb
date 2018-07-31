@@ -42,14 +42,29 @@ module Taxes
             keys = month_taxes.keys.sort
             keys.each do |k|
               sum_unit = month_taxes[k].sum(&:unit)
-              sum_total = month_taxes[k].sum(&:total)
+
+              currencies = month_taxes[k].group_by(&:currency)
+              riel_total_fee = (currencies['riel'] || []).sum(&:total)
+              dollar_total_fee = (currencies['dollar'] || []).sum(&:total)
+              fees = []
+              fees << "#{I18n.t('currency_symbols.riel')}#{riel_total_fee}" if riel_total_fee != 0
+              fees << "#{I18n.t('currency_symbols.dollar')}#{dollar_total_fee}" if dollar_total_fee != 0
+              sum_total = fees.join(' / ')
+
               col = k * 2
               ws.write(row, col, sum_unit, fs2)
               ws.write(row, col + 1, sum_total, fs2)
             end
 
             total_unit = values[1].sum(&:unit)
-            total_fee = values[1].sum(&:total)
+            currencies = values[1].group_by(&:currency)
+            riel_total_fee = (currencies['riel'] || []).sum(&:total)
+            dollar_total_fee = (currencies['dollar'] || []).sum(&:total)
+            fees = []
+            fees << "#{I18n.t('currency_symbols.riel')}#{riel_total_fee}" if riel_total_fee != 0
+            fees << "#{I18n.t('currency_symbols.dollar')}#{dollar_total_fee}" if dollar_total_fee != 0
+            total_fee = fees.join(' / ')
+
             ws.write(row, 26, total_unit, fs2)
             ws.write(row, 27, total_fee, fs2)
           end
@@ -89,11 +104,21 @@ module Taxes
 
       taxes.each_with_index do |tax, i|
         col = tax.month * 2
+        total = I18n.t("currency_symbols.#{tax.currency}") + tax.total.to_s
         ws.write(row, col, tax.unit, colfs1)
-        ws.write(row, col + 1, tax.total, colfs1)
+        ws.write(row, col + 1, total, colfs1)
       end
+
+      currencies = taxes.group_by(&:currency)
+      riel_total_fee = (currencies['riel'] || []).sum(&:total)
+      dollar_total_fee = (currencies['dollar'] || []).sum(&:total)
+      fees = []
+      fees << "#{I18n.t('currency_symbols.riel')}#{riel_total_fee}" if riel_total_fee != 0
+      fees << "#{I18n.t('currency_symbols.dollar')}#{dollar_total_fee}" if dollar_total_fee != 0
+      total_fee = fees.join(' / ')
+
       ws.write(row, 26, taxes.sum(&:unit), colfs1)
-      ws.write(row, 27, taxes.sum(&:total), colfs1)
+      ws.write(row, 27, total_fee, colfs1)
     end
   end
 end

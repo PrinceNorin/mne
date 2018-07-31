@@ -1,5 +1,5 @@
 <%= render 'duty_form', tax: @duty_tax %>
-<%= render 'env_recovery_fee_form', tax: @env_recovery_fee unless @env_recovery_fee.respond_to?(:new_record?) %>
+<%= render 'env_recovery_fee_form', tax: @env_recovery_fee if @env_recovery_fee.try(:new_record?) %>
 <%= render 'total_area_fee_form', tax: @total_area_fee if @total_area_fee.try(:new_record?) %>
 <%= render 'license_fee_form', tax: @license_fee if @license_fee.try(:new_record?) %>
 

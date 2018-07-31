@@ -25,6 +25,14 @@
   src: font-url("Khmer-OS-muollight.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: 'Suwannaphum';
+  font-style: normal;
+  font-weight: 400;
+  src: font-url("Suwannaphum-Regular.ttf") format("truetype");
+  unicode-range: U+1780-17FF, U+200C, U+25CC;
+}
+
 @function remCalc($pixels) {
   $remSize: $pixels / 16px;
   @return $remSize * 1rem;

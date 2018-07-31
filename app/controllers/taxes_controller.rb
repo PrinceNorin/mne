@@ -34,6 +34,7 @@ class TaxesController < ApplicationController
         end
       else
         tax = @license.taxes.find_or_initialize_by(tax_type: tax_type)
+        tax.currency = 'riel' if tax_type == 'license_fee'
       end
       instance_variable_set(:"@#{tax_type}", tax)
     end
@@ -112,7 +113,7 @@ class TaxesController < ApplicationController
     if params[:tax].nil?
       env_recovery_params
     else
-      params.require(:tax).permit(:unit, :total, :year, :month, :tax_type)
+      params.require(:tax).permit(:unit, :total, :year, :month, :tax_type, :currency)
     end
   end
 
@@ -133,9 +134,10 @@ class TaxesController < ApplicationController
         end
       else
         tax = @license.taxes.find_or_initialize_by(tax_type: tax_type)
+        tax.currency = 'riel' if tax_type == 'license_fee'
       end
 
-      if !tax.try(:new_record?) && tax_type == tax_params[:tax_type]
+      if tax.try(:new_record?) && tax_type == tax_params[:tax_type]
         tax.assign_attributes(tax_params)
         tax.valid?
       end

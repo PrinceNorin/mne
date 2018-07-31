@@ -8,8 +8,16 @@ class LicensesController < ApplicationController
     @nearly_expires_licenses = scope.nearly_expires
       .page(params[:page])
       .order(created_at: :desc)
+    nearly_expire_ids = @nearly_expires_licenses.map(&:id)
 
-    @licenses = scope.where.not(id: @nearly_expires_licenses.pluck(:id))
+    # @expired_licenses = scope.expired.where.not(id: nearly_expire_ids)
+    #   .page(params[:page])
+    #   .per(params[:per_page])
+    #   .order(created_at: :desc)
+    # expired_ids = @expired_licenses.map(&:id)
+
+    # @licenses = scope.where.not(id: (nearly_expire_ids + expired_ids).uniq)
+    @licenses = scope.where.not(id: nearly_expire_ids)
       .page(params[:page])
       .per(params[:per_page])
       .order(created_at: :desc)

@@ -49,7 +49,7 @@ class License < ApplicationRecord
   validate :valid_at, if: -> { valid_at && expire_at } do
     if valid_at >= expire_at
       errors.add(:valid_at, :must_be_less_than)
-      errors.add(:expires_at, :must_be_greater_than)
+      errors.add(:expire_at, :must_be_greater_than)
     end
   end
 
@@ -57,6 +57,10 @@ class License < ApplicationRecord
     from = 1.month.ago
     to = 3.months.from_now
     where(expire_at: from..to)
+  end
+
+  scope :expired, -> do
+    where('expire_at < ?', Date.current)
   end
 
   scope :unique_by_latest_expires_date, -> do
@@ -84,12 +88,12 @@ class License < ApplicationRecord
   end
 
   searchable_scope :valid_year_from, ->(year) do
-    where('valid_at >= ?', Date.parse("#{year}-01-01"))
+    where('licenses.valid_at >= ?', Date.parse("#{year}-01-01"))
   end
 
   searchable_scope :valid_year_to, ->(year) do
     date = Date.parse("#{year}-01-01")
-    where('valid_at <= ?', date.end_of_year)
+    where('licenses.valid_at <= ?', date.end_of_year)
   end
 
   def d_business_address

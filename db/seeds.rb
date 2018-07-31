@@ -1,16 +1,15 @@
 ApplicationRecord.transaction do
-  categories = %w(
-    ថ្ម
-    ថ្មអារ
-    អាចម៍ដី
-    ដីក្រហម
-    ខ្សាច់
-    ខ្សាច់បក
-    ខ្សាច់សំណង់
-  )
+  categories = {
+    'ថ្មសំណង់' => 50,
+    'ខ្សាច់សំណង់' => 30,
+    'អាចម៍ដី' => 30,
+    'ខ្សាច់បក' => 30,
+    'ដីក្រហម' => 30,
+    'ថ្មអារ' => 50
+  }
 
-  categories.each do |name|
-    Category.create!(name: name)
+  categories.each do |name, rate|
+    Category.create!(name: name, tax_rate: rate)
   end
 
   print 'Enter your name: '

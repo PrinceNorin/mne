@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516025715) do
+ActiveRecord::Schema.define(version: 20180731120517) do
 
   create_table "business_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "license_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180516025715) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
+    t.float "tax_rate", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180516025715) do
     t.text "business_address"
     t.text "note"
     t.string "company_name", null: false
-    t.string "owner_name", null: false
+    t.string "owner_name"
     t.string "category_name", null: false
     t.bigint "company_id"
     t.bigint "category_id"
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180516025715) do
     t.integer "tax_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "currency", default: 1
     t.index ["license_id"], name: "index_taxes_on_license_id"
   end
 

@@ -13,6 +13,7 @@ gem 'paper_trail', '~> 8.0'
 gem 'acts_as_paranoid', git: 'https://github.com/ActsAsParanoid/acts_as_paranoid.git', branch: :master
 
 # utilities
+gem 'roo', '~> 2.7.0'
 gem 'whenever', require: false
 gem 'ransack', '~> 1.8.8'
 gem 'kaminari', '~> 1.1'

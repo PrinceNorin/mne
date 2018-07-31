@@ -101,9 +101,41 @@ $(document).ready(function() {
       },
 
       calculateTotal: function(taxes, propName) {
-        return _.sumBy(taxes, function(tax) {
+        if (propName.indexOf('unit') !== -1) {
+          return _.sumBy(taxes, function(tax) {
+            return parseFloat(tax[propName]);
+          });
+        }
+
+        const currencies = _.groupBy(taxes, function(tax) {
+          return tax.currency;
+        });
+
+        const riels = _.sumBy((currencies.riel || []), function(tax) {
           return parseFloat(tax[propName]);
         });
+        const dollars = _.sumBy((currencies.dollar || []), function(tax) {
+          return parseFloat(tax[propName]);
+        });
+
+        let fees = [];
+        if (riels !== 0) {
+          fees.push(`៛${riels}`);
+        }
+
+        if (dollars !== 0) {
+          fees.push(`$${dollars}`);
+        }
+
+        return fees.join(' / ');
+      },
+
+      totalCurrency: function(total, currency) {
+        if (currency === 'riel') {
+          return `៛${total}`;
+        } else {
+          return `$${total}`;
+        }
       },
 
       isMonthlyTaxType: function() {

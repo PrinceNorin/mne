@@ -13,7 +13,9 @@
             <%= f.hidden_field :tax_type, value: tax.tax_type %>
 
             <div class="form-row">
-              <%= f.input :total, input_html: { value: tax.tax_unit * tax.tax_rate, readonly: true }, wrapper_html: { class: 'col-md-10' } %>
+              <%= f.input :total, input_html: { value: tax.tax_unit * tax.tax_rate }, wrapper_html: { class: 'col-md-8' } %>
+              <%= f.input :currency, collection: BusinessPlan.currency_select,
+                include_blank: false, wrapper_html: { class: 'col-md-2' } %>
               <div class="form-group col-md-2">
                 <label style="visibility: hidden">*</label>
                 <%= f.button :submit, tax.new_record? ? t('create') : t('update'), class: 'form-control btn btn-primary' %>

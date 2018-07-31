@@ -3,13 +3,26 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title text-center mb-4"><%= t('expire_license_list') %></h3>
+          <h3 class="card-title text-center mb-4"><%= t('nearly_expire_license_list') %></h3>
           <%= render 'table', licenses: @nearly_expires_licenses %>
         </div>
       </div>
     </div>
   </div>
 <% end %>
+
+<%# if @expired_licenses.any? %>
+  <!-- <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4"><%#= t('expire_license_list') %></h3>
+          <%#= render 'table', licenses: @expired_licenses %>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<%# end %>
 
 <div class="row">
   <div class="col-12">
