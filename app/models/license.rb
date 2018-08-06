@@ -54,7 +54,7 @@ class License < ApplicationRecord
   end
 
   scope :nearly_expires, -> do
-    from = 1.month.ago
+    from = 3.days.ago
     to = 3.months.from_now
     where(expire_at: from..to)
   end

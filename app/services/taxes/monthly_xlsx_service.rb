@@ -85,12 +85,12 @@ module Taxes
         start_index = (i + 1) * 2
         end_index = start_index + 1
         ws.merge_range(0, start_index, 0, end_index, month, fs)
-        ws.write(1, start_index, I18n.t('activerecord.attributes.tax.unit'), fs)
-        ws.write(1, end_index, I18n.t('activerecord.attributes.tax.total'), fs)
+        ws.write(1, start_index, I18n.t('activerecord.attributes.tax.unit_3'), fs)
+        ws.write(1, end_index, I18n.t('activerecord.attributes.tax.total_3'), fs)
       end
 
-      ws.merge_range(0, 26, 1, 26, I18n.t('total_unit'), fs)
-      ws.merge_range(0, 27, 1, 27, I18n.t('total_amount_1'), fs)
+      ws.merge_range(0, 26, 1, 26, I18n.t('total_unit_3'), fs)
+      ws.merge_range(0, 27, 1, 27, I18n.t('total_amount_3'), fs)
     end
 
     def write_tax_data(wb, ws, start_row, taxes, no)

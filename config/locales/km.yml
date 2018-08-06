@@ -124,6 +124,8 @@ km:
         month: "ខែ"
         tax_type: "ប្រភេទ"
         currency: "ប្រភេទថវិកា"
+        unit_3: "បរិមាណ"
+        total_3: "សួយសារ"
       category:
         name: "ឈ្មោះ"
       company:
@@ -281,7 +283,9 @@ km:
   nearly_expire_license_list: "ស្ថិតិអាជ្ញាបណ្ណរ៉ែសំណង់ដែលជិតផុតសុពលភាព"
   expire_license_list: "ស្ថិតិអាជ្ញាបណ្ណរ៉ែសំណង់ដែលផុតសុពលភាព"
   total_unit: "ផ្ទៃដីសរុប"
+  total_unit_3: "បរិមាណសរុប"
   total_amount_1: "ទឹកប្រាក់សរុប"
+  total_amount_3: "សួយសារសរុប"
   tax_title: "កាតព្វកិច្ចហិរញ្ញវត្ថុ"
   env_recovery_title: "កាតព្វកិច្ចតម្កល់មូលនិធិស្តារការដ្ឋានរ៉ែឡើងវិញ"
 
